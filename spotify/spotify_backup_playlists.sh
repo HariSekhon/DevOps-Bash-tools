@@ -45,6 +45,9 @@ help_usage "$@"
 # shellcheck disable=SC2034
 spotify_user="${1:-${SPOTIFY_USER:-}}"
 
+# avoids spotify_backup_playlist.sh having to resolve this itself each time
+export SPOTIFY_USER="$spotify_user"
+
 shift || :
 
 spotify_user
@@ -71,7 +74,18 @@ export SPOTIFY_BACKUP_DIR="$backup_dir"
 export SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME=1
 export SPOTIFY_FOREACH_NO_NEWLINE=1
 
-"$srcdir"/spotify_foreach_playlist.sh "printf '%s  ' \"\$(date '+%F %T')\"; \"$srcdir/spotify_backup_playlist.sh\" '{playlist_id}' '{snapshot_id}'" "$spotify_user" "$@"
+playlist_file="$PWD/.spotify_metadata/playlists.txt"
+
+if [ -f "$playlist_file" ] &&
+    file_newer_than_mins 5 "$playlist_file"; then
+    timestamp "Spotify playlist file '$playlist_file' is within 5 minutes old, reusing it"
+    while read -r playlist_id snapshot_id _playlist; do
+        printf '%s  ' "$(date '+%F %T')"
+        "$srcdir/spotify_backup_playlist.sh" "$playlist_id" "$snapshot_id" "$@"
+    done < "$playlist_file"
+else
+    "$srcdir"/spotify_foreach_playlist.sh "printf '%s  ' \"\$(date '+%F %T')\"; \"$srcdir/spotify_backup_playlist.sh\" '{playlist_id}' '{snapshot_id}'" "$spotify_user" "$@"
+fi
 if [ -n "${SPOTIFY_PRIVATE:-}" ] &&
    is_blank "${NO_LIKED_PLAYLIST:-}"; then
     printf '%s  ' "$(date '+%F %T')"
