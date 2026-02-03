@@ -10,7 +10,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -29,6 +30,9 @@ Uses Spotify API to translate a Spotify public playlist name to ID
 If a Spotify playlist ID is given, returns it as is (this is for coding convenience when calling from other scripts)
 
 Needed by several other adjacent spotify tools
+
+This is quite a slow O(n) operation as it has to iterate through all playlists until it finds a matching name to
+retrieve its ID and is therefore used as a last resort by my adjacent scripts
 
 
 $usage_playlist_help
