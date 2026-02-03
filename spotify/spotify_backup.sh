@@ -72,7 +72,6 @@ echo >&2
 echo >&2
 
 "$srcdir/spotify_backup_playlists.sh"
-
 echo >&2
 
 timestamp "Spotify Backup completed in $SECONDS seconds"
