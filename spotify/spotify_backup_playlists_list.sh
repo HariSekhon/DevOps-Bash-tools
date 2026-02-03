@@ -54,16 +54,14 @@ timestamp "Dumping list of Spotify playlists to $SPOTIFY_BACKUP_DIR/.spotify_met
 tmp="$(mktemp)"
 SPOTIFY_PLAYLIST_SNAPSHOT_ID=1 "$srcdir/spotify_playlists.sh" > "$tmp"
 mv -f "$tmp" "$SPOTIFY_BACKUP_DIR/.spotify_metadata/playlists.txt"
-echo >&2
 
 timestamp "Stripping spotify playlist Snapshot IDs from $SPOTIFY_BACKUP_DIR/.spotify_metadata/playlists.txt => $SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
-awk '{$2=""; print}' "$SPOTIFY_BACKUP_DIR/.spotify_metadata/playlists.txt" > "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
-echo >&2
+awk '{$2=""; print}' "$SPOTIFY_BACKUP_DIR/.spotify_metadata/playlists.txt" |
+sed 's/  / /' > "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
 
 timestamp "Stripping spotify playlist IDs from $SPOTIFY_BACKUP_DIR/spotify/playlists.txt => $SPOTIFY_BACKUP_DIR/playlists.txt"
 tmp="$(mktemp)"
 sed 's/^[^[:space:]]*[[:space:]]*//' "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt" > "$tmp"
 mv -f "$tmp" "$SPOTIFY_BACKUP_DIR/playlists.txt"
-echo >&2
 
 timestamp "Spotify playlists list downloaded"
