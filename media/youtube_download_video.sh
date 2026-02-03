@@ -32,6 +32,7 @@ Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package ma
 
 Automatically tries to upgrade the yt-dlp and ffmpeg packages first as sites like YouTube update their site
 regularly breaking this and requiring a yt-dlp update - you should only install yt-dlp using your OS package manager
+for this to work, otherwise you'll be having to upgrade yt-dlp often yourself manually
 
 If you run into a error determining a video format to download such as this:
 
