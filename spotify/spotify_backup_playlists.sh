@@ -41,6 +41,8 @@ usage_args="<spotify_user> [<curl_options>]"
 
 help_usage "$@"
 
+# used by spotify_user function below
+# shellcheck disable=SC2034
 spotify_user="${1:-${SPOTIFY_USER:-}}"
 
 shift || :
@@ -69,7 +71,7 @@ export SPOTIFY_BACKUP_DIR="$backup_dir"
 export SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME=1
 export SPOTIFY_FOREACH_NO_NEWLINE=1
 
-"$srcdir"/spotify_foreach_playlist.sh "printf '%s  ' \"\$(date '+%F %T')\"; \"$srcdir/spotify_backup_playlist.sh\" '{playlist_id}'" "$spotify_user" "$@"
+"$srcdir"/spotify_foreach_playlist.sh "printf '%s  ' \"\$(date '+%F %T')\"; \"$srcdir/spotify_backup_playlist.sh\" '{playlist_id}' '{snapshot_id}'" "$spotify_user" "$@"
 if [ -n "${SPOTIFY_PRIVATE:-}" ] &&
    is_blank "${NO_LIKED_PLAYLIST:-}"; then
     printf '%s  ' "$(date '+%F %T')"
