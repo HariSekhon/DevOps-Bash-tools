@@ -30,6 +30,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Upgrades Mac Homebrew package lists if the packages are outdated
 
+Ignores packages that aren't recognized, outputting a warning to stderr
+
 $package_args_description
 
 Tested on macOS
