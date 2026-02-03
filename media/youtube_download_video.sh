@@ -54,6 +54,8 @@ Tip: set this in direnv to have smaller quicker downloads using less disk space 
 especially for videos you're just going to quickly watch one time with the mpvd alias to delete the file after one
 watch, see this documentation:
 
+    https://github.com/HariSekhon/Knowledge-Base/blob/main/direnv.md
+
     https://github.com/HariSekhon/Knowledge-Base/blob/main/mpv.md
 "
 
