@@ -82,6 +82,7 @@ while read -r playlist_id snapshot_id playlist; do
     # this works, tested on Ke$ha playlist and `echo injected`
     playlist="${playlist//$/\\$}"
     playlist="${playlist//\`/}"
+    playlist="${playlist//\\"/\\\\"}"
     cmd="${command_template//\{playlist_id\}/$playlist_id}"
     cmd="${cmd//\{playlist\}/$playlist}"
     cmd="${cmd//\{snapshot_id\}/$snapshot_id}"
