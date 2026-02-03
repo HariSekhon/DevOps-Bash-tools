@@ -109,8 +109,8 @@ spotify_token
 
 SECONDS=0
 
-# uses the local spotify/playlists.txt file cache as a faster looking than iterating the playlists
-# with spotify_playlist_name_to_id.sh
+# uses the local spotify/playlists.txt file cache as it's faster than iterating all playlists
+# with spotify_playlist_name_to_id.sh to find the ID of matching playlist name
 playlist_name_to_id(){
     local playlist="$1"
     # spotify/playlists.txt is generated up front by spotify_backup_playlists.sh
