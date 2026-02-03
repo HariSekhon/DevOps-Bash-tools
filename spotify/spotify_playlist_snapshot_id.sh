@@ -29,7 +29,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Returns the Snapshot ID of a given Spotify playlist
 
-Used by spotify_backup_playlist.sh to skip re-downloading an up to date playlist
+Used by Spotify backup scripts like blacklisted_artists.sh in HariSekhon/Spotify-Playlists
+to skip re-downloading an up to date playlist
 
 If you pass 'liked' then retrieves the Last Added timestamp which is the equivalent for 'Liked Songs'
 
