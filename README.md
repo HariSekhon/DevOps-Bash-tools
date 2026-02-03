@@ -1569,11 +1569,12 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 
 - `spotify_playlists*.sh` - list playlists in either `<id> <name>` or JSON format
 - `spotify_playlist_tracks*.sh` - gets playlist contents as track URIs / `Artists - Track` / CSV format - useful for backups or exports between music systems
-- `spotify_backup.sh` - backup all Spotify playlists as well as the ordered list of playlists
-- `spotify_backup_playlist*.sh` - backup Spotify playlists to local files in both human readable `Artist - Track` format and Spotify URI format for easy restores or adding to new playlists
-- `spotify_search*.sh` - search Spotify's library for tracks / albums / artists getting results in human readable format, JSON, or URI formats for easy loading to Spotify playlists
+- `spotify_backup.sh` - backs up all Spotify playlists as well as the ordered list of playlists
+- `spotify_backup_playlist*.sh` - backs up Spotify playlists to local files in both human readable `Artist - Track` format and Spotify URI format for easy restores or adding to new playlists
+- `spotify_backup_artists_followed.sh` - backs up the list of artists followed to Spotify URI and Names
+- `spotify_search*.sh` - searches Spotify's library for tracks / albums / artists getting results in human readable format, JSON, or URI formats for easy loading to Spotify playlists
 - `spotify_release_year.sh` - searches for a given track or album and finds the original release year
-- `spotify_uri_to_name.sh` - convert Spotify track / album / artist URIs to human readable `Artist - Track` / CSV format. Takes Spotify URIs, URL links or just IDs. Reads URIs from files or standard input
+- `spotify_uri_to_name.sh` - converts Spotify track / album / artist URIs to human readable `Artist - Track` / CSV format. Takes Spotify URIs, URL links or just IDs. Reads URIs from files or standard input
 - `spotify_create_playlist.sh` - creates a Spotify playlist, either public or private
 - `spotify_rename_playlist.sh` - renames a Spotify playlist
 - `spotify_set_playlists_public.sh` / `spotify_set_playlists_private.sh` - sets one or more given Spotify playlists to public / private
