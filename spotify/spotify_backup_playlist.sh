@@ -37,6 +37,9 @@ Caches metadata locally in .spotify_metadata/ directory. Tracks playlist name to
 and playlist snapshot ID to avoid re-downloading playlists which haven't changed, reducing the number of Spotify API
 calls and therefore the likelihood of hitting HTTP 429 Too Many Requests throttling errors
 
+If a second argument is given with the Spotify Snapshot_ID, this avoids having to fetch the playlist's metadata,
+greatly speeding up iterative downloads of all playlists
+
 The environment variable SPOTIFY_PLAYLIST_FORCE_DOWNLOAD can be set to any value to force a playlist to redownload
 and ignore the last downloaded snapshot ID optimization above
 
@@ -54,7 +57,7 @@ $usage_auth_help
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<playlist> [<curl_options>]"
+usage_args="<playlist> [<snapshot_id> <curl_options>]"
 
 help_usage "$@"
 
@@ -68,6 +71,9 @@ liked(){
     [ "$playlist" = "Liked Songs" ]
 }
 
+snapshot_id="${2:-}"
+
+shift || :
 shift || :
 
 spotify_user
@@ -148,7 +154,12 @@ if liked; then
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
     # Caching behaviour
-    liked_added_at="$("$srcdir/spotify_api.sh" "/v1/me/tracks?limit=1" | jq -r '.items[0].added_at')"
+    # If we pass the second arg snapshot ID just use that to save an API call
+    if ! is_blank "$snapshot_id"; then
+        liked_added_at="$snapshot_id"
+    else
+        liked_added_at="$("$srcdir/spotify_api.sh" "/v1/me/tracks?limit=1" | jq -r '.items[0].added_at')"
+    fi
     liked_metadata_dir="$backup_dir_metadata/liked"
     mkdir -pv "$liked_metadata_dir"
     liked_added_cache="$liked_metadata_dir/added_at"
@@ -219,34 +230,6 @@ else
 
     #echo "Saving to filename: $filename"
 
-    #playlist_json="$("$srcdir/spotify_playlist_json.sh" "$playlist_id")"
-
-    # optimization to pull only the fields we need without the first 100 tracks
-    playlist_json="$("$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id?fields=snapshot_id,description")"
-
-    # debug code for when we hit HTTP 429 Too Many Requests back off errors
-    #if [ -n "${SPOTIFY_DUMP_HEADERS:-}" ]; then
-    #    "$srcdir/../bin/curl_auth.sh" -i "$url_base/$url_path" "$@" | sed '/^[[:space:]]*$/,$d' >&2
-    #    exit 1
-    #fi
-
-    echo -n "=> Description "
-
-    description_file="$backup_dir/$filename.description"
-
-    # playlist descriptions are HTML encoded
-    jq -r '.description' <<< "$playlist_json" | tr -d '\n' | "$srcdir/../bin/htmldecode.sh" > "$description_file"
-
-    if [ -f "$description_file" ]; then
-        # if file is blank then no description is set, remove the useless file
-        if ! [ -s "$description_file" ]; then
-            rm -f -- "$description_file"
-            echo -n "None"
-        else
-            echo -n "OK"
-        fi
-    fi
-
     playlist_metadata_dir="$backup_dir_metadata/$playlist_id"
     mkdir -p "$playlist_metadata_dir"
 
@@ -254,7 +237,38 @@ else
     playlist_metadata_filename_file="$playlist_metadata_dir/filename"
     playlist_metadata_snapshot_id_file="$playlist_metadata_dir/snapshot_id"
 
-    snapshot_id="$(jq -r '.snapshot_id' <<< "$playlist_json" | tr -d '\n')"
+    #playlist_json="$("$srcdir/spotify_playlist_json.sh" "$playlist_id")"
+
+    # If we pass the second arg snapshot ID just use that to save an API call
+    if is_blank "$snapshot_id"; then
+        # optimization to pull only the fields we need without the first 100 tracks
+        playlist_json="$("$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id?fields=snapshot_id,description")"
+
+        # debug code for when we hit HTTP 429 Too Many Requests back off errors
+        #if [ -n "${SPOTIFY_DUMP_HEADERS:-}" ]; then
+        #    "$srcdir/../bin/curl_auth.sh" -i "$url_base/$url_path" "$@" | sed '/^[[:space:]]*$/,$d' >&2
+        #    exit 1
+        #fi
+
+        echo -n "=> Description "
+
+        description_file="$backup_dir/$filename.description"
+
+        # playlist descriptions are HTML encoded
+        jq -r '.description' <<< "$playlist_json" | tr -d '\n' | "$srcdir/../bin/htmldecode.sh" > "$description_file"
+
+        if [ -f "$description_file" ]; then
+            # if file is blank then no description is set, remove the useless file
+            if ! [ -s "$description_file" ]; then
+                rm -f -- "$description_file"
+                echo -n "None"
+            else
+                echo -n "OK"
+            fi
+        fi
+
+        snapshot_id="$(jq -r '.snapshot_id' <<< "$playlist_json" | tr -d '\n')"
+    fi
 
     # renaming a playlist or changing its description also changes the snapshot ID,
     # not just adding/removing/reordering tracks, triggering a full re-download and rename handling logic
