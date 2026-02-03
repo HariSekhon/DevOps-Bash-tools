@@ -31,7 +31,7 @@ Even resumes downloads after network interruptions or a Control-C and re-run the
 Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package manager if not already installed
 
 Automatically tries to upgrade the yt-dlp and ffmpeg packages first as sites like YouTube update their site
-regularly breaking this and requiring a yt-dlp update
+regularly breaking this and requiring a yt-dlp update - you should only install yt-dlp using your OS package manager
 
 If you run into a error determining a video format to download such as this:
 
@@ -87,7 +87,10 @@ format="${YT_DLP_FORMAT:-$default_format}"
 
 export HOMEBREW_NO_ENV_HINTS=1
 
-# in case installed manually but not in package manager
+# In case installed manually but not in package manager...
+#
+# Update: expect user to be using package manager so we can auto-upgrade yt-dlp which is needed often
+#
 #for cmd in yt-dlp ffmpeg; do
 #    if ! type -P "$cmd" &>/dev/null; then
 #        timestamp "$cmd not found in \$PATH, attempting to install..."
