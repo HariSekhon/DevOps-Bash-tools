@@ -4380,6 +4380,6 @@ iOSInjectionProject/
 # End of https://www.toptal.com/developers/gitignore/api/ansible,apachehadoop,appcode,appengine,archive,archives,archlinuxpackages,audio,autotools,backup,basic,batch,bittorrent,c,c++,certificates,chefcookbook,clojure,cloud9,cmake,code,code-java,codeblocks,compressed,compressedarchive,compression,data,database,datarecovery,diff,direnv,diskimage,docfx,docpress,docz,dotenv,dotfilessh,dotsettings,dropbox,eclipse,emacs,erlang,executable,firebase,flask,git,gitbook,go,gpg,gradle,grails,groovy,grunt,haskell,helm,homebrew,hugo,images,intellij,intellij+all,intellij+iml,java,java-web,jenv,jetbrains,jetbrains+all,jetbrains+iml,jmeter,julia,jupyternotebooks,kotlin,lamp,latex,less,linux,lua,macos,matlab,maven,mercurial,microsoftoffice,node,octave,osx,packer,patch,perl,perl6,phpunit,powershell,puppet,putty,pycharm,pycharm+all,pycharm+iml,pydev,python,r,rails,react,reactnative,redis,root,ruby,rust,sbt,scala,serverless,sonar,sonarqube,spark,splunk,spreadsheet,ssh,sublimetext,svn,terraform,terragrunt,tortoisegit,vagrant,venv,virtualenv,visualstudio,visualstudiocode,vs,vscode,vue,vuejs,waf,windows,xcode,xcodeinjection,zsh
 
 # for DevOps-Bash-tools packages/*.sh scripts
-!Packages/
+## needed to unmask directory ignore above otherwise !packages/*packages*.sh isn't respected
 !packages/
 !packages/*packages*.sh
