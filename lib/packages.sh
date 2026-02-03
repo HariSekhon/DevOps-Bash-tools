@@ -24,7 +24,9 @@ fi
 
 # used in client code
 # shellcheck disable=SC2034
-package_args_description="Takes a list of packages as arguments or via stdin, and for any arguments that are plaintext files, reads the packages from those given files (one package per line)"
+package_args_description="Takes a list of packages as arguments or via stdin,
+and for any arguments that are plaintext files,
+reads the packages from those given files (one package per line)"
 
 packages=""
 
