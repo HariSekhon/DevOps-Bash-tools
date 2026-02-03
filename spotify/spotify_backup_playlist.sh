@@ -217,7 +217,9 @@ if liked; then
         echo -n 'OK'
     fi
 else
-    if is_blank "$playlist_id"; then
+    if ! is_blank "$playlist_id"; then
+        playlist_name="$playlist"
+    else
         playlist_id="$(playlist_name_to_id "$playlist")"
         # if we were passed a playlist_id instead of name as first arg to avoid one lookup,
         # do a reverse lookup to get the name
