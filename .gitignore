@@ -476,6 +476,8 @@ wordlists/users.weighted
 
 # SwiftPackageManager
 Packages
+# for DevOps-Bash-tools packages/*.sh scripts
+!Packages/*packages*.sh
 
 # Obj-C/Swift specific
 *.hmap
