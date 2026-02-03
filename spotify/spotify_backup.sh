@@ -66,9 +66,9 @@ if [ $# -gt 0 ]; then
 fi
 
 "$srcdir/spotify_backup_artists_followed.sh"
+echo >&2
 
 "$srcdir/spotify_backup_playlists_list.sh"
-
 echo >&2
 
 "$srcdir/spotify_backup_playlists.sh"
