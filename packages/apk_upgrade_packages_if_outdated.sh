@@ -26,6 +26,9 @@ usage(){
     cat <<EOF
 Upgrades Alpine APK package lists if the packages are outdated
 
+This is slow because it has to do an 'apk update' to get the latest package list first
+which can take 15 seconds if you're not on a fast connection
+
 $package_args_description
 
 Not yet tested on Alpine as new docker images have no outdated packages
