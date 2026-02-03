@@ -221,7 +221,7 @@ else
     # to avoid lots of API iterations trying to find a name to ID mapping
     playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
 
-    echo -n "$playlist_name "
+    echo -n "$playlist_name"
 
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
@@ -250,7 +250,7 @@ else
         #    exit 1
         #fi
 
-        echo -n "=> Description "
+        echo -n " => Description "
 
         description_file="$backup_dir/$filename.description"
 
