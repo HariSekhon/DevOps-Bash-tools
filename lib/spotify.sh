@@ -79,11 +79,16 @@ is_local_uri(){
 }
 
 is_spotify_playlist_id(){
-    #local playlist_id="${1:-}"
+    local playlist_id="${1:-}"
     #if [ -z "$playlist_id" ]; then
     #    die "no playlist id passed to function is_spotify_playlist_id()"
     #fi
-    [[ "$1" =~ ^[A-Za-z0-9]{22}$ ]]
+    [[ "$playlist_id" =~ ^[A-Za-z0-9]{22}$ ]]
+}
+
+is_spotify_playlist_snapshot_id(){
+    local snapshot_id="${1:-}"
+    [[ "$snapshot_id" =~ ^[A-Za-z0-9+/]{20,}={0,2}$ ]]
 }
 
 validate_spotify_uri(){
