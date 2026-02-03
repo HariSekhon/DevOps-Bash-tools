@@ -39,6 +39,7 @@ usage_args="<packages>"
 
 help_usage "$@"
 
+rpm -q xargs &>/dev/null ||
 yum install -y xargs
 
 process_package_args "$@" |
