@@ -16,7 +16,7 @@
 --
 
 -- ========================================================================== --
---         MPV Speed
+--                               M P V   S p e e d
 -- ========================================================================== --
 
 -- I use this to automatically increase playback speed for some videos using direnv
