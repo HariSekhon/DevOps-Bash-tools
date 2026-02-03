@@ -35,7 +35,6 @@ aws/.aws_customize_environment
 configs/.Codefresh/cli-config/config.yaml
 configs/.config/flake8
 configs/.config/htop/htoprc
-configs/.config/mpv
 configs/.config/pycodestyle
 configs/.config/terminalizer/config.yml
 configs/.config/yamllint/config
