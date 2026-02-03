@@ -14,7 +14,7 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# Mac OSX - HomeBrew install packages in a forgiving way
+# Mac OSX - HomeBrew upgrades packages if they're outdated
 
 set -eu #o pipefail  # undefined in /bin/sh
 [ -n "${DEBUG:-}" ] && set -x
@@ -28,7 +28,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Installs Mac Homebrew package lists if the packages aren't already installed
+Upgrades Mac Homebrew package lists if the packages are outdated
 
 $package_args_description
 
