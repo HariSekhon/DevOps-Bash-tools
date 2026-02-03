@@ -31,6 +31,10 @@ Output Format:
 
 <playlist_id>   <playlist_name>
 
+If SPOTIFY_PLAYLIST_SNAPSHOT_ID=1 environment variable is set, then returns a 2nd column with the snapshot ID.
+This addition was made as an optimization to avoid having to do an extra API call per playlist when running
+spotify_backup_playlist.sh / spotify_backup_playlists.sh
+
 \$SPOTIFY_USER must be defined in environment or given as first arg unless \$SPOTIFY_PRIVATE=1 is set,
 in which case it's inferred from the auth token
 
@@ -117,7 +121,11 @@ output(){
     else
         jq "select(.owner.id == \"$spotify_user\")"
     fi |
-    jq -r "[.id, .name] | @tsv" |
+    if [ -n "${SPOTIFY_PLAYLIST_SNAPSHOT_ID:-}" ]; then
+        jq -r "[.id, .snapshot_id, .name] | @tsv"
+    else
+        jq -r "[.id, .name] | @tsv"
+    fi |
     sed 's/[[:space:]]*$//'
 }
 
