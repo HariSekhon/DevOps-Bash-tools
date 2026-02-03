@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
+# default to trying get the best video and audio format we can
+default_format="bestvideo[ext=mp4][vcodec^=avc1]+bestaudio/best[ext=mp4]"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Downloads a YouTube, Facebook or Twitter / X video to mp4 with maximum quality and compatibility using yt-dlp
@@ -49,7 +52,17 @@ Then set this in your shell first with the name of your browser:
 You can specify the download format using args eg. --format, but you can also set this in environment variable used
 by this script:
 
-    export YT_DLP_FORMAT='best[height=720]'
+    export YT_DLP_FORMAT='best[height<=720]'
+
+This can make hundreds of MB of size difference vs 1080p or greater, reducing a long download wait time.
+
+Better would be to add the '[height<=720]' to the default format which is:
+
+    export YT_DLP_FORMAT='$default_format'
+
+        so it becomes:
+
+    export YT_DLP_FORMAT='bestvideo[ext=mp4][vcodec^=avc1][height<=720]+bestaudio/best[ext=mp4][height<=720]'
 
 Tip: set this in direnv to have smaller quicker downloads using less disk space by limiting to good enough 720p,
 especially for videos you're just going to quickly watch one time with the mpvd alias to delete the file after one
@@ -75,9 +88,6 @@ shift || :
 shift || :
 
 output_filename="$file_basename_without_ext.%(ext)s"
-
-# default to trying get the best video and audio format we can
-default_format="bestvideo[ext=mp4][vcodec^=avc1]+bestaudio/best[ext=mp4]"
 
 # override the format with direnv in your ~/Downloads or ~/Downloads/YouTube dir
 # dir if you want faster downloads at a good enough format:
