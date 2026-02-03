@@ -30,6 +30,9 @@ Even resumes downloads after network interruptions or a Control-C and re-run the
 
 Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package manager if not already installed
 
+Automatically tries to upgrade the yt-dlp and ffmpeg packages first as sites like YouTube update their site
+regularly breaking this and requiring a yt-dlp update
+
 If you run into a error determining a video format to download such as this:
 
     WARNING: [youtube] RVVDi1PHgw4: nsig extraction failed: Some formats may be missing
@@ -42,7 +45,16 @@ Then set this in your shell first with the name of your browser:
 
     export COOKIES_FROM_BROWSER=chrome
 
-Try to upgrade yt-dlp first as sites like YouTube update their site breaking this and requiring a yt-dlp update
+You can specify the download format using args eg. --format, but you can also set this in environment variable used
+by this script:
+
+    export YT_DLP_FORMAT='best[height=720]'
+
+Tip: set this in direnv to have smaller quicker downloads using less disk space by limiting to good enough 720p,
+especially for videos you're just going to quickly watch one time with the mpvd alias to delete the file after one
+watch, see this documentation:
+
+    https://github.com/HariSekhon/Knowledge-Base/blob/main/mpv.md
 "
 
 # used by usage() in lib/utils.sh
@@ -61,20 +73,32 @@ shift || :
 
 output_filename="$file_basename_without_ext.%(ext)s"
 
-format="bestvideo[ext=mp4][vcodec^=avc1]+bestaudio/best[ext=mp4]"
+# default to trying get the best video and audio format we can
+default_format="bestvideo[ext=mp4][vcodec^=avc1]+bestaudio/best[ext=mp4]"
 
-#"$srcdir/../packages/install_packages_if_absent.sh" yt-dlp ffmpeg
+# override the format with direnv in your ~/Downloads or ~/Downloads/YouTube dir
+# dir if you want faster downloads at a good enough format:
+#
+#   eg. export YT_DLP_FORMAT='best[height=720]'
+#
+format="${YT_DLP_FORMAT:-$default_format}"
+
+export HOMEBREW_NO_ENV_HINTS=1
 
 # in case installed manually but not in package manager
-for cmd in yt-dlp ffmpeg; do
-    if ! type -P "$cmd" &>/dev/null; then
-        timestamp "$cmd not found in \$PATH, attempting to install..."
-        echo
-        "$srcdir/../packages/install_packages.sh" "$cmd"
-        echo
-    fi
-    check_bin "$cmd"
-done
+#for cmd in yt-dlp ffmpeg; do
+#    if ! type -P "$cmd" &>/dev/null; then
+#        timestamp "$cmd not found in \$PATH, attempting to install..."
+#        echo
+#        "$srcdir/../packages/install_packages.sh" "$cmd"
+#        echo
+#    fi
+#    check_bin "$cmd"
+#done
+
+"$srcdir/../packages/install_packages_if_absent.sh" yt-dlp ffmpeg
+
+"$srcdir/../packages/upgrade_packages_if_outdated.sh" yt-dlp ffmpeg
 
 # https://github.com/yt-dlp/yt-dlp#output-template
 
