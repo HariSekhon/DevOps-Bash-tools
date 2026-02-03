@@ -40,8 +40,9 @@ usage_args="<packages>"
 
 help_usage "$@"
 
-rpm -q xargs &>/dev/null ||
-yum install -y xargs
+# get xargs if it's not installed since we call it below in the shell pipeline
+rpm -q findutils &>/dev/null ||
+yum install -y findutils
 
 process_package_args "$@" |
 "$srcdir/rpms_filter_not_installed.sh" |
