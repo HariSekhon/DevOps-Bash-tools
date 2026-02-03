@@ -1620,19 +1620,23 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
     - Redhat RHEL / CentOS:
       - `yum_install_packages.sh` / `yum_remove_packages.sh` - installs RPM lists from arguments, files or stdin. Handles Yum + Dnf behavioural differences, calls `sudo` if not root, auto-attempts variations of python/python2/python3 package names. Avoids yum slowness by checking if rpm is installed before attempting to install it, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across RHEL/CentOS/Fedora versions)
       - `yum_install_packages_if_absent.sh` - installs RPMs only if not already installed and not a metapackage provided by other packages (eg. `vim` metapackage provided by `vim-enhanced`), saving time and minimizing install logs / CI logs, plus all the features of `yum_install_packages.sh` above
+      - `yum_upgrade_packages_if_outdated.sh` - upgrades RPMs only if they're outdated
       - `rpms_filter_installed.sh` / `rpms_filter_not_installed.sh` - pipe filter packages that are / are not installed for easy script piping
     - Debian / Ubuntu:
       - `apt_install_packages.sh` / `apt_remove_packages.sh` - installs Deb package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Debian/Ubuntu distros/versions)
       - `apt_install_packages_if_absent.sh` - installs Deb packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apt_install_packages.sh` above
+      - `apt_upgrade_packages_if_outdated.sh` - upgrades Deb packages only if they're outdated
       - `apt_wait.sh` - blocking wait on concurrent apt locks to avoid failures and continue when available, mimicking yum's waiting behaviour rather than error'ing out
       - `debs_filter_installed.sh` / `debs_filter_not_installed.sh` - pipe filter packages that are / are not installed for easy script piping
     - Alpine:
       - `apk_install_packages.sh` / `apk_remove_packages.sh` - installs Alpine apk package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Alpine versions)
       - `apk_install_packages_if_absent.sh` - installs Alpine apk packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apk_install_packages.sh` above
+      - `apk_upgrade_packages_if_outdated.sh` - upgrades Alpine apk packages only if they're outdated
       - `apk_filter_installed.sh` / `apk_filter_not_installed.sh` - pipe filter packages that are / are not installed for easy script piping
     - Mac:
       - `brew_install_packages.sh` / `brew_remove_packages.sh` - installs Mac Hombrew package lists from arguments, files or stdin. Accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across versions)
       - `brew_install_packages_if_absent.sh` - installs Mac Homebrew packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `brew_install_packages.sh` above
+      - `brew_upgrade_packages_if_outdated.sh` - upgrades Mac Homebrew packages only if they're outdated
       - `brew_filter_installed.sh` / `brew_filter_not_installed.sh` - pipe filter packages that are / are not installed for easy script piping
       - `brew_package_owns.sh` - finds which brew package owns a given filename argument
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
