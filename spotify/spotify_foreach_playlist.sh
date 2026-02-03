@@ -75,6 +75,9 @@ while read -r playlist_id snapshot_id playlist; do
     if is_blank "${SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME:-}"; then
         printf '%s/%s  %s\t' "$i" "$total_playlists" "$playlist"
     fi
+    if ! is_spotify_snapshot_id "$snapshot_id"; then
+        die "ERROR: invalid Spotify snapshot_id '$snapshot_id' detected for playlist: $playlist"
+    fi
     # handle danger - done at playlist level not command level because we need late command evaluation in spotify_backup_playlists.sh
     # this works, tested on Ke$ha playlist and `echo injected`
     playlist="${playlist//$/\\$}"
