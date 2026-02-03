@@ -1888,6 +1888,7 @@ Does nothing:
 
 [![TamperMonkey](https://github-readme-stats-fast.vercel.app/api/pin/?username=HariSekhon&repo=TamperMonkey&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/TamperMonkey)
 [![Hammerspoon](https://github-readme-stats-fast.vercel.app/api/pin/?username=HariSekhon&repo=Hammerspoon&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Hammerspoon)
+[![MPV-Scripts](https://github-readme-stats-fast.vercel.app/api/pin/?username=HariSekhon&repo=MPV-Scripts&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/MPV-Scripts)
 
 ### Spotify
 
