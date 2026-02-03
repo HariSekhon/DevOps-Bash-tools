@@ -32,6 +32,7 @@ HariSekhon:harisekhon
 Environments:environments
 TamperMonkey:tampermonkey
 Hammerspoon:hammerspoon
+MPV-Scripts:mpvscripts
 # order repos by dependent submodule repos first
 GitHub-Actions-Contexts:contexts
 SQL-keywords:sql-keywords
