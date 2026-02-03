@@ -57,7 +57,7 @@ $usage_auth_help
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<playlist> [<snapshot_id> <curl_options>]"
+usage_args="<playlist> [<playlist_id> <snapshot_id> <curl_options>]"
 
 help_usage "$@"
 
@@ -71,8 +71,10 @@ liked(){
     [ "$playlist" = "Liked Songs" ]
 }
 
-snapshot_id="${2:-}"
+playlist_id="${2:-}"
+snapshot_id="${3:-}"
 
+shift || :
 shift || :
 shift || :
 
@@ -215,11 +217,12 @@ if liked; then
         echo -n 'OK'
     fi
 else
-    playlist_id="$(playlist_name_to_id "$playlist")"
-
-    # not redundant since spotify_backup.sh passes in a playlist ID instead of name for efficiency
-    # to avoid lots of API iterations trying to find a name to ID mapping
-    playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
+    if is_blank "$playlist_id"; then
+        playlist_id="$(playlist_name_to_id "$playlist")"
+        # if we were passed a playlist_id instead of name as first arg to avoid one lookup,
+        # do a reverse lookup to get the name
+        playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
+    fi
 
     echo -n "$playlist_name"
 
