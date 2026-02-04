@@ -66,6 +66,7 @@ if is_mac; then
     if [ -n "${BACKGROUND_VIDEO:-}" ]; then
         opts+=(-g)
     fi
+    # if the video player has a binary in \$PATH then use it, otherwise assume it's an /Application/NAME.app
     if type -P "${DEFAULT_VIDEO_PLAYER-}" &>/dev/null; then
         if [ "$DEFAULT_VIDEO_PLAYER" = mpv ]; then
             if [ -n "${PLAY_VIDEO:-}" ]; then
