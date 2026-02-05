@@ -16,7 +16,7 @@
 
 # Cities to load into the World Clock on macOS
 
-# Was going to load this into Clock via Applescript but that is extraordinarily bad for scripting
+# Was going to load this into Clock via Applescript but this app is extraordinarily bad for scripting
 
 London
 Prague
