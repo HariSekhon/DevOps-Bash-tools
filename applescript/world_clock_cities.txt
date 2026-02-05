@@ -1,0 +1,46 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2026-02-05 14:53:51 -0300 (Thu, 05 Feb 2026)
+#
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  https///github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# Cities to load into the World Clock on macOS
+
+# Was going to load this into Clock via Applescript but that is extraordinarily bad for scripting
+
+London
+Prague
+Madrid
+Amsterdam
+Dubai
+Bangkok
+Cairo
+Chisinau
+Istanbul
+Tbilisi
+Cancun
+Bogota
+New York
+Los Angeles
+#Palo Alto
+San Franciso
+
+#Marrakesh
+#Kyiv
+#Miami
+#Hanoi
+#Adelaide
+#Athens
+#Pontianak
+#Melbourne
+#Tunis
