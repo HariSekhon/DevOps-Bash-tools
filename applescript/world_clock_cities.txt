@@ -30,6 +30,8 @@ Istanbul
 Tbilisi
 Cancun
 Bogota
+Santiago
+Buenos Aires
 New York
 Los Angeles
 #Palo Alto
