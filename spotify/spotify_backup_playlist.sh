@@ -93,6 +93,7 @@ fi
 
 backup_dir_spotify="$backup_dir/spotify"
 backup_dir_metadata="$backup_dir/.spotify_metadata"
+unchanged_playlist=0
 
 if liked; then
     playlist_name="Liked Songs"
@@ -285,6 +286,7 @@ else
        [ -f "$backup_dir_spotify/$filename" ] &&
        is_blank "${SPOTIFY_PLAYLIST_FORCE_DOWNLOAD:-}"; then
         echo -n ' => Snapshot ID unchanged'
+        unchanged_playlist=1
     else
         # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
         echo -n " => URIs "
@@ -382,3 +384,8 @@ else
     fi
 fi
 echo " => $SECONDS secs"
+# used by HariSekhon/Spotify-Playlists scripts to remove the many lines of unchanged playlists output
+# so I can see only what has changed and where I am spending time to optimize things
+if [ "$unchanged_playlist" = 1 ] && ! is_blank "${QUIET_UNCHANGED_PLAYLISTS:-}"; then
+    clear_previous_line
+fi
