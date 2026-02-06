@@ -742,10 +742,21 @@ log(){
 }
 
 clear_current_line(){
+    # Terminal Codes:
+    #
+    # \r       - position cursor back to column 0
+    # \033[K   - ESC + [K = clear line
+    #
     printf "\r\033[K"
 }
 
 clear_previous_line(){
+    # Terminal Codes:
+    #
+    # \033[1A  - ESC + [1A = move cursor up one line
+    # \033[2K  - clear entire line
+    # \r       - position cursor back to column 0
+    #
     printf "\033[1A\033[2K\r"
 }
 
