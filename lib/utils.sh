@@ -224,6 +224,24 @@ is_interactive(){
     return 1
 }
 
+file_newer_than_mins(){
+    local mins="$1"
+    local file="$2"
+    local mtime
+    if ! is_int "$mins"; then
+        die "Error: non-integer passed as first arg to file_newer_than_mins() function"
+    fi
+    local secs="$((mins * 60))"
+
+    if is_mac; then
+        mtime=$(stat -f %m "$file")
+    else  # assume Linux GNU stat
+        mtime=$(stat -c %Y "$file")
+    fi
+
+    (( "$(date +%s)" - mtime <= secs ))
+}
+
 # XXX: there are other tarball extensions for other compression algorithms but these are the 2 very standard ones we always use: gzip or bz2
 has_tarball_extension(){
     local filename="$1"
@@ -721,6 +739,14 @@ log(){
     if is_verbose; then
         timestamp "$@"
     fi
+}
+
+clear_current_line(){
+    printf "\r\033[K"
+}
+
+clear_previous_line(){
+    printf "\033[1A\033[2K\r"
 }
 
 start_timer(){
