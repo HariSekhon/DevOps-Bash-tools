@@ -66,7 +66,7 @@ if is_mac; then
     # if the video player has a binary in \$PATH then use it, otherwise assume it's an /Application/NAME.app
     if type -P "${DEFAULT_VIDEO_PLAYER-}" &>/dev/null; then
         if [ "$DEFAULT_VIDEO_PLAYER" = mpv ]; then
-            if [ -n "${PLAY_VIDEO:-}" ]; then
+            if [ -z "${PLAY_VIDEO:-}" ]; then
                 opts+=("--pause=yes")
             fi
         fi
