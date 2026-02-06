@@ -67,7 +67,7 @@ if is_mac; then
     if type -P "${DEFAULT_VIDEO_PLAYER-}" &>/dev/null; then
         if [ "$DEFAULT_VIDEO_PLAYER" = mpv ]; then
             if [ -n "${PLAY_VIDEO:-}" ]; then
-                opts=("--pause=yes")
+                opts+=("--pause=yes")
             fi
         fi
         "$DEFAULT_VIDEO_PLAYER" "${opts[@]}" "$video" ${BACKGROUND_VIDEO:+&}
