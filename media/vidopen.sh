@@ -63,9 +63,6 @@ linux_commands=(
 
 if is_mac; then
     opts=()
-    if [ -n "${BACKGROUND_VIDEO:-}" ]; then
-        opts+=(-g)
-    fi
     # if the video player has a binary in \$PATH then use it, otherwise assume it's an /Application/NAME.app
     if type -P "${DEFAULT_VIDEO_PLAYER-}" &>/dev/null; then
         if [ "$DEFAULT_VIDEO_PLAYER" = mpv ]; then
@@ -75,6 +72,9 @@ if is_mac; then
         fi
         "$DEFAULT_VIDEO_PLAYER" "${opts[@]}" "$video" ${BACKGROUND_VIDEO:+&}
     else
+        if [ -n "${BACKGROUND_VIDEO:-}" ]; then
+            opts+=(-g)
+        fi
         if [ -n "${DEFAULT_VIDEO_PLAYER:-}" ]; then
             opts+=(-a "$DEFAULT_VIDEO_PLAYER")
         fi
