@@ -114,7 +114,8 @@ export HOMEBREW_NO_ENV_HINTS=1
 
 "$srcdir/../packages/install_packages_if_absent.sh" yt-dlp ffmpeg
 
-"$srcdir/../packages/upgrade_packages_if_outdated.sh" yt-dlp ffmpeg
+# painfully slow blocks downloads on slow connections because retrieving new Homebrew package lists is expensive
+#"$srcdir/../packages/upgrade_packages_if_outdated.sh" yt-dlp ffmpeg
 
 # https://github.com/yt-dlp/yt-dlp#output-template
 
