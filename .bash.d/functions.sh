@@ -134,12 +134,13 @@ dle(){
             # doesn't persist past a pause/unpause,
             # and this starts playing which we don't want which is why it's backgrounded
             #osascript -e 'tell application "QuickTime Player" to set rate of document 1 to 2' &&
-            exit
+            break
         fi
         local sleep_secs="$((RANDOM % 300))"
         echo "Sleeping for $sleep_secs secs before retrying..."
         sleep "$sleep_secs"
     done
+    exit
 }
 
 deccp(){
