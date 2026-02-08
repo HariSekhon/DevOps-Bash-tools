@@ -70,7 +70,7 @@ if is_mac; then
                 opts+=("--pause=yes")
             fi
         fi
-        "$DEFAULT_VIDEO_PLAYER" "${opts[@]}" "$video" ${BACKGROUND_VIDEO:+&}
+        "$DEFAULT_VIDEO_PLAYER" "${opts[@]}" -- "$video" &
     else
         if [ -n "${BACKGROUND_VIDEO:-}" ]; then
             opts+=(-g)
