@@ -96,10 +96,10 @@ backup_dir_spotify_base="$backup_dir/spotify"
 backup_dir_metadata="$backup_dir/.spotify_metadata"
 unchanged_playlist=0
 
-# If .path_mappings.txt exists in the backup directory, map playlist names to subdirs via regex.
-# Format: first column = directory name (tab-separated), rest of line = regex to match playlist name.
-# Spotify does not expose folder structure, so this recreates grouping (e.g. "Best of Year", "Mixes in Time").
-# Match is done with grep -E so regex is never re-interpreted by the shell (avoids injection if file is untrusted).
+# if .path_mappings.txt exists in the backup directory, map playlist names to subdirs via regex.
+# format: first column = directory name (tab-separated), rest of line = regex to match playlist name.
+# spotify does not expose folder structure, so this recreates grouping (e.g. "Best of Year", "Mixes in Time").
+# match is done with grep -E so regex is never re-interpreted by the shell (avoids injection if file is untrusted).
 get_path_mapping_subdir(){
     local base_dir="$1"
     local playlist_name="$2"
@@ -113,7 +113,7 @@ get_path_mapping_subdir(){
         dir="${line%%$'\t'*}"
         regex="${line#*$'\t'}"
         [ -z "$regex" ] && continue
-        if printf '%s' "$playlist_name" | grep -qE -- "$regex"; then
+        if grep -Eq -- "\\<$regex\\>" <<< "$playlist_name"; then
             echo "$dir"
             return 0
         fi
@@ -200,7 +200,7 @@ if liked; then
     apply_path_mapping "$playlist_name"
 
     # Caching behaviour
-    # If we pass the second arg snapshot ID just use that to save an API call
+    # if we pass the second arg snapshot ID just use that to save an API call
     if ! is_blank "$snapshot_id"; then
         liked_added_at="$snapshot_id"
     else
@@ -384,20 +384,20 @@ else
 
             echo -n " => playlist RENAMED"
 
-            # With path mapping, renames are under base: Subdir/ and spotify/Subdir/; run from backup base
+            # with path mapping, renames are under base: Subdir/ and spotify/Subdir/; run from backup base
             if [ -n "${path_mapping_subdir:-}" ]; then
                 cd "$backup_dir_base"
             else
                 cd "$backup_dir"
             fi
 
-            # If we're in a git repo and the old filename is git managed, then rename it
+            # if we're in a git repo and the old filename is git managed, then rename it
             #
-            # Optionally using a local rename.sh script if present - useful script hook which could have
+            # optionally using a local rename.sh script if present - useful script hook which could have
             # some more specific handling of corresponding files under management - *.description, spotify/ or
             # .spotify/metadata/ files
             #
-            # In my case this just calls spotify_rename_playlist_files.sh in this repo so it's the same, but a
+            # in my case this just calls spotify_rename_playlist_files.sh in this repo so it's the same, but a
             # potentially useful hook script to leave in, and the rename.sh abstraction is simpler
             if is_in_git_repo &&
                is_file_tracked_in_git "$old_filename"; then
