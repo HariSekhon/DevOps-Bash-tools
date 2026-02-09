@@ -77,6 +77,8 @@ cowsay
 csshx
 #ctags
 ctop  # container top
+cursor  # AI editor
+cursor-cli
 #cyberduck  # GUI client for FTP, SFTP, WebDAV, Amazon S3, Google Drive etc.
 d2  # declarative diagram language
 dateutils  # strptime, dateadd, dateconv, datediff, dategrep, dateseq, datesort, datetest, datezone - https://www.fresse.org/dateutils/
