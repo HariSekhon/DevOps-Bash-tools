@@ -63,9 +63,11 @@ fi
 
 # if new is a directory or ends in /, treat as directory: rename to same filename under that path
 if [[ "$new" == */ ]] || [[ -d "${prefix}$new" ]]; then
+    mkdir -p -v "$new"
     new_dest="${new%/}/$old"
     dest_prefix=""
     spotify_dest_prefix="spotify/"
+    mkdir -p -v "${spotify_dest_prefix}$new"
 else
     new_dest="$new"
     dest_prefix="$prefix"
