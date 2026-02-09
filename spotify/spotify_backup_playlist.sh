@@ -99,7 +99,7 @@ unchanged_playlist=0
 # if .path_mappings.txt exists in the backup directory, map playlist names to subdirs via regex.
 # format: first column = directory name (tab-separated), rest of line = regex to match playlist name.
 # spotify does not expose folder structure, so this recreates grouping (e.g. "Best of Year", "Mixes in Time").
-# match is done with grep -E so regex is never re-interpreted by the shell (avoids injection if file is untrusted).
+# match is done with grep -E so regex is never re-interpreted by the shell (avoids injection if file is untrusted)
 get_path_mapping_subdir(){
     local base_dir="$1"
     local playlist_name="$2"
