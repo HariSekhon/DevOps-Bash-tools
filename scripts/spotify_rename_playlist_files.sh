@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -28,8 +29,11 @@ usage_description="
 Renames a Spotify playlist in both the \$PWD and \$PWD/spotify/ directories
 to keep the Spotify backups in sync
 
+If <new_playlist_name> is a directory or ends with /, the file is moved into
+that directory keeping the same filename (rename to <dir>/<old_filename>)
+
 With optional third arg <subdir> (path-mapped backups): renames under
-\$PWD/<subdir>/ and \$PWD/spotify/<subdir>/ instead. Invoke from backup base
+\$PWD/<subdir>/ and \$PWD/spotify/<subdir>/ instead, invoke from backup base
 "
 
 # used by usage() in lib/utils.sh
@@ -47,7 +51,7 @@ subdir="${3:-}"
 old="$("$srcdir/../spotify/spotify_playlist_to_filename.sh" "$old")"
 new="$("$srcdir/../spotify/spotify_playlist_to_filename.sh" "$new")"
 
-# Optional subdir for path-mapped backups: playlists in base/Subdir/, URIs in base/spotify/Subdir/
+# optional subdir for path-mapped backups: playlists in base/Subdir/, URIs in base/spotify/Subdir/
 if [ -n "$subdir" ]; then
     prefix="$subdir/"
     spotify_prefix="spotify/$subdir/"
@@ -56,20 +60,31 @@ else
     spotify_prefix="spotify/"
 fi
 
+# if new is a directory or ends in /, treat as directory: rename to same filename under that path
+if [[ "$new" == */ ]] || [[ -d "${prefix}$new" ]]; then
+    new_dest="${new%/}/$old"
+    dest_prefix=""
+    spotify_dest_prefix="spotify/"
+else
+    new_dest="$new"
+    dest_prefix="$prefix"
+    spotify_dest_prefix="$spotify_prefix"
+fi
+
 # the gitrename function in lib/git.sh has been updated to preserve the new file
 # and restore it after the move to then git diff and commit any updates
-gitrename "${prefix}$old" "${prefix}$new"
+gitrename "${prefix}$old" "${dest_prefix}$new_dest"
 
-gitrename "${spotify_prefix}$old" "${spotify_prefix}$new"
+gitrename "${spotify_prefix}$old" "${spotify_dest_prefix}$new_dest"
 
 if [ -f "aggregations/${prefix}$old" ]; then
-    gitrename "aggregations/${prefix}$old" "aggregations/${prefix}$new"
+    gitrename "aggregations/${prefix}$old" "aggregations/${dest_prefix}$new_dest"
 fi
 
 if [ -f "${prefix}$old.description" ]; then
-    gitrename "${prefix}$old.description" "${prefix}$new.description"
+    gitrename "${prefix}$old.description" "${dest_prefix}$new_dest.description"
 fi
 
 if [ -f "id/${prefix}$old.id.txt" ]; then
-    mv -v "id/${prefix}$old.id.txt" "id/${prefix}$new.id.txt"
+    mv -v "id/${prefix}$old.id.txt" "id/${dest_prefix}$new_dest.id.txt"
 fi
