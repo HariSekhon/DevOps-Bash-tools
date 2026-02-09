@@ -48,8 +48,9 @@ old="$1"
 new="$2"
 subdir="${3:-}"
 
-old="$("$srcdir/../spotify/spotify_playlist_to_filename.sh" "$old")"
-new="$("$srcdir/../spotify/spotify_playlist_to_filename.sh" "$new")"
+# the replacement of slashes breaks the later logic to test for destination being a directory
+#old="$("$srcdir/../spotify/spotify_playlist_to_filename.sh" "$old")"
+#new="$("$srcdir/../spotify/spotify_playlist_to_filename.sh" "$new")"
 
 # optional subdir for path-mapped backups: playlists in base/Subdir/, URIs in base/spotify/Subdir/
 if [ -n "$subdir" ]; then
