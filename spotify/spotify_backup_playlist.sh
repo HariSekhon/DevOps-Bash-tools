@@ -91,9 +91,49 @@ fi
 # messes up output per line when iterating all playlists via spotify_backup_playlists.sh
 #log "Backing up to directory: $backup_dir"
 
-backup_dir_spotify="$backup_dir/spotify"
+backup_dir_base="$backup_dir"
+backup_dir_spotify_base="$backup_dir/spotify"
 backup_dir_metadata="$backup_dir/.spotify_metadata"
 unchanged_playlist=0
+
+# If .path_mappings.txt exists in the backup directory, map playlist names to subdirs via regex.
+# Format: first column = directory name (tab-separated), rest of line = regex to match playlist name.
+# Spotify does not expose folder structure, so this recreates grouping (e.g. "Best of Year", "Mixes in Time").
+# Match is done with grep -E so regex is never re-interpreted by the shell (avoids injection if file is untrusted).
+get_path_mapping_subdir(){
+    local base_dir="$1"
+    local playlist_name="$2"
+    local mappings_file="$base_dir/.path_mappings.txt"
+    [ -f "$mappings_file" ] || return 0
+    local dir regex
+    while IFS= read -r line; do
+        line="${line%%#*}"
+        line="$(printf '%s' "$line" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+        [ -z "$line" ] && continue
+        dir="${line%%$'\t'*}"
+        regex="${line#*$'\t'}"
+        [ -z "$regex" ] && continue
+        if printf '%s' "$playlist_name" | grep -qE -- "$regex"; then
+            echo "$dir"
+            return 0
+        fi
+    done < "$mappings_file"
+    return 0
+}
+export -f get_path_mapping_subdir
+
+apply_path_mapping(){
+    local playlist_name="$1"
+    path_mapping_subdir="$(get_path_mapping_subdir "$backup_dir_base" "$playlist_name")"
+    if [ -n "$path_mapping_subdir" ]; then
+        backup_dir="$backup_dir_base/$path_mapping_subdir"
+        backup_dir_spotify="$backup_dir_base/spotify/$path_mapping_subdir"
+        mkdir -p "$backup_dir" "$backup_dir_spotify"
+    else
+        backup_dir="$backup_dir_base"
+        backup_dir_spotify="$backup_dir_spotify_base"
+    fi
+}
 
 if liked; then
     playlist_name="Liked Songs"
@@ -157,6 +197,7 @@ if liked; then
     echo -n "$playlist_name "
 
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
+    apply_path_mapping "$playlist_name"
 
     # Caching behaviour
     # If we pass the second arg snapshot ID just use that to save an API call
@@ -232,6 +273,7 @@ else
     echo -n "$playlist_name"
 
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
+    apply_path_mapping "$playlist_name"
 
     # XXX: bugfix for 'illegal byte sequence error' for weird unicode chars in the filename
     #filename="$(sed 's/[^[:alnum:][:space:]!"$&'"'"'()+,.\/:<_|–\∕-]/-/g' <<< "$filename")"
@@ -342,7 +384,12 @@ else
 
             echo -n " => playlist RENAMED"
 
-            cd "$backup_dir"
+            # With path mapping, renames are under base: Subdir/ and spotify/Subdir/; run from backup base
+            if [ -n "${path_mapping_subdir:-}" ]; then
+                cd "$backup_dir_base"
+            else
+                cd "$backup_dir"
+            fi
 
             # If we're in a git repo and the old filename is git managed, then rename it
             #
@@ -356,9 +403,9 @@ else
                is_file_tracked_in_git "$old_filename"; then
                 echo -n " => updating files... "
                 if [ -x ./rename.sh ]; then
-                    ./rename.sh "$old_filename" "$filename"
+                    ./rename.sh "$old_filename" "$filename" ${path_mapping_subdir:+$path_mapping_subdir}
                 else
-                    "$srcdir/../scripts/spotify_rename_playlist_files.sh" "$old_filename" "$filename"
+                    "$srcdir/../scripts/spotify_rename_playlist_files.sh" "$old_filename" "$filename" ${path_mapping_subdir:+$path_mapping_subdir}
                 fi
             fi
 
