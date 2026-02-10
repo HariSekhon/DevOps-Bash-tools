@@ -117,7 +117,9 @@ get_path_mapping_subdir(){
         dir="${line%%$'\t'*}"
         regex="${line#*$'\t'}"
         [ -z "$regex" ] && continue
-        if grep -Eq -- "\\<$regex\\>" <<< "$playlist_name"; then
+        # breaks many Artist name matches
+        #if grep -Eq -- "\\<$regex\\>" <<< "$playlist_name"; then
+        if grep -Eq -- "$regex" <<< "$playlist_name"; then
             echo "$dir"
             return 0
         fi
