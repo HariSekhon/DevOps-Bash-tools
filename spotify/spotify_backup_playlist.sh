@@ -96,6 +96,10 @@ backup_dir_spotify_base="$backup_dir/spotify"
 backup_dir_metadata="$backup_dir/.spotify_metadata"
 unchanged_playlist=0
 
+mkdir -vp "$backup_dir_base"
+mkdir -vp "$backup_dir_spotify_base"
+mkdir -vp "$backup_dir_metadata"
+
 # if .path_mappings.txt exists in the backup directory, map playlist names to subdirs via regex.
 # format: first column = directory name (tab-separated), rest of line = regex to match playlist name.
 # spotify does not expose folder structure, so this recreates grouping (e.g. "Best of Year", "Mixes in Time").
@@ -133,15 +137,13 @@ apply_path_mapping(){
         backup_dir="$backup_dir_base"
         backup_dir_spotify="$backup_dir_spotify_base"
     fi
+    mkdir -vp "$backup_dir"
+    mkdir -vp "$backup_dir_spotify"
 }
 
 if liked; then
     playlist_name="Liked Songs"
 fi
-
-mkdir -vp "$backup_dir"
-mkdir -vp "$backup_dir_spotify"
-mkdir -vp "$backup_dir_metadata"
 
 if liked; then
     export SPOTIFY_PRIVATE=1
