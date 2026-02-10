@@ -748,6 +748,8 @@ trim(){
         s/[[:space:]]*$//;
     ' <<< "$string_arg"
 }
+# used in subshells to capture output so export it
+export -f trim
 
 clear_current_line(){
     # Terminal Codes:
