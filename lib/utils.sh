@@ -741,6 +741,14 @@ log(){
     fi
 }
 
+trim(){
+    local string_arg="$1"
+    sed '
+        s/^[[:space:]]*//;
+        s/[[:space:]]*$//;
+    ' <<< "$string_arg"
+}
+
 clear_current_line(){
     # Terminal Codes:
     #
