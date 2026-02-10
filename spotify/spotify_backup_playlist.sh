@@ -100,32 +100,48 @@ mkdir -vp "$backup_dir_base"
 mkdir -vp "$backup_dir_spotify_base"
 mkdir -vp "$backup_dir_metadata"
 
-# if .path_mappings.txt exists in the backup directory, map playlist names to subdirs via regex.
-# format: first column = directory name (tab-separated), rest of line = regex to match playlist name.
-# spotify does not expose folder structure, so this recreates grouping (e.g. "Best of Year", "Mixes in Time").
-# match is done with grep -E so regex is never re-interpreted by the shell (avoids injection if file is untrusted)
-get_path_mapping_subdir(){
+# load mappings once
+load_path_mappings(){
     local base_dir="$1"
-    local playlist_name="$2"
-    local mappings_file="$base_dir/.path_mappings.txt"
+    mappings_file="$backup_dir_base/.path_mappings.txt"
+    path_map_dirs=()
+    path_map_regex=()
+
     [ -f "$mappings_file" ] || return 0
-    local dir regex
+
     while IFS= read -r line; do
         line="${line%%#*}"
-        line="$(printf '%s' "$line" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+        line="$(sed 's/^[[:space:]]*//;s/[[:space:]]*$//' <<< "$line")"
         [ -z "$line" ] && continue
+
         dir="${line%%$'\t'*}"
         regex="${line#*$'\t'}"
         [ -z "$regex" ] && continue
-        # breaks many Artist name matches
-        #if grep -Eq -- "\\<$regex\\>" <<< "$playlist_name"; then
-        #if grep -Eq -- "$regex" <<< "$playlist_name"; then
-        if [[ "$playlist_name" =~ $regex ]]; then
-            echo "$dir"
+
+        path_map_dirs+=("$dir")
+        path_map_regex+=("$regex")
+    done < "$mappings_file"
+}
+
+get_path_mapping_subdir(){
+    local base_dir="$1"
+    local playlist_name="$2"
+
+    # load once
+    if [ "${path_map_dirs_loaded:-0}" -eq 0 ]; then
+        load_path_mappings "$base_dir"
+        path_map_dirs_loaded=1
+    fi
+
+    local i
+    for ((i=0; i<${#path_map_dirs[@]}; i++)); do
+        if [[ "$playlist_name" =~ ${path_map_regex[$i]} ]]; then
+            [ -n "${DEBUG_PATH_MAPPING:-}" ] &&
+                echo "Mapping: '$playlist_name' -> ${path_map_dirs[$i]}" >&2
+            echo "${path_map_dirs[$i]}"
             return 0
         fi
-    done < "$mappings_file"
-    return 0
+    done
 }
 export -f get_path_mapping_subdir
 
