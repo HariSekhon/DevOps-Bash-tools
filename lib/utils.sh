@@ -742,11 +742,18 @@ log(){
 }
 
 trim(){
-    local string_arg="$1"
-    sed '
-        s/^[[:space:]]*//;
-        s/[[:space:]]*$//;
-    ' <<< "$string_arg"
+    local str="$1"
+    # easier
+    #sed '
+    #    s/^[[:space:]]*//;
+    #    s/[[:space:]]*$//;
+    #' <<< "$str"
+    # more efficient
+    # trim leading whitespace
+    str="${str#"${str%%[![:space:]]*}"}"
+    # trim trailing whitespace
+    str="${str%"${str##*[![:space:]]}"}"
+    echo "$str"
 }
 # used in subshells to capture output so export it
 export -f trim
