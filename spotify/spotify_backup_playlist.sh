@@ -184,7 +184,6 @@ apply_path_mapping(){
     if [ -n "$path_mapping_subdir" ]; then
         backup_dir="$backup_dir_base/$path_mapping_subdir"
         backup_dir_spotify="$backup_dir_base/spotify/$path_mapping_subdir"
-        mkdir -p "$backup_dir" "$backup_dir_spotify"
     else
         backup_dir="$backup_dir_base"
         backup_dir_spotify="$backup_dir_spotify_base"
