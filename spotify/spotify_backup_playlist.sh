@@ -103,9 +103,11 @@ mkdir -vp "$backup_dir_metadata"
 # load mappings once
 load_path_mappings(){
     local base_dir="$1"
-    mappings_file="$backup_dir_base/.path_mappings.txt"
-    path_map_dirs=()
-    path_map_regex=()
+    local mappings_file="$backup_dir_base/.path_mappings.txt"
+
+    # can't make this an associative array because we want to support multiple rules per dir path
+    dirs=()
+    regexes=()
 
     [ -f "$mappings_file" ] || return 0
 
@@ -114,31 +116,62 @@ load_path_mappings(){
         line="$(sed 's/^[[:space:]]*//;s/[[:space:]]*$//' <<< "$line")"
         [ -z "$line" ] && continue
 
-        dir="${line%%$'\t'*}"
-        regex="${line#*$'\t'}"
+        # if file is split by tabs, prefer this
+        if [[ "$line" == *$'\t'* ]]; then
+            dir="${line%%$'\t'*}"
+            regex="${line#*$'\t'}"
+            dir="$(trim "$dir")"
+            regex="$(trim "$regex")"
+        # but fall back to parsing multiple spaces as field separator between dir and regex
+        else
+            dir="$(sed -E 's/[[:space:]]{2,}.*//' <<< "$line")"
+            regex="$(sed -E 's/^.*[[:space:]]{2,}//' <<< "$line")"
+        fi
+        # dir should always be populated as it comes first
+        [ -z "$dir" ] && continue
         [ -z "$regex" ] && continue
 
-        path_map_dirs+=("$dir")
-        path_map_regex+=("$regex")
+        dirs+=("$dir")
+        regexes+=("$regex")
     done < "$mappings_file"
 }
 
 get_path_mapping_subdir(){
     local base_dir="$1"
     local playlist_name="$2"
+    local debug_mappings="${DEBUG_MAPPINGS:-}"
 
-    # load once
-    if [ "${path_map_dirs_loaded:-0}" -eq 0 ]; then
+    if [ -z "${path_map_dirs_loaded:-}" ]; then
         load_path_mappings "$base_dir"
         path_map_dirs_loaded=1
     fi
 
     local i
-    for ((i=0; i<${#path_map_dirs[@]}; i++)); do
-        if [[ "$playlist_name" =~ ${path_map_regex[$i]} ]]; then
-            [ -n "${DEBUG_PATH_MAPPING:-}" ] &&
-                echo "Mapping: '$playlist_name' -> ${path_map_dirs[$i]}" >&2
-            echo "${path_map_dirs[$i]}"
+
+    # try exact match first as it's faster than regex and allows us just use simpler literal lines
+    for (( i=0; i < ${#regexes[@]} ; i++ )); do
+        if [ "$playlist_name" = "${regexes[$i]}" ]; then
+            if [ -n "$debug_mappings" ]; then
+                echo "literal match: [${regexes[$i]}]" >&2
+                echo "playlist:      [$playlist]"      >&2
+                echo "dir:           [${dirs[$i]}]"    >&2
+                echo
+            fi
+            echo "${dirs[$i]}"
+            return 0
+        fi
+    done
+
+    # regex fallback
+    for (( i=0; i  <${#regexes[@]} ; i++ )); do
+        if [[ "$playlist_name" =~ ${regexes[$i]} ]]; then
+            if [ -n "$debug_mappings" ]; then
+                echo "regex:    [${regexes[$i]}]" >&2
+                echo "playlist: [$playlist]"      >&2
+                echo "dir:      [${dirs[$i]}]"    >&2
+                echo
+            fi
+            echo "${dirs[$i]}"
             return 0
         fi
     done
@@ -398,7 +431,11 @@ else
         #mv -f "$tmp" "$backup_dir/$filename"
         echo -n 'OK'
 
-        old_filename="$(if [ -f "$playlist_metadata_filename_file" ]; then cat "$playlist_metadata_filename_file"; fi)"
+        old_filename="$(
+            if [ -f "$playlist_metadata_filename_file" ]; then
+                cat "$playlist_metadata_filename_file"
+            fi
+        )"
 
         if not_blank "$old_filename" &&
            [ "$backup_dir/$filename" != "$backup_dir/$old_filename" ]; then
@@ -428,17 +465,6 @@ else
                 else
                     "$srcdir/../scripts/spotify_rename_playlist_files.sh" "$old_filename" "$filename" ${path_mapping_subdir:+$path_mapping_subdir}
                 fi
-            fi
-
-            if [ -f "core_playlists.txt" ]; then
-                #echo -n " => updating core_playlists.txt"
-                tmp="$(mktemp)"
-                awk -v id="$playlist_id" -v name="$playlist_name" '
-                    # replace the rest of line (the playlist name) if the first column (the playlist ID) matches
-                    $1 == id { $0 = $1 " " name }
-                    { print }
-                ' core_playlists.txt > "$tmp"
-                mv "$tmp" core_playlists.txt
             fi
 
             cd -
