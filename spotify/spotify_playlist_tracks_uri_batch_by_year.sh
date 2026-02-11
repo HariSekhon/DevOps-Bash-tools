@@ -1,0 +1,139 @@
+#!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  args: "Upbeat & Sexual Pop"
+#  args: 64OO67Be8wOXn6STqHxexr
+#
+#  Author: Hari Sekhon
+#  Date: 2026-02-10 23:44:07 -0300 (Tue, 10 Feb 2026)
+#
+#  https://github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlist/
+
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/spotify.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Returns all track URIs from the given Spotify playlist grouped by year or decade
+
+Copies each batch to the clipboard, prints to stdout, and prompts to continue
+before printing the next batch
+
+Useful for filtering tracks to add to my best of each years or decade playlists
+
+Anything as a second arg indicates to batch by decade instead of year
+
+Playlist argument can be a playlist name or ID (see spotify_playlists.sh)
+
+\$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
+
+$usage_playlist_help
+
+$usage_auth_help
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<playlist> [<decade_flag_instead_of_by_year>]"
+
+help_usage "$@"
+
+playlist_id="${1:-${SPOTIFY_PLAYLIST:-}}"
+decade_arg="${2:-}"
+shift || :
+shift || :
+
+if is_blank "$playlist_id"; then
+    usage "playlist not defined"
+fi
+
+spotify_token
+
+playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
+
+# $offset defined in lib/spotify.sh
+# shellcheck disable=SC2154
+url_path="/v1/playlists/$playlist_id/tracks?limit=100&offset=$offset"
+
+tmpfile="$(mktemp)"
+trap_cmd "rm -f \"$tmpfile\""
+
+# collect year/decade + URI pairs
+collect_output() {
+    jq -r '
+        .items[]
+        | select(.track.uri)
+        | select(.track.album.release_date | test("^[0-9]{4}"))
+        | .track as $t
+        | ($t.album.release_date[0:4]) as $year
+        | "\($year)\t\($t.uri)"
+    ' <<< "$output" >> "$tmpfile"
+}
+
+while not_null "$url_path"; do
+    output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
+    url_path="$(get_next "$output")"
+    collect_output
+    # slow down a bit to try to reduce hitting Spotify API rate limits and getting 429 errors on large playlists
+    #sleep 0.1
+done
+
+if [ -n "${decade_arg:-}" ]; then
+    grouped="$(awk -F'\t' '
+        {
+            decade = substr($1,1,3) "0s"
+            print decade "\t" $2
+        }
+    ' "$tmpfile" | sort -k1,1)"
+else
+    grouped="$(sort -k1,1 "$tmpfile")"
+fi
+
+current=""
+
+batchfile="$(mktemp)"
+trap_cmd "rm -f \"$tmpfile\" \"$batchfile\""
+
+while IFS=$'\t' read -r label uri; do
+    # when we move to the next year or decade, dump the current batchfile and reset it for the next batch
+    if [ "$label" != "$current" ] && [ -n "$current" ]; then
+        echo >&2
+        echo "=== $current ===" >&2
+        echo >&2
+        tee >( "$srcdir/../bin/copy_to_clipboard.sh" ) < "$batchfile"
+        echo >&2
+        printf "Press ENTER to continue..." >&2
+        # requires interactive TTY support otherwise we need to do the trick from
+        # https://github.com/HariSekhon/Knowledge-Base/blob/main/bash.md#wait-for-a-terminal-prompt-from-inside-a-while-loop
+        read -r _ < /dev/tty
+        echo >&2
+        # clear batchfile
+        : > "$batchfile"
+    fi
+
+    current="$label"
+    printf '%s\n' "$uri" >> "$batchfile"
+done <<< "$grouped"
+
+# Final batch
+if [ -s "$batchfile" ]; then
+    echo >&2
+    echo "=== $current ===" >&2
+        echo >&2
+    tee >( "$srcdir/../bin/copy_to_clipboard.sh" ) < "$batchfile"
+    echo >&2
+fi
