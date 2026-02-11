@@ -1144,6 +1144,7 @@ Maintain your Git `README.md` and similar Markdown documentation well.
   - `markdown_octocat_github_links.sh` - converts GitHub links like
     `<https://github.com/HariSekhon/Knowledge-Base>` to shorthand links with an OctoCat emoji and without the redundant `https://github.com/` prefix such as
     [:octocat: HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base)
+  - `markdown_replace_links_with_jsdelivr.sh` - replaces local GitHub repo file links in the given markdown file(s) with JSDelivr CDN links
 
 ### CI/CD - Continuous Integration / Continuous Deployment
 
