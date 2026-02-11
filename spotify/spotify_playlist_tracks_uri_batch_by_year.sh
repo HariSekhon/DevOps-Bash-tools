@@ -33,7 +33,7 @@ Returns all track URIs from the given Spotify playlist grouped by year or decade
 Copies each batch to the clipboard, prints to stdout, and prompts to continue
 before printing the next batch
 
-Useful for filtering tracks to add to my best of each years or decade playlists
+Useful for filtering tracks to add to my best of each year or decade playlists
 
 Anything as a second arg indicates to batch by decade instead of year
 
