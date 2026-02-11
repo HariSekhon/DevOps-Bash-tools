@@ -63,9 +63,10 @@ trap_cmd "rm -f \"$tmpfile\""
 collect_output() {
     jq -r '
         .items[]
-        | select(.track.uri)
-        | select(.track.album.release_date | test("^[0-9]{4}"))
+        | select(.track?.uri)
         | .track as $t
+        | select($t.album.release_date? | type == "string")
+        | select($t.album.release_date | test("^[0-9]{4}"))
         | ($t.album.release_date[0:4]) as $year
         | "\($year)\t\($t.uri)"
     ' <<< "$output" >> "$tmpfile"
