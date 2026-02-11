@@ -59,7 +59,10 @@ spotify_token
 tmpfile="$(mktemp)"
 trap_cmd "rm -f \"$tmpfile\""
 
-# collect year/decade + URI pairs
+# collect to tmpfile:
+#
+#   year    canonical_id    release_date    uri
+#
 collect_output() {
     jq -r '
         .items[]
@@ -69,7 +72,8 @@ collect_output() {
         | select($rd | length >= 4)
         | ($rd[0:4]) as $year
         | select($year | test("^[0-9]{4}$"))
-        | "\($year)\t\($t.uri)"
+        | ($t.linked_from.id // $t.id) as $cid
+        | "\($year)\t\($cid)\t\($rd)\t\($t.uri)"
     ' <<< "$output" >> "$tmpfile"
 }
 
@@ -100,17 +104,21 @@ if [ -n "${TRACK_URIS_BY_DECADE:-}" ]; then
     grouped="$(
         awk -F'\t' '
             {
-                decade = substr($1,1,3) "0s"
-                print decade "\t" $2
+                decade = substr($1,1,3) "0s";
+                print decade "\t" $2 "\t" $3 "\t" $4
             }
         ' "$tmpfile" |
+        sort -k2,2 -k3,3 |
         sort -u -k2,2 |
-        sort -k1,1 -k2,2
+        sort -k1,1 |
+        cut -f1,4
     )"
 else
     grouped="$(
-        sort -u -k2,2 "$tmpfile" |
-        sort -k1,1 -k2,2
+        sort -k2,2 -k3,3 "$tmpfile" |
+        sort -u -k2,2 |
+        sort -k1,1 |
+        cut -f1,4
     )"
 fi
 
