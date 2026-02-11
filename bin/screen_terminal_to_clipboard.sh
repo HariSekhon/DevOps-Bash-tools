@@ -26,9 +26,13 @@ usage_description="
 Dumps the GNU Screen terminal output to a temp file and
 copies to clipboard for sharing & debugging purposes
 
-You can pass screen options as args such as:
+Uses adjacent scripts:
 
-    -S session_name
+    screen_terminal_to_stdout.sh
+
+    copy_to_clipboard.sh
+
+You can pass screen options as args, see screen_terminal_to_stdout.sh for details
 "
 
 # used by usage() in lib/utils.sh
