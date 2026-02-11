@@ -28,18 +28,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns all track URIs from the given Spotify playlist grouped by year or decade
+Returns all track URIs from the given Spotify playlist(s) grouped by year or decade
 
 Copies each batch to the clipboard, prints to stdout, and prompts to continue
 before printing the next batch
 
+Set the environment variable TRACK_URIS_BY_DECADE to any value for decade batching
+
 Useful for filtering tracks to add to my best of each year or decade playlists
 
-Anything as a second arg indicates to batch by decade instead of year
-
 Playlist argument can be a playlist name or ID (see spotify_playlists.sh)
-
-\$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
 $usage_playlist_help
 
@@ -48,26 +46,15 @@ $usage_auth_help
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<playlist> [<decade_flag_instead_of_by_year>]"
+usage_args="<playlist> [<playlist2> <playlist3>]"
 
 help_usage "$@"
 
-playlist_id="${1:-${SPOTIFY_PLAYLIST:-}}"
-decade_arg="${2:-}"
-shift || :
-shift || :
-
-if is_blank "$playlist_id"; then
+if [ $# -eq 0 ]; then
     usage "playlist not defined"
 fi
 
 spotify_token
-
-playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
-
-# $offset defined in lib/spotify.sh
-# shellcheck disable=SC2154
-url_path="/v1/playlists/$playlist_id/tracks?limit=100&offset=$offset"
 
 tmpfile="$(mktemp)"
 trap_cmd "rm -f \"$tmpfile\""
@@ -84,15 +71,30 @@ collect_output() {
     ' <<< "$output" >> "$tmpfile"
 }
 
-while not_null "$url_path"; do
-    output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-    url_path="$(get_next "$output")"
-    collect_output
-    # slow down a bit to try to reduce hitting Spotify API rate limits and getting 429 errors on large playlists
-    #sleep 0.1
-done
+process_playlist(){
+    local playlist="$1"
+    timestamp "Processing playlist: $playlist"
+    playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist")"
 
-if [ -n "${decade_arg:-}" ]; then
+    # $offset defined in lib/spotify.sh
+    # shellcheck disable=SC2154
+    url_path="/v1/playlists/$playlist_id/tracks?limit=100&offset=$offset"
+
+    while not_null "$url_path"; do
+        output="$("$srcdir/spotify_api.sh" "$url_path")"
+        url_path="$(get_next "$output")"
+        collect_output
+        # slow down a bit to try to reduce hitting Spotify API rate limits and getting 429 errors on large playlists
+        sleep 0.1
+    done
+}
+
+for arg; do
+    process_playlist "$arg"
+done
+echo
+
+if [ -n "${TRACK_URIS_BY_DECADE:-}" ]; then
     grouped="$(awk -F'\t' '
         {
             decade = substr($1,1,3) "0s"
