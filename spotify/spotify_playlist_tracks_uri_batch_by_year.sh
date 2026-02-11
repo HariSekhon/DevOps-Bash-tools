@@ -118,9 +118,14 @@ while IFS=$'\t' read -r label uri; do
             echo
         } | less -F
         printf "Press ENTER to continue..." >&2
-        # requires interactive TTY support otherwise we need to do the trick from
+        # read < tty avoids reading from the loop stdin but requires interactive TTY support
+        # otherwise we need to do the trick from my doc here which is a bit more exec tricky:
+        #
         # https://github.com/HariSekhon/Knowledge-Base/blob/main/bash.md#wait-for-a-terminal-prompt-from-inside-a-while-loop
-        read -r _ < /dev/tty
+        #
+        # need to handle SIGINT explicitly to allow Control-C from this read < tty
+        trap 'echo; exit 130' INT
+        read -r _ < /dev/tty || exit 130
         echo
         # clear batchfile
         : > "$batchfile"
