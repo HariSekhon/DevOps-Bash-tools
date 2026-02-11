@@ -111,16 +111,17 @@ trap_cmd "rm -f \"$tmpfile\" \"$batchfile\""
 while IFS=$'\t' read -r label uri; do
     # when we move to the next year or decade, dump the current batchfile and reset it for the next batch
     if [ "$label" != "$current" ] && [ -n "$current" ]; then
-        echo >&2
-        echo "=== $current ===" >&2
-        echo >&2
-        tee >( "$srcdir/../bin/copy_to_clipboard.sh" ) < "$batchfile"
-        echo >&2
+        {
+            echo "=== $current ==="
+            echo
+            tee >( "$srcdir/../bin/copy_to_clipboard.sh" ) < "$batchfile"
+            echo
+        } | less -F
         printf "Press ENTER to continue..." >&2
         # requires interactive TTY support otherwise we need to do the trick from
         # https://github.com/HariSekhon/Knowledge-Base/blob/main/bash.md#wait-for-a-terminal-prompt-from-inside-a-while-loop
         read -r _ < /dev/tty
-        echo >&2
+        echo
         # clear batchfile
         : > "$batchfile"
     fi
@@ -131,9 +132,11 @@ done <<< "$grouped"
 
 # Final batch
 if [ -s "$batchfile" ]; then
-    echo >&2
-    echo "=== $current ===" >&2
-        echo >&2
-    tee >( "$srcdir/../bin/copy_to_clipboard.sh" ) < "$batchfile"
-    echo >&2
+    {
+        echo
+        echo "=== $current ==="
+        echo
+        tee >( "$srcdir/../bin/copy_to_clipboard.sh" ) < "$batchfile"
+        echo
+    } | less -F
 fi
