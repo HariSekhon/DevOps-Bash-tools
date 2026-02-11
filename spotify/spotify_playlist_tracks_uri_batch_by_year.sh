@@ -65,9 +65,10 @@ collect_output() {
         .items[]
         | select(.track?.uri)
         | .track as $t
-        | select($t.album.release_date? | type == "string")
-        | select($t.album.release_date | test("^[0-9]{4}"))
-        | ($t.album.release_date[0:4]) as $year
+        | ($t.album.release_date // "") as $rd
+        | select($rd | length >= 4)
+        | ($rd[0:4]) as $year
+        | select($year | test("^[0-9]{4}$"))
         | "\($year)\t\($t.uri)"
     ' <<< "$output" >> "$tmpfile"
 }
