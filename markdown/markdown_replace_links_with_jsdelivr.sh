@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Replaces links in the given markdown file(s) with JSDelivr CDN links
+Replaces local GitHub repo file links in the given markdown file(s) with JSDelivr CDN links
 
 Handles Markdown and URL links in the format:
 
