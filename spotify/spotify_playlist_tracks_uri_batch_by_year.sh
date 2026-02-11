@@ -97,14 +97,21 @@ done
 echo
 
 if [ -n "${TRACK_URIS_BY_DECADE:-}" ]; then
-    grouped="$(awk -F'\t' '
-        {
-            decade = substr($1,1,3) "0s"
-            print decade "\t" $2
-        }
-    ' "$tmpfile" | sort -u -k1,1)"
+    grouped="$(
+        awk -F'\t' '
+            {
+                decade = substr($1,1,3) "0s"
+                print decade "\t" $2
+            }
+        ' "$tmpfile" |
+        sort -u -k2,2 |
+        sort -k1,1 -k2,2
+    )"
 else
-    grouped="$(sort -u -k1,1 "$tmpfile")"
+    grouped="$(
+        sort -u -k2,2 "$tmpfile" |
+        sort -k1,1 -k2,2
+    )"
 fi
 
 current=""
