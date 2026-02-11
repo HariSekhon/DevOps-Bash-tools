@@ -748,11 +748,31 @@ trim(){
     #    s/^[[:space:]]*//;
     #    s/[[:space:]]*$//;
     #' <<< "$str"
-    # more efficient
+
+    # more efficient without process fork to sed
+    #
+    # not using shopt -s extglob because then I have to track it its prior state
+    # from parent/client calling script and restore it
+    #
+    #str="${str##+([[:space:]])}"  # trim leading
+    #str="${str%%+([[:space:]])}"  # trim trailing
+    #
     # trim leading whitespace
     str="${str#"${str%%[![:space:]]*}"}"
     # trim trailing whitespace
     str="${str%"${str##*[![:space:]]}"}"
+
+    # strip literal \n at edges
+    # leading
+    while [[ "$str" == '\n'* ]]; do
+        str="${str#\\n}"
+    done
+
+    # trailing
+    while [[ "$str" == *'\n' ]]; do
+        str="${str%\\n}"
+    done
+
     echo "$str"
 }
 # used in subshells to capture output so export it
