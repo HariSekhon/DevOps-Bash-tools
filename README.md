@@ -358,6 +358,8 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `random_select.sh` - selects one of given args at random. Useful for sampling, running randomized subsets of large test suites etc.
 - `random_number.sh` - prints a random integer between two integer arguments (inclusive)
 - `random_string.sh` - prints a random alphanumeric string of a given length
+- `screen_terminal_to_stdout.sh` - dumps the GNU Screen terminal output to stdout
+- `screen_terminal_to_clipboard.sh` - dumps the GNU Screen terminal output to a temp file and copies to clipboard for sharing & debugging purposes
 - `shields_embed_logo.sh` - base64 encodes a given icon file or url and prints the `logo=...` url parameter you need to add the [shields.io](https://shields.io/) badge url
 - `shorten_text_selection.sh` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes out multiple blank lines. I use this for LinkedIn comments due to the short 1250 character limit
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
