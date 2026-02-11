@@ -37,7 +37,7 @@ usage_args="[<screen_options>]"
 
 help_usage "$@"
 
-no_more_args "$@"
+#no_more_args "$@"
 
 # indicate to screen_terminal_to_stdout.sh not to remove the term
 export SCREEN_TERMINAL_NO_DELETE_TEMPFILE=1
