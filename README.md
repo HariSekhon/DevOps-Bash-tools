@@ -1574,7 +1574,8 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 - `spotify_backup_artists_followed.sh` - backs up the list of artists followed to Spotify URI and Names
 - `spotify_search*.sh` - searches Spotify's library for tracks / albums / artists getting results in human readable format, JSON, or URI formats for easy loading to Spotify playlists
 - `spotify_release_year.sh` - searches for a given track or album and finds the original release year
-- `spotify_uri_to_name.sh` - converts Spotify track / album / artist URIs to human readable `Artist - Track` / CSV format. Takes Spotify URIs, URL links or just IDs. Reads URIs from files or standard input
+- `spotify_uri_json.sh` - takes a Spotify URI and dumps its JSON for inspection. You can pass one of the following formats: `spotify:<type>:<alphanumeric_ID>`, `http://open.spotify.com/<type>/<alphanumeric_ID>`, `<alphanumeric_ID>`
+- `spotify_uri_to_name.sh` - converts Spotify track / album / artist URIs to human readable `Artist - Track` / CSV format. Takes Spotify URIs, URL links or just IDs similar to `spotify_uri_json.sh` above. Reads URIs from files or standard input
 - `spotify_create_playlist.sh` - creates a Spotify playlist, either public or private
 - `spotify_rename_playlist.sh` - renames a Spotify playlist
 - `spotify_set_playlists_public.sh` / `spotify_set_playlists_private.sh` - sets one or more given Spotify playlists to public / private
