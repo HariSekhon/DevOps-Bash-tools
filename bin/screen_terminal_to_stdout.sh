@@ -35,7 +35,12 @@ Used by adjacent script:
 
 You can pass screen options as args such as:
 
-    -S session_name
+    -S <session_name>
+    -p <window_number>
+
+See window numbers using your 'Ctrl-A + w' hotkey combo or in stdout via this command:
+
+    screen -S <session_name>] -Q windows
 "
 
 # used by usage() in lib/utils.sh
