@@ -38,7 +38,7 @@ spotify:<type>:<alphanumeric_ID>
 http://open.spotify.com/<type>/<alphanumeric_ID>
 <alphanumeric_ID>
 
-where <type> is track / album / artist
+where <type> is track / episode / album / artist
 
 These IDs are 22 chars, but this is length is not enforced in case the Spotify API changes
 
