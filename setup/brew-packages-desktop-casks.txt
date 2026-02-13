@@ -11,6 +11,7 @@ atom
 barrier
 blackhole-2ch  # to create multi-output sound device to shazam songs from shows while using headphones
 ccmenu
+#claude-code  # use native installer which auto-updates: curl -fsSL https://claude.ai/install.sh | bash
 codeship/taps/jet
 docker
 flux-app
