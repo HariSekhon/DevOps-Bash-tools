@@ -226,12 +226,12 @@ playlist_name_to_id(){
         )"
 
         if [ -n "$playlist_id" ] && [[ "$playlist_id" =~ ^[A-Za-z0-9]{22}$ ]]; then
-            #timestamp "cache hit: $playlist_id"
+            log "cache hit: $playlist_id"
             echo "$playlist_id"
             return
         fi
     fi
-    #timestamp "cache miss: processing to use API lookup"
+    log "cache miss: processing to use API lookup"
     SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist"
 }
 export -f playlist_name_to_id
@@ -245,6 +245,8 @@ clean_trackname(){
     ' <<< "$artist_track"
 }
 export -f clean_trackname
+
+timestamp
 
 if liked; then
     echo -n "$playlist_name "
@@ -277,15 +279,28 @@ if liked; then
         uri_tmp="$(mktemp)"
         #"$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$tmp"
         #mv -f -- "$tmp" "$backup_dir_spotify/$filename"
+        # open output files once
+        exec 3>>"$uri_tmp"
+        exec 4>>"$track_tmp"
+        count=0
         "$srcdir/spotify_liked_uri_artist_track.sh" |
         while read -r uri track; do
             if ! validate_spotify_uri "$uri" &>/dev/null &&
                ! is_local_uri "$uri" ; then
                 die "Invalid Spotify URI returned: '$uri', for track: $track"
             fi
-            echo "$uri" >> "$uri_tmp"
-            clean_trackname "$track" >> "$track_tmp"
+            echo "$uri" >&3
+            clean_trackname "$track" >&4
+
+            count=$((count + 1))
+            if [ $((count % 100)) -eq 0 ]; then
+                echo -n '.'
+            fi
         done
+        # wipe out the progress dots and reprint the current line
+        clear_previous_line
+        timestamp
+        echo -n "$playlist_name => Description => URIs "
         #mv -f "$track_tmp" "$backup_dir/$filename"
         #mv -f "$uri_tmp" "$backup_dir_spotify/$filename"
         # XXX: sort the Liked URI and track orderings - although this breaks the fidelity between the playlist <=> spotify/playlist formats,
@@ -392,6 +407,10 @@ else
         #"$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$tmp"
         #mv -f "$tmp" "$backup_dir_spotify/$filename"
         #untrap
+        # open output files once
+        exec 3>>"$uri_tmp"
+        exec 4>>"$track_tmp"
+        count=0
         "$srcdir/spotify_playlist_tracks_uri_artist_track.sh" "$playlist_id" "$@" |
         # TODO: consider replacing this with a tee to two streaming commands to avoid so many executions
         while read -r uri track; do
@@ -399,9 +418,18 @@ else
                ! is_local_uri "$uri" ; then
                 die "Invalid Spotify URI returned: '$uri', for track: $track"
             fi
-            echo "$uri" >> "$uri_tmp"
-            clean_trackname "$track" >> "$track_tmp"
+            echo "$uri" >&3
+            clean_trackname "$track" >&4
+
+            count=$((count + 1))
+            if [ $((count % 100)) -eq 0 ]; then
+                echo -n '.'
+            fi
         done
+        # wipe out the progress dots and reprint the current line
+        clear_previous_line
+        timestamp
+        echo -n "$playlist_name => Description => URIs "
         mv -f "$track_tmp" "$backup_dir/$filename"
         mv -f "$uri_tmp" "$backup_dir_spotify/$filename"
         # try to avoid hitting HTTP 429 rate limiting
