@@ -298,7 +298,7 @@ if liked; then
             fi
         done
         # wipe out the progress dots and reprint the current line
-        clear_previous_line
+        clear_current_line
         timestamp
         echo -n "$playlist_name => Description => URIs "
         #mv -f "$track_tmp" "$backup_dir/$filename"
@@ -427,7 +427,7 @@ else
             fi
         done
         # wipe out the progress dots and reprint the current line
-        clear_previous_line
+        clear_current_line
         timestamp
         echo -n "$playlist_name => Description => URIs "
         mv -f "$track_tmp" "$backup_dir/$filename"
