@@ -41,22 +41,23 @@ You can set this args as an environment variable \$SHAZAM_APP_DUMP_NUM_TRACKS - 
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<num_tracks>]"
+usage_args="[<num_tracks> <sqlite_db_path>]"
 
 help_usage "$@"
 
-max_args 1 "$@"
+max_args 2 "$@"
 
 mac_only
 
-arg="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:-1}}"
+num_tracks="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:-1}}"
+sqlite_db_path="${2:-}"
 
-case "$arg" in
+case "$num_tracks" in
     # allow only these args to be passed to shazam_app_dump_tracks.sh
     today|yesterday|week|????-??-??) : ;;
     *)
-        if ! [[ "$arg" =~ ^-?[[:digit:]]+$ ]]; then
-            die "Invalid argument given, must be an integer or one of today/yesterday/week/YYYY-MM-DD: $arg"
+        if ! [[ "$num_tracks" =~ ^-?[[:digit:]]+$ ]]; then
+            die "Invalid argument given, must be an integer or one of today/yesterday/week/YYYY-MM-DD: $num_tracks"
         fi
         ;;
 esac
@@ -85,5 +86,5 @@ while IFS=$'\t' read -r artist _ track; do
         read -r < /dev/tty
     fi
 done < <(
-    "$srcdir/shazam_app_dump_tracks.sh" "$arg"
+    "$srcdir/shazam_app_dump_tracks.sh" "$num_tracks" ${sqlite_db_path:+"$sqlite_db_path"}
 )
