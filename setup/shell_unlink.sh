@@ -21,7 +21,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 bash_tools="$srcdir/.."
 
-conf_files="$(sed 's/#.*//; /^[[:space:]]*$/d' "$bash_tools/setup/files.txt")"
+conf_files=()
+while IFS= read -r line; do
+    conf_files+=("$line")
+done < <(
+    "$srcdir/../bin/decomment.sh" "$bash_tools/setup/files.txt"
+)
 
 # unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
 [ -n "${HOME:-}" ] || HOME=~
