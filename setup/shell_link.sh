@@ -33,11 +33,18 @@ setup_file(){
     fi
 }
 
-remove_broken_link(){
+fix_link(){
     local path="$1"
-    if [ -L "$path" ] && [ ! -e "$path" ]; then
-        echo "WARNING: Removing broken symlink: $path"
-        rm -f -- "$path"
+    local target="$2"
+
+    if [ -L "$path" ]; then
+        local current
+        current="$(readlink "$path")"
+
+        if [ ! -e "$path" ] || [ "$current" != "$target" ]; then
+            echo "Removing stale symlink: $path"
+            rm -f -- "$path"
+        fi
     fi
 }
 
@@ -77,12 +84,12 @@ for filename in $conf_files; do
         sourcepath="${sourcepath/\/\//\/}"
         destpath="${destpath/\/\//\/}"
         mkdir -pv "$destpath"
-        remove_broken_link "$destpath/$filename"
+        fix_link "$destpath/$filename" "$sourcepath"
         # want opt expansion
         # shellcheck disable=SC2086
         ln -sv $opts -- "$sourcepath" "$destpath" || :
     else
-        remove_broken_link "$HOME/$filename"
+        fix_link "$HOME/$filename" "$PWD/$filename"
         # want opt expansion
         # shellcheck disable=SC2086
         ln -sv $opts -- "$PWD/$filename" "$HOME/" || continue
@@ -93,12 +100,12 @@ for filename in $conf_files; do
     fi
 done
 
-remove_broken_link ~/.gitignore_global
+fix_link "$HOME/.gitignore_global" "$HOME/.gitignore"
 # want opt expansion
 # shellcheck disable=SC2086
-ln -sv $opts -- ~/.gitignore "$HOME/.gitignore_global" || :
+ln -sv $opts -- "$HOME/.gitignore" "$HOME/.gitignore_global" || :
 
 if [[ "${USER:-}" =~ harisekhon|hsekhon ]]; then
-    remove_broken_link "$HOME/.gitconfig.local"
+    fix_link "$HOME/.gitconfig.local" "$PWD/.gitconfig.local"
     ln -sv -- "$PWD/.gitconfig.local" "$HOME/" || :
 fi
