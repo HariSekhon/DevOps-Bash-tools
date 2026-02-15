@@ -38,7 +38,6 @@ configs/.config/htop/htoprc
 configs/.config/pycodestyle
 configs/.config/terminalizer/config.yml
 configs/.config/yamllint/config
-gcp/.customize_environment
 configs/.gemrc
 configs/.git-templates/git-secrets/hooks/*
 configs/.grype.yaml
@@ -62,4 +61,5 @@ configs/.vimrc
 #configs/.wakatime.cfg  # copied because Wakatime IntelliJ plugin doesn't accept env var and insists on writing to this file and don't want to accidentally commit it
 configs/.Xdefaults
 configs/.Xmodmap
+gcp/.customize_environment
 scalastyle_config.xml
