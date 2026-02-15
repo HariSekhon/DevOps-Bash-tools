@@ -31,3 +31,9 @@ set show-all-if-unmodified on
 set completion-ignore-case off # default
 
 set visible-stats on
+
+# trying to avoid alignment issues in emoji filename handling
+set input-meta on
+set output-meta on
+set convert-meta off
+set enable-bracketed-paste on
