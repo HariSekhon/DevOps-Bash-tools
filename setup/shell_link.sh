@@ -109,7 +109,7 @@ symlink(){
         fix_link "$HOME/$filename" "$PWD/$filename"
         # want opt expansion
         # shellcheck disable=SC2086
-        ln -sv $opts -- "$PWD/$filename" "$HOME/" || ::
+        ln -sv $opts -- "$PWD/$filename" "$HOME/" || :
         # if we link .vimrc then run the vundle install and get plugins to prevent vim errors every startup
         if [ "$filename" = .vimrc ]; then
             "$srcdir/../install/install_vundle.sh" || :
