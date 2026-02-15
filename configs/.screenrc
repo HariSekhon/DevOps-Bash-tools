@@ -25,6 +25,9 @@ startup_message off
 
 defscrollback 20000
 
+# attempt to alleviate emoji filename character width readline issues
+defutf8 on
+
 # enables monitor to notify of change in backgrounded panes (default: off)
 # do not enable - causes flickering ocassionally noticeable, but really awful when running welcome
 #defmonitor on
