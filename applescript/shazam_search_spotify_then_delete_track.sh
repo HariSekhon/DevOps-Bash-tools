@@ -71,9 +71,14 @@ trap_cmd 'relaunch_shazam'
 
 while IFS=$'\t' read -r artist _ track; do
     "$srcdir/spotify_app_search.sh" "$artist $track"
-    timestamp "Press enter to delete this track from the Shazam DB: $artist - $track"
-    read -r < /dev/tty
-    QUIET=1 "$srcdir/shazam_app_delete_track.sh" "$artist" "$track"
+    if [ "${SHAZAM_APP_DELETE_TRACK_AFTER_SEARCH:-}" = 1 ]; then
+        timestamp "Press enter to delete this track from the Shazam DB: $artist - $track"
+        read -r < /dev/tty
+        QUIET=1 "$srcdir/shazam_app_delete_track.sh" "$artist" "$track"
+    else
+        timestamp "Press enter to search for next track"
+        read -r < /dev/tty
+    fi
 done < <(
     "$srcdir/shazam_app_dump_tracks.sh" "$arg"
 )
