@@ -92,6 +92,13 @@ fix_link(){
 #    fi
 #}
 
+if uname -s | grep -q Darwin; then
+    readlink(){
+        command greadlink "$@"
+    }
+    export -f readlink
+fi
+
 symlink(){
     local path="$1"
     if [[ "$path" =~ / ]]; then
@@ -107,6 +114,7 @@ symlink(){
         destpath="${destpath/\/\//\/}"
         destpath="${destpath%%/}"
         mkdir -pv "$destpath"
+        sourcepath="$(readlink -f "$sourcepath")"
         fix_link "$destpath/$filename" "$sourcepath"
         # want opt expansion
         # shellcheck disable=SC2086
