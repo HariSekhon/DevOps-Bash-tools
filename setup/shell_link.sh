@@ -42,7 +42,7 @@ fix_link(){
         current="$(readlink "$path")"
 
         if [ ! -e "$path" ] || [ "$current" != "$target" ]; then
-            echo "Removing stale symlink: $path"
+            echo "WARNING: Removing stale symlink: $path"
             rm -f -- "$path"
         fi
     fi
