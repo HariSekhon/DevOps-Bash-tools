@@ -105,16 +105,17 @@ symlink(){
         # remove double slashes to clean the path
         sourcepath="${sourcepath/\/\//\/}"
         destpath="${destpath/\/\//\/}"
+        destpath="${destpath%%/}"
         mkdir -pv "$destpath"
         fix_link "$destpath/$filename" "$sourcepath"
         # want opt expansion
         # shellcheck disable=SC2086
         ln -sv $opts -- "$sourcepath" "$destpath" || :
     else
-        fix_link "$HOME/$filename" "$PWD/$filename"
+        fix_link "$HOME/$filename" "$bash_tools/$filename"
         # want opt expansion
         # shellcheck disable=SC2086
-        ln -sv $opts -- "$PWD/$filename" "$HOME/" || :
+        ln -sv $opts -- "$bash_tools/$filename" "$HOME/" || :
         # if we link .vimrc then run the vundle install and get plugins to prevent vim errors every startup
         if [ "$filename" = .vimrc ]; then
             "$srcdir/../install/install_vundle.sh" || :
@@ -124,8 +125,8 @@ symlink(){
 
  for filename in "${conf_files[@]}"; do
      if [[ "$filename" =~ \* ]]; then
-         for expanded_filename in $(eval echo "$bash_tools"/$filename); do
-            if [[ "$filename" =~ \* ]]; then
+         for expanded_filename in "$bash_tools"/$filename; do
+            if [[ "$expanded_filename" =~ \* ]]; then
                 echo "ERROR: failed to expand glob: $bash_tools/$filename"
                 exit 1
             fi
@@ -138,13 +139,13 @@ symlink(){
      fi
  done
 
-fix_link "$HOME/.gitignore_global" "$HOME/.gitignore"
+fix_link "$HOME/.gitignore_global" "$bash_tools/.gitignore"
 # want opt expansion
 # shellcheck disable=SC2086
-ln -sv $opts -- "$HOME/.gitignore" "$HOME/.gitignore_global" || :
+ln -sv $opts -- "$bash_tools/.gitignore" "$HOME/.gitignore_global" || :
 
 # drop my personal Git username and email local file in this repo into home dir
 if [[ "${USER:-}" =~ ^hari$|harisekhon|hsekhon ]]; then
-    fix_link "$HOME/.gitconfig.local" "$PWD/.gitconfig.local"
-    ln -sv -- "$PWD/.gitconfig.local" "$HOME/" || :
+    fix_link "$HOME/.gitconfig.local" "$bash_tools/.gitconfig.local"
+    ln -sv -- "$bash_tools/.gitconfig.local" "$HOME/" || :
 fi
