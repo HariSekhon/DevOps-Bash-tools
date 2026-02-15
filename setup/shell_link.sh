@@ -33,6 +33,14 @@ setup_file(){
     fi
 }
 
+remove_broken_link(){
+    local path="$1"
+    if [ -L "$path" ] && [ ! -e "$path" ]; then
+        echo "WARNING: Removing broken symlink: $path"
+        rm -f -- "$path"
+    fi
+}
+
 setup_file .bashrc
 setup_file .bash_profile
 setup_file .bash_logout
@@ -69,13 +77,15 @@ for filename in $conf_files; do
         sourcepath="${sourcepath/\/\//\/}"
         destpath="${destpath/\/\//\/}"
         mkdir -pv "$destpath"
+        remove_broken_link "$destpath/$filename"
         # want opt expansion
         # shellcheck disable=SC2086
         ln -sv $opts -- "$sourcepath" "$destpath" || :
     else
+        remove_broken_link "$HOME/$filename"
         # want opt expansion
         # shellcheck disable=SC2086
-        ln -sv $opts -- "$PWD/$filename" ~ || continue
+        ln -sv $opts -- "$PWD/$filename" "$HOME/" || continue
         # if we link .vimrc then run the vundle install and get plugins to prevent vim errors every startup
         if [ "$filename" = .vimrc ]; then
             "$srcdir/../install/install_vundle.sh" || :
@@ -83,10 +93,12 @@ for filename in $conf_files; do
     fi
 done
 
+remove_broken_link ~/.gitignore_global
 # want opt expansion
 # shellcheck disable=SC2086
-ln -sv $opts -- ~/.gitignore ~/.gitignore_global || :
+ln -sv $opts -- ~/.gitignore "$HOME/.gitignore_global" || :
 
 if [[ "${USER:-}" =~ harisekhon|hsekhon ]]; then
-    ln -sv -- "$PWD/.gitconfig.local" ~ || :
+    remove_broken_link "$HOME/.gitconfig.local"
+    ln -sv -- "$PWD/.gitconfig.local" "$HOME/" || :
 fi
