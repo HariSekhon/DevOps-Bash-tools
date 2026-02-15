@@ -39,7 +39,6 @@ configs/.config/pycodestyle
 configs/.config/terminalizer/config.yml
 configs/.config/yamllint/config
 configs/.customize_environment
-configs/.editorconfig
 configs/.gemrc
 configs/.git-templates/git-secrets/hooks/*
 configs/.grype.yaml
