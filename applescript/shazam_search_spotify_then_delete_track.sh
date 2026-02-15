@@ -36,7 +36,7 @@ You can set this args as an environment variable \$SHAZAM_APP_DUMP_NUM_TRACKS - 
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<num_tracks> <db_path>]"
+usage_args="[<num_tracks> <sqlite_db_path>]"
 
 help_usage "$@"
 
