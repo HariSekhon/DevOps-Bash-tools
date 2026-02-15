@@ -61,14 +61,6 @@ fix_link(){
     local path="$1"
     local target="$2"
 
-    if [[ "$path" =~ \* ]]; then
-        return
-    fi
-
-    if [[ "$target" =~ \* ]]; then
-        return
-    fi
-
     if [ -L "$path" ]; then
         local current
         current="$(readlink "$path")"
