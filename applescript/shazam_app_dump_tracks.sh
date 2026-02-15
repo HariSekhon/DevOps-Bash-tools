@@ -21,6 +21,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
+default_dbpath="$(
+    find ~/Library/Group\ Containers \
+        -type f \
+        -path '*/*.group.com.shazam/com.shazam.mac.Shazam/ShazamDataModel.sqlite' \
+        2>/dev/null |
+    head -n 1
+)"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Queries the local Mac's Shazam app sqlite database and outputs all tracks, one per line
@@ -33,6 +41,10 @@ since Apple removed Shazam's Spotify integration
 
 Can optionally specify a number of tracks to stop after as an arg or environment variable \$SHAZAM_APP_DUMP_NUM_TRACKS
 
+A second arg can specify a path to the Shazam SQLite DB, which otherwise defaults to:
+
+    $default_dbpath
+
 Tested on Shazam app version 2.11.0 - may need to be modified for other versions as the Shazam DB schema changes
 "
 
@@ -42,22 +54,16 @@ usage_args="[<num_tracks|today|yesterday|week|last:num_days|YYYY-MM-DD>]"
 
 help_usage "$@"
 
-max_args 1 "$@"
+max_args 2 "$@"
 
 mac_only
 
 arg="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:--1}}"
 
-dbpath="$(
-    find ~/Library/Group\ Containers \
-        -type f \
-        -path '*/*.group.com.shazam/com.shazam.mac.Shazam/ShazamDataModel.sqlite' \
-        2>/dev/null |
-    head -n 1
-)"
+dbpath="${2:-$default_dbpath}"
 
-if [ -z "$dbpath" ]; then
-    die "Error: Could not locate ShazamDataModel.sqlite"
+if [ ! -f "$dbpath" ]; then
+    die "Error: Could not locate ShazamDataModel.sqlite - File Not Found: $dbpath"
 fi
 
 timestamp "Found Shazam App DB: $dbpath"
