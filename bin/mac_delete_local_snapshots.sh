@@ -65,6 +65,22 @@ show_disk_space
 snapshots="$(
     tmutil listlocalsnapshots "$path" |
     tail -n +2 |
+    # format is like:
+    #
+    #   com.apple.TimeMachine.2026-02-14-041148.local
+    #   com.apple.TimeMachine.2026-02-14-051247.local
+    #   com.apple.TimeMachine.2026-02-14-174320.local
+    #   com.apple.TimeMachine.2026-02-14-225329.local
+    #   com.apple.TimeMachine.2026-02-15-013603.local
+    #   com.apple.TimeMachine.2026-02-15-023623.local
+    #   com.apple.TimeMachine.2026-02-15-033634.local
+    #   com.apple.os.update-7850C02764D0DA2E70DAEF3595E6971F5B559DB93E53CCD252FAEA3C1110DBCBF1D66824F751C3AFAA37D9761B620610
+    #   com.apple.os.update-F6A31E7EE1E0D94A5A3E654C49952C5BC7E881804C69887CAD1C476EC161E83A
+    #   com.apple.os.update-MSUPrepareUpdate
+    #
+    # update snapshots can't be deleted so just take the date timestamped ones:
+    #
+    #                  2026-02-14-041148
     command ggrep -oP '\d{4}-\d\d-\d\d-\d+'
     #awk -F. '{print $4}' |
     #sed '/^[[:space:]]*$/d'
