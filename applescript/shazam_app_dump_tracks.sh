@@ -50,7 +50,7 @@ Tested on Shazam app version 2.11.0 - may need to be modified for other versions
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<num_tracks|today|yesterday|week|last:num_days|YYYY-MM-DD>]"
+usage_args="[<num_tracks|today|yesterday|week|last:num_days|YYYY-MM-DD> <sqlite_db_path>]"
 
 help_usage "$@"
 
