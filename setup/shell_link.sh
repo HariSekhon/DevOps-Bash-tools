@@ -22,7 +22,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 bash_tools="$srcdir/.."
 
-conf_files="$(sed 's/#.*//; /^[[:space:]]*$/d' "$bash_tools/setup/files.txt")"
+conf_files=()
+while IFS= read -r line; do
+    conf_files+=("$line")
+done < <(
+    "$srcdir/../bin/decomment.sh" "$bash_tools/setup/files.txt"
+)
 
 # unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
 #[ -n "${HOME:-}" ] || HOME=~
@@ -117,9 +122,21 @@ symlink(){
     fi
 }
 
-for filename in $conf_files; do
-    symlink "$filename"
-done
+ for filename in "${conf_files[@]}"; do
+     if [[ "$filename" =~ \* ]]; then
+         for expanded_filename in $(eval echo "$bash_tools"/$filename); do
+            if [[ "$filename" =~ \* ]]; then
+                echo "ERROR: failed to expand glob: $bash_tools/$filename"
+                exit 1
+            fi
+            # shellcheck disable=SC2295
+            expanded_filename="${expanded_filename#$bash_tools/}"
+            symlink "$expanded_filename"
+         done
+     else
+         symlink "$filename"
+     fi
+ done
 
 fix_link "$HOME/.gitignore_global" "$HOME/.gitignore"
 # want opt expansion
