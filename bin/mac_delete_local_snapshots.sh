@@ -65,6 +65,9 @@ show_disk_space
 snapshots="$(
     tmutil listlocalsnapshots "$path" |
     tail -n +2 |
+    #awk -F. '{print $4}' |
+    #sed '/^[[:space:]]*$/d'
+    #
     # format is like:
     #
     #   com.apple.TimeMachine.2026-02-14-041148.local
@@ -82,8 +85,6 @@ snapshots="$(
     #
     #                  2026-02-14-041148
     command ggrep -oP '\d{4}-\d\d-\d\d-\d+'
-    #awk -F. '{print $4}' |
-    #sed '/^[[:space:]]*$/d'
 )"
 
 # because wc -l returns 1 on an empty line due to a \n newline
