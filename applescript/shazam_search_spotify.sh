@@ -23,10 +23,15 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Dumps the local Mac Shazam app's tracks one at a time, searches the Spotify app for each one,
-and then deletes it from the Shazam local sqlite DB upon an Enter key press to proceed to the next one
+Dumps the local Mac Shazam app's tracks one at a time, searches the Spotify app for each one
 
 Shazam to Spotify apps workaround to Apple removing Spotify integration from Shazam
+
+Prompts between each track to proceed to search for the next one
+
+Optionally prompts to delete the track after searh from the Shazam local sqlite DB if this environment variable is set:
+
+    export SHAZAM_APP_DELETE_TRACK_AFTER_SEARCH=1
 
 Can optionally specify a number of tracks to stop after as an arg,
 or a timeframe today/yesterday/week/YYYY-MM-DD,
