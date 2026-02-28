@@ -79,15 +79,21 @@ echo >&2
 #));")
 
 artist_sql="$(
-  sqlite3 -batch -noheader -list -cmd ".parameter clear" \
-          -cmd ".parameter set @v '$artist'" \
+  sqlite3 -batch \
+          -noheader \
+          -list \
+          -cmd ".parameter clear" \
+          -cmd ".parameter set @v '$(sed "s/'/''/g" <<< "$artist")'" \
           :memory: \
           "SELECT quote(@v);"
 )"
 
 track_sql="$(
-  sqlite3 -batch -noheader -list -cmd ".parameter clear" \
-          -cmd ".parameter set @v '$track'" \
+  sqlite3 -batch \
+          -noheader \
+          -list \
+          -cmd ".parameter clear" \
+          -cmd ".parameter set @v '$(sed "s/'/''/g" <<< "$track")'" \
           :memory: \
           "SELECT quote(@v);"
 )"
