@@ -69,15 +69,32 @@ echo >&2
 # quoting and newline issues with arbitrary data, so pre-generate
 # the variables with escaping using SQLite's own quoting engine
 
-artist_sql=$(sqlite3 ':memory:' "SELECT quote($(
-    printf "'%s'" "$(printf '%s' "$artist" | sed "s/'/''/g")"
-));")
+# also fragile
+#artist_sql=$(sqlite3 ':memory:' "SELECT quote($(
+#    printf "'%s'" "$(printf '%s' "$artist" | sed "s/'/''/g")"
+#));")
+#
+#track_sql=$(sqlite3 ':memory:' "SELECT quote($(
+#    printf "'%s'" "$(printf '%s' "$track" | sed "s/'/''/g")"
+#));")
 
-track_sql=$(sqlite3 ':memory:' "SELECT quote($(
-    printf "'%s'" "$(printf '%s' "$track" | sed "s/'/''/g")"
-));")
+artist_sql="$(
+  sqlite3 -batch -noheader -list -cmd ".parameter clear" \
+          -cmd ".parameter set @v '$artist'" \
+          :memory: \
+          "SELECT quote(@v);"
+)"
 
-sqlite3 -batch -bail "$dbpath" <<EOF
+track_sql="$(
+  sqlite3 -batch -noheader -list -cmd ".parameter clear" \
+          -cmd ".parameter set @v '$track'" \
+          :memory: \
+          "SELECT quote(@v);"
+)"
+
+sqlite3 -batch \
+        -bail  \
+        "$dbpath" <<SQL
     DELETE FROM
         ZSHTAGRESULTMO
     WHERE
@@ -95,7 +112,7 @@ sqlite3 -batch -bail "$dbpath" <<EOF
               AND
                 r.ZTRACKNAME = $track_sql
         );
-EOF
+SQL
 
 if [ -z "${QUIET:-}" ]; then
     timestamp "You must now quit and re-open the Shazam app to pick up this change"
