@@ -1,0 +1,1 @@
+../applescript/reopen_app.sh
