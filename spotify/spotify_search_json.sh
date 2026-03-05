@@ -40,6 +40,8 @@ Example:
 
 API JSON is returned, used by adjacent spotify_search*.sh scripts
 
+There is no way in Spotify API to anchor search terms, they are always fuzzy and will therefore return things like
+remixes of a given song along with its original version
 
 Environment variable options:
 
