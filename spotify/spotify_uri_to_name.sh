@@ -72,7 +72,7 @@ $usage_auth_help
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<files>] [<curl_options>]"
+usage_args="[<uri_or_files>] [<curl_options>]"
 
 help_usage "$@"
 
@@ -290,15 +290,23 @@ clean_output(){
 }
 
 files=()
+tmp="$(mktemp)"
 
 for filename in "$@"; do
     if [ -f "$filename" ]; then
         files+=("$filename")
         shift || :
+    elif [[ "$filename" =~ ^spotify: ]]; then
+        echo "$filename" >> "$tmp"
+        shift || :
     else
         break
     fi
 done
+
+if [ -s "$tmp" ]; then
+    files+=("$tmp")
+fi
 
 if [ $# -gt 0 ]; then
     curl_options=("$@")
