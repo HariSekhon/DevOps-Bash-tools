@@ -34,6 +34,8 @@ Breaking Changes Feb 2026 - several API endpoints have been REMOVED :-(:
 
     https://developer.spotify.com/documentation/web-api/references/changes/february-2026
 
+    https://developer.spotify.com/documentation/web-api/tutorials/february-2026-migration-guide
+
 For private user data endpoints you must export SPOTIFY_PRIVATE=1
 
 $usage_auth_help
