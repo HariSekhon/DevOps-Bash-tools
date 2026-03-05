@@ -54,13 +54,15 @@ or if \$SPOTIFY_CSV environment variable is set then:
 \"Artist\",\"Album\"
 \"Artist\"
 
-Useful for saving Spotify playlists in a format that is easier to understand, revision control changes or export to other music systems
+Useful for saving Spotify playlists in a format that is easier to understand, revision control changes or export to
+other music systems
 
 or if \$SPOTIFY_TSV environment variable is set then:
 
 Artist \\t Track
 
-Useful for post-processing in scripts like spotify_search_alternate_track_uris.sh that want to be sure which was the artist and which was the track component
+Useful for post-processing in scripts like spotify_search_alternate_track_uris.sh that want to be sure which was the
+artist and which was the track component
 
 The first argument that doesn't correspond to a file and all subsequent arguements are fed as-is to curl as options
 
