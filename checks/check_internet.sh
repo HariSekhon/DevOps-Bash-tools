@@ -23,7 +23,20 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Checks the internet is up before returning
+Checks the internet is available by multiple tests
+
+Waits for the internet to become available before returning
+
+Useful to run in a blocking latch wait fashion in scripts to ensure the internet is available
+before running a big operation like my Spotify Playlists API backups
+
+Tests:
+
+- Local Gateway IP is configured (Wifi DHCP has succeeded or we have static details configured)
+- Gateway IP is reachable (ping)
+- Public IP is reachable (ping to known major public IP 1.1.1.1)
+- DNS resolution is working (resolves google.com)
+- Public Domain is reachable (ping to google.com)
 "
 
 # used by usage() in lib/utils.sh
