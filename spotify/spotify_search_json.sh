@@ -47,7 +47,7 @@ Environment variable options:
                         artist
                         album
 
-\$SPOTIFY_SEARCH_LIMIT = 1 # default
+\$SPOTIFY_SEARCH_LIMIT = 1 # default, official API limit 10, this code truncates to max 50 to avoid API errors
 
 \$SPOTIFY_SEARCH_OFFSET = 0 # default
 
