@@ -47,6 +47,8 @@ help_usage "$@"
 
 export SPOTIFY_SEARCH_LIMIT=10
 
+spotify_token
+
 SPOTIFY_TSV=1 "$srcdir/spotify_uri_to_name.sh" "$@" |
 while IFS=$'\t' read -r artist track; do
     "$srcdir/spotify_search_uri.sh" artist:"$artist" track:"$track"
