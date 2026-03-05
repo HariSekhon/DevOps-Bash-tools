@@ -277,10 +277,10 @@ output(){
 export -f output
 
 clean_output(){
-    if [ -z "${SPOTIFY_TSV:-}" ]; then
-        tr '\t' ' '
+    if [ -n "${SPOTIFY_TSV:-}" ]; then
+        sed $'s/\t-\t/\t/'
     else
-        cat
+        tr '\t' ' '
     fi |
     sed '
         s/^[[:space:]]*-//;
