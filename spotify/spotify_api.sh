@@ -30,6 +30,10 @@ API endpoints you can query with this code:
 
 https://developer.spotify.com/documentation/web-api/reference/
 
+Breaking Changes Feb 2026 - several API endpoints have been REMOVED :-(:
+
+    https://developer.spotify.com/documentation/web-api/references/changes/february-2026
+
 For private user data endpoints you must export SPOTIFY_PRIVATE=1
 
 $usage_auth_help
