@@ -16,7 +16,7 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# https://developer.spotify.com/documentation/web-api/reference/search/search/
+# https://developer.spotify.com/documentation/web-api/reference/search
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
