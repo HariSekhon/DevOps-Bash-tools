@@ -34,6 +34,8 @@ Tests:
 
 - Local Gateway IP is configured (Wifi DHCP has succeeded or we have static details configured)
 - Gateway IP is reachable (ping)
+  - now optional informational, progresses regardless now as some hotel wifi did not return pings even
+    when internet was up
 - Public IP is reachable (ping to known major public IP 1.1.1.1)
 - DNS resolution is working (resolves google.com)
 - Public Domain is reachable (ping to google.com)
@@ -119,9 +121,13 @@ while :; do
 done
 
 timestamp "Checking Gateway IP available: $gateway_ip"
-while ! check_gateway; do
-    sleep "$sleep_seconds"
-done
+#while ! check_gateway; do
+# no point wasting 5 tries when the hotel wifi will always fail, it just slows down dependent scripts
+#for ((i=0; i< 5; i++)); do
+#    check_gateway && break
+#    sleep "$sleep_seconds"
+#done
+check_gateway || :
 
 timestamp "Checking Public IP available: $public_ip"
 while ! check_public_ip; do
