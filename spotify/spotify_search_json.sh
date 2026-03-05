@@ -30,7 +30,7 @@ Searches the Spotify API and returns the first N tracks / artists / albums that 
 
 See this page for documentation on how to write query expressions:
 
-https://developer.spotify.com/documentation/web-api/reference/search/search/
+    https://developer.spotify.com/documentation/web-api/reference/search
 
 Example:
 
