@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
-#  args: "Foo Fighters" | tee /dev/stderr | spotify_uri_to_name.sh
-#
 #  Author: Hari Sekhon
 #  Date: 2020-07-05 14:33:55 +0100 (Sun, 05 Jul 2020)
 #
@@ -51,6 +49,7 @@ spotify_token
 
 SPOTIFY_TSV=1 "$srcdir/spotify_uri_to_name.sh" "$@" |
 while IFS=$'\t' read -r artist track; do
+    # URL encode to solve non-ASCII characters breaking the Spotify API calls eg. artist:"Sébastien Tellier"
     artist="$(urlencode.sh <<< "$artist")"
     track="$(urlencode.sh <<< "$track")"
     "$srcdir/spotify_search_uri.sh" artist:"$artist" track:"$track"
