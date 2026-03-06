@@ -44,6 +44,9 @@ API JSON is returned, used by adjacent spotify_search*.sh scripts
 There is no way in Spotify API to anchor search terms, they are always fuzzy and will therefore return things like
 remixes of a given song along with its original version
 
+Non-ASCII characters will cause the Spotify API to break with HTTP 400 errors - you must URL encode them first
+eg. the artist Sébastien Tellier. You can use the ../bin/urlencode.sh script on the term first
+
 Environment variable options:
 
 \$SPOTIFY_SEARCH_TYPE  = track # default
