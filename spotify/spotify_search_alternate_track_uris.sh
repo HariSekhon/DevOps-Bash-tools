@@ -29,7 +29,7 @@ Searches the Spotify API for and returns alternate track URIs for the given URIs
 
 Accepts URIs as either args or from standard input
 
-Uses spotify_search_json.sh which supports the following environment variable options:
+Uses spotify_search_json.sh - see its help for more details on search capabilities
 
 
 $usage_auth_help
