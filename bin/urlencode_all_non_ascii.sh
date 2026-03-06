@@ -29,6 +29,12 @@ URL encodes the given string argument or standard input
 Escapes all non-ASCII characters
 
 Written to solve an issue with the Spotify API
+
+Figures out which of the relevant tools are available and uses the first one it finds in this order:
+
+- jq
+- Perl URI::ESCAPE
+- Python urllib.parse
 "
 
 # used by usage() in lib/utils.sh
