@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: one two
 #
 #  Author: Hari Sekhon
 #  Date: 2020-03-03 17:47:02 +0000 (Tue, 03 Mar 2020)
