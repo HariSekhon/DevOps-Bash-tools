@@ -51,5 +51,7 @@ spotify_token
 
 SPOTIFY_TSV=1 "$srcdir/spotify_uri_to_name.sh" "$@" |
 while IFS=$'\t' read -r artist track; do
+    artist="$(urlencode.sh <<< "$artist")"
+    track="$(urlencode.sh <<< "$track")"
     "$srcdir/spotify_search_uri.sh" artist:"$artist" track:"$track"
 done
