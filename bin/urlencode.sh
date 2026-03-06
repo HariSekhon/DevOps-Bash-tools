@@ -15,6 +15,8 @@
 #
 
 # Quick command line URL encoding
+#
+# Only escapes characters disallowed in URIs
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
