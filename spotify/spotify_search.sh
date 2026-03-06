@@ -59,9 +59,6 @@ Uses the adjacent script spotify_search_json.sh which supports the following env
 \$SPOTIFY_SEARCH_OFFSET = 0 # default
 
 
-Uses spotify_search_json.sh - see there for more searching defails.
-
-
 $usage_auth_help
 "
 
