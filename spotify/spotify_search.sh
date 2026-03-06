@@ -48,7 +48,7 @@ Non-ASCII characters will cause the Spotify API to break with HTTP 400 errors - 
 eg. the artist Sébastien Tellier. You can use the ../bin/urlencode.sh script on the term first
 
 
-Uses spotify_search_json.sh which supports the following environment variable options:
+Uses the adjacent script spotify_search_json.sh which supports the following environment variable options:
 
 \$SPOTIFY_SEARCH_TYPE  = track # default
                         artist
