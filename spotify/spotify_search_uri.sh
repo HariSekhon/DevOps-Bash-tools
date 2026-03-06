@@ -40,8 +40,6 @@ Example:
 
 Uses spotify_search_json.sh which supports the following environment variable options:
 
-Environment variable options:
-
 \$SPOTIFY_SEARCH_TYPE  = track # default
                         artist
                         album
