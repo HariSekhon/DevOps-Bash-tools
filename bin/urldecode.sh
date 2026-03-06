@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: one%20two
 #
 #  Author: Hari Sekhon
 #  Date: 2020-03-03 17:47:02 +0000 (Tue, 03 Mar 2020)
@@ -40,4 +41,13 @@ if [ $# -gt 0 ]; then
 else
     cat
 fi |
-perl -MURI::Escape -ne 'chomp; print uri_unescape($_) . "\n"'
+if type -P perl &>/dev/null &&
+   perl -MURI::ESCAPE -e '' &>/dev/null; then
+    perl -MURI::Escape -ne 'chomp; print uri_unescape($_) . "\n"'
+elif type -p python3 &>/dev/null &&
+     python3 -c 'from urllib.parse import quote_plus'; then
+    python3 -c "import sys, urllib.parse; [print(urllib.parse.unquote(line.strip())) for line in sys.stdin]"
+else
+    echo "ERROR: neither Perl URI::Escape nor Python3 with UrlLib.Parse are available" >&2
+    exit 1
+fi
