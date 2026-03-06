@@ -38,7 +38,7 @@ Example:
 ./${0##*/} artist:foo fighters track:arlandria
 
 
-Uses spotify_search_json.sh which supports the following environment variable options:
+Uses the adjacent script spotify_search_json.sh which supports the following environment variable options:
 
 \$SPOTIFY_SEARCH_TYPE  = track # default
                         artist
