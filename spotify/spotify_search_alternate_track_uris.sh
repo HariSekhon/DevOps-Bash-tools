@@ -25,11 +25,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Searches the Spotify API for and returns alternate track URIs for the given URIs (up to 10)
+Returns track URIs for the other tracks that have the same Artist + Track name as the given track URI(s)
+by first resolving the given URI(s) artist + track name(s), then searching for and returning the URIs of the results
 
 Accepts URIs as either args or from standard input
 
-Uses spotify_search_json.sh - see its help for more details on search capabilities
+Returns up to 10 URIs of tracks with the same Artist + Track matching
+
+Uses spotify_search_json.sh - see its help for more details on search capabilities and limitations
 
 $usage_auth_help
 "
