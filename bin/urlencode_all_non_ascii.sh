@@ -44,7 +44,9 @@ if [ $# -gt 0 ]; then
 else
     cat
 fi |
-if type -P perl &>/dev/null &&
+if type -P jq &>/dev/null; then
+    jq -rn --arg q "$(cat)" '$q|@uri'
+elif type -P perl &>/dev/null &&
    perl -MURI::ESCAPE -e '' &>/dev/null; then
     perl -MURI::Escape -ne 'chomp; print uri_escape_utf8($_) . "\n"'
 elif type -p python3 &>/dev/null &&
