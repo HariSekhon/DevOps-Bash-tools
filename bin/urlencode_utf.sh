@@ -26,7 +26,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 URL encodes the given string argument or standard input
 
-Escapes all non-ASCII characters
+Escapes all non-ASCII characters by converting them to UTF-8 and then encoding them
 
 Written to solve an issue with the Spotify API
 
