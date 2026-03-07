@@ -34,8 +34,8 @@ Tests:
 
 - Local Gateway IP is configured (Wifi DHCP has succeeded or we have static details configured)
 - Gateway IP is reachable (ping)
-  - now optional informational, progresses regardless now as some hotel wifi did not return pings even
-    when internet was up
+  - now optional informational, progresses regardless now as some hotel wifi gateway did not return pings
+  even though the end-to-end internet connection was up (router was obviously just set to not respond to ICMP)
 - Public IP is reachable (ping to known major public IP 1.1.1.1)
 - DNS resolution is working (resolves google.com)
 - Public Domain is reachable (ping to google.com)
@@ -72,7 +72,7 @@ check_gateway() {
     if ping -c "$ping_count" -W "$ping_timeout" "$gateway_ip" &>/dev/null; then
         timestamp "OK: Gateway IP reachable"
     else
-        timestamp "FAIL: Gateway IP '$gateway_ip' unreachable"
+        timestamp "FAIL: Gateway IP '$gateway_ip' unreachable (skipping as some routers are configured to just not respond to ping)"
         return 1
     fi
 }
