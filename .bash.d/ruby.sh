@@ -63,7 +63,10 @@ fi
 # Ruby User Dirs
 
 # add newest ruby to path first
-ruby_bins="$(find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null)"
+ruby_bins="$(
+    find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null
+    find ~/.local/share/gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null
+)"
 #if is_mac; then
 #    ruby_bins_newest="$(tail -r <<< "$ruby_bins")"
 #else
