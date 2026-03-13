@@ -42,13 +42,14 @@ Used by the following scripts:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<video_file>"
+usage_args="<video_file> [<player_specific_commandline_options>]"
 
 help_usage "$@"
 
-num_args 1 "$@"
+min_args 1 "$@"
 
 video="$1"
+shift || :
 
 # Will be tried in this order
 linux_commands=(
@@ -69,8 +70,11 @@ if is_mac; then
             if [ -z "${PLAY_VIDEO:-}" ]; then
                 opts+=("--pause=yes")
             fi
+            if [ -z "${BACKGROUND_VIDEO:-}" ]; then
+                opts+=("--focus-on=never")
+            fi
         fi
-        "$DEFAULT_VIDEO_PLAYER" "${opts[@]}" -- "$video" &
+        "$DEFAULT_VIDEO_PLAYER" "${opts[@]}" "$@" -- "$video" &
     else
         if [ -n "${BACKGROUND_VIDEO:-}" ]; then
             opts+=(-g)
@@ -78,7 +82,7 @@ if is_mac; then
         if [ -n "${DEFAULT_VIDEO_PLAYER:-}" ]; then
             opts+=(-a "$DEFAULT_VIDEO_PLAYER")
         fi
-        open "${opts[@]}" "$video"
+        open "${opts[@]}" "$@" "$video"
         if [ -n "${PLAY_VIDEO:-}" ]; then
             osascript -e "tell application \"${DEFAULT_VIDEO_PLAYER:-QuickTime Player}\" to play document 1"
         fi
@@ -88,7 +92,7 @@ else  # assume Linux
     for linux_command in "${linux_commands[@]}"; do
         if type -P "$linux_command" &>/dev/null; then
             found=1
-            "$linux_command" -- "$video" &
+            "$linux_command" "$@" -- "$video" &
             break
         fi
     done
