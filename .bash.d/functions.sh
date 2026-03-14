@@ -142,6 +142,7 @@ dle(){
     done
     exit
 }
+alias ytp="cd ~/Downloads/YouTube && ./play.sh"
 
 deccp(){
     # shellcheck disable=SC2119
