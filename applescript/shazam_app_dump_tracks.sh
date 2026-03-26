@@ -26,7 +26,7 @@ default_dbpath="$(
         -type f \
         -path '*/*.group.com.shazam/com.shazam.mac.Shazam/ShazamDataModel.sqlite' \
         2>/dev/null |
-    head -n 1
+    head -n 1 || :
 )"
 
 # shellcheck disable=SC2034,SC2154
