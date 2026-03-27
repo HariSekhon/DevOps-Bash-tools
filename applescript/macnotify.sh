@@ -31,7 +31,7 @@ If not dismissed this persists in Notification Center until cleared
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<title>] [<subtitle> <message>"
+usage_args="[<title>] [<subtitle>] <message>"
 
 help_usage "$@"
 
