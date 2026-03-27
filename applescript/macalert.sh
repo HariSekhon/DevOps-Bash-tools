@@ -31,7 +31,7 @@ Requires the OK button to be clicked to dismiss it
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<title>] [<subtitle> <message>"
+usage_args="[<title>] <message>"
 
 help_usage "$@"
 
