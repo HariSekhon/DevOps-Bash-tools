@@ -132,5 +132,5 @@ elif ! is_blank "${TOKEN:-${JWT_TOKEN:-}}"; then
         command curl -H "$auth_header" "$@"
     fi
 else
-    command curl --netrc-file <(cat <<< "$netrc_contents") "$@"
+    command curl -A "HariSekhon/DevOps-Bash-tools (contact: GitHub repo)" --netrc-file <(cat <<< "$netrc_contents") "$@"
 fi
