@@ -43,9 +43,9 @@ $usage_auth_help
 
 Examples:
 
-    spotify_api.sh /v1/users/harisekhon
+    ${0##*/}.sh /v1/users/harisekhon
 
-    SPOTIFY_PRIVATE=1 spotify_api.sh /v1/me/tracks
+    SPOTIFY_PRIVATE=1 ${0##*/} /v1/me/tracks
 
 Used by adjacent spotify_*.sh scripts for more serious usage
 
