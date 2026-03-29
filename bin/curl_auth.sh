@@ -127,6 +127,8 @@ elif ! is_blank "${TOKEN:-${JWT_TOKEN:-}}"; then
     if is_curl_min_version 7.55; then
         # this trick doesn't work, file descriptor is lost by next line
         #filedescriptor=<(cat <<< "Private-Token: $GITLAB_TOKEN")
+        # user_agent defined in lib/util.shs
+        # shellcheck disable=SC2154
         command curl "${user_agent[@]}" -H @<(cat <<< "$auth_header") "$@"
     else
         command curl "${user_agent[@]}" -H "$auth_header" "$@"
