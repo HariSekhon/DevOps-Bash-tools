@@ -23,6 +23,7 @@ google-cloud-sdk
 #google-earth-pro
 grandperspective  # like Disk Inventory X - GUI disk space analysis
 hammerspoon  # system event handler
+hiddenbar
 #intellij-idea-ce  # in main packages now
 keepassxc
 keka
