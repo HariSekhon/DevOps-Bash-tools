@@ -50,4 +50,6 @@ cookie="$(pycookiecheat "$url")"
 
 cookie_header="$(jq -r 'to_entries | map("\(.key)=\(.value)") | join("; ")' <<< "$cookie")"
 
-curl -H "Cookie: $cookie_header" -L "$@" "$url"
+# user_agent defined in lib/util.shs
+# shellcheck disable=SC2154
+curl "${user_agent[@]}" -H "Cookie: $cookie_header" -L "$@" "$url"
