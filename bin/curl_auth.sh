@@ -34,6 +34,8 @@ for constructing the authentication string to be specific to the host as using n
 # shellcheck disable=SC2034
 usage_args="[<curl_options>] <url>"
 
+user_agent=(-A "HariSekhon/DevOps-Bash-tools (contact: GitHub repo)")
+
 if [ $# -lt 1 ]; then
     # shellcheck disable=SC2119
     usage
@@ -127,10 +129,10 @@ elif ! is_blank "${TOKEN:-${JWT_TOKEN:-}}"; then
     if is_curl_min_version 7.55; then
         # this trick doesn't work, file descriptor is lost by next line
         #filedescriptor=<(cat <<< "Private-Token: $GITLAB_TOKEN")
-        command curl -H @<(cat <<< "$auth_header") "$@"
+        command curl "${user_agent[@]}" -H @<(cat <<< "$auth_header") "$@"
     else
-        command curl -H "$auth_header" "$@"
+        command curl "${user_agent[@]}" -H "$auth_header" "$@"
     fi
 else
-    command curl -A "HariSekhon/DevOps-Bash-tools (contact: GitHub repo)" --netrc-file <(cat <<< "$netrc_contents") "$@"
+    command curl "${user_agent[@]}" --netrc-file <(cat <<< "$netrc_contents") "$@"
 fi
