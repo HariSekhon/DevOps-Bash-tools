@@ -28,7 +28,7 @@ Queries the given Spotify API
 
 API endpoints you can query with this code:
 
-https://developer.spotify.com/documentation/web-api/reference/
+    https://developer.spotify.com/documentation/web-api/reference/
 
 Breaking Changes Feb 2026 - several API endpoints have been REMOVED :-(:
 
