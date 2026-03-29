@@ -1578,6 +1578,7 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 - `spotify_search*.sh` - searches Spotify's library for tracks / albums / artists getting results in human readable format, JSON, or URI formats for easy loading to Spotify playlists
   - `spotify_search_json.sh` - searches the Spotify API and returns the JSON of the first N tracks / artists / albums that match the given search expression
   - `spotify_search.sh` - same as above but returns just the Artist and Track name
+  - `spotify_search_uri.sh` - same as above but returns the Spotify URI for further processing or copying straight into a playlist (can be auto-loaded to a playlist by chaining with `spotify_add_to_playlist.sh` below)
   - `spotify_search_local_tracks.sh` - searches the Spotify API for the given local track URIs and returns the first Spotify URI match for each track. Useful to quickly replace local tracks with Spotify official tracks by copying the output URIs into playlists
   - `spotify_search_alternate_track_uris.sh` - for give URI(s) returns the alternate track URIs that have the same Artist + Track name
 - `spotify_release_year.sh` - searches for a given track or album and finds the original release year
