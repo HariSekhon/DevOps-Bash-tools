@@ -53,6 +53,10 @@ if [ -z "${total_run_count:-}" ]; then
     total_run_count=0
 fi
 
+# used in calling curl_*.sh scripts
+# shellcheck disable=SC2034
+user_agent=(-A "HariSekhon/DevOps-Bash-tools (contact: GitHub repo)")
+
 # ERE format (egrep / grep -E)
 #
 # used in client scripts
@@ -1128,7 +1132,6 @@ retry(){
         fi
     done
 }
-
 
 timeout(){
     if is_mac; then
