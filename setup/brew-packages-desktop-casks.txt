@@ -10,6 +10,7 @@ anaconda
 atom
 barrier
 blackhole-2ch  # to create multi-output sound device to shazam songs from shows while using headphones
+blurred  # dims background apps to let you focus on the in-focus window
 ccmenu
 #claude-code  # use native installer which auto-updates: curl -fsSL https://claude.ai/install.sh | bash
 codeship/taps/jet
@@ -23,7 +24,7 @@ google-cloud-sdk
 #google-earth-pro
 grandperspective  # like Disk Inventory X - GUI disk space analysis
 hammerspoon  # system event handler
-hiddenbar
+hiddenbar  # collapsable space to tuck away menu bar items
 #intellij-idea-ce  # in main packages now
 keepassxc
 keka
