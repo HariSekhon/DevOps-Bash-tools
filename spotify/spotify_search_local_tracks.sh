@@ -25,9 +25,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Searches the Spotify API for the given local tracks and returns the first URI match for each track
+Searches the Spotify API for the given local track URIs and returns the first Spotify URI match for each track
 
-Useful to quickly replace local tracks with Spotify official tracks
+Useful to quickly replace local tracks with Spotify official tracks by copying the output URIs into playlists
 
 eg.
 
