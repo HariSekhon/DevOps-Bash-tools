@@ -53,6 +53,8 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+spotify_token
+
 if [ $# -eq 0 ]; then
     warn "Reading local track URIs from standard input"
     cat
@@ -61,6 +63,14 @@ else
         echo "$track"
     done
 fi |
+while read -r line; do
+    is_blank "$line" && continue
+    if [[ "$line" =~ https://open.spotify.com/local/.*/.*/.* ]]; then
+        echo "$line"
+    else
+        warn "Not a local track, skipping: $line"
+    fi
+done |
 sed $'
     s|https://open.spotify.com/local/||;
     s|/[[:digit:]]*$||
@@ -69,8 +79,8 @@ sed $'
 # do not url decode, see spotify_search.sh --help for why this breaks the Spotify API
 #"$srcdir/../bin/urldecode.sh |
 while read -r artist track; do
-    is_blank "$artist" && continue
-    if is_blank "$track"; then
+    if is_blank "$artist" ||
+       is_blank "$track"; then
         warn "Failed to parse track, skipping: $artist $track"
         continue
     fi
