@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Queries the given Spotify API endpoint
+Queries the given Spotify API
 
 API endpoints you can query with this code:
 
