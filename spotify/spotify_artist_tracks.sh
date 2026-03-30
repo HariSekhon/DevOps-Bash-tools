@@ -60,6 +60,9 @@ fi
 
 spotify_token
 
+artist="${artist%%\?*}"
+artist="${artist#https://open.spotify.com/artist/}"
+
 if [ "${#artist}" = 22 ] &&
    [[ "$artist" =~ ^[[:alnum:]]+$ ]]; then
     artist_id="$artist"
