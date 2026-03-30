@@ -23,7 +23,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090,SC2154
+# shellcheck disable=SC1090,SC1091,SC2154
 . "$srcdir/lib/spotify.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -49,22 +49,34 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-artist="$1"
+artist="$*"
 
-shift || :
+# no longer passing $@ to spotify_api.sh as I never use this in practice
+#shift || :
 
 if is_blank "$artist"; then
-    usage "artist not defined"
+    usage "Artist not defined"
 fi
 
 spotify_token
 
-if [ "${#artist}" = 22 ]; then
+if [ "${#artist}" = 22 ] &&
+   [[ "$artist" =~ ^[[:alnum:]]+$ ]]; then
     artist_id="$artist"
 else
-    timestamp "resolving artist '$artist' to artist ID"
-    artist_id="$(SPOTIFY_SEARCH_TYPE=artist SPOTIFY_SEARCH_LIMIT=50 "$srcdir/spotify_search_json.sh" "$artist" | jq -r ".artists.items[] | select(.name | ascii_downcase == \"$artist\") | .id" | head -n1)"
-    timestamp "got artist ID '$artist_id'"
+    timestamp "Resolving artist '$artist' to artist ID"
+    artist_id="$(
+        SPOTIFY_SEARCH_TYPE=artist \
+        SPOTIFY_SEARCH_LIMIT=50 \
+        "$srcdir/spotify_search_json.sh" "$artist" |
+        jq -r "
+            .artists.items[] |
+            select(.name | ascii_downcase == \"$artist\") |
+            .id
+        " |
+        head -n1
+    )"
+    timestamp "Got artist ID: $artist_id"
 echo >&2
 fi
 
@@ -72,29 +84,32 @@ fi
 # shellcheck disable=SC2154
 url_path="/v1/artists/$artist_id/albums?limit=50&offset=$offset&include_groups=album,single"  # API limit max is 50
 
-timestamp "getting list of albums for artist"
+timestamp "Getting list of albums for artist:"
+echo >&2
 albums="$(
     while not_null "$url_path"; do
-        output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
+        output="$("$srcdir/spotify_api.sh" "$url_path")"
         #die_if_error_field "$output"
         url_path="$(get_next "$output")"
         jq -r '.items[] | [.id, .name] | @tsv' <<< "$output"
-    done
+    done | tee /dev/stderr
 )"
 echo >&2
 
 offset=0
 while read -r album_id album_name; do
-    timestamp "getting list of tracks for album '$album_name'"
+    timestamp "Getting list of tracks for album '$album_name'"
+    echo >&2
     # $offset defined in lib/spotify.sh
     # shellcheck disable=SC2154
     url_path="/v1/albums/$album_id/tracks?limit=50&offset=$offset"  # API limit max is 50
 
     while not_null "$url_path"; do
-        output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
+        output="$("$srcdir/spotify_api.sh" "$url_path")"
         #die_if_error_field "$output"
         url_path="$(get_next "$output")"
         #jq -r '.items[] | [.id, .name] | @tsv' <<< "$output"
         jq -r '.items[].id' <<< "$output"
     done
+    echo >&2
 done <<< "$albums"
