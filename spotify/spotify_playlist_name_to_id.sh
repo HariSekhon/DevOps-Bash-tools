@@ -29,6 +29,8 @@ Uses Spotify API to translate a Spotify public playlist name to ID
 
 If a Spotify playlist ID is given, returns it as is (this is for coding convenience when calling from other scripts)
 
+If a Spotify link to playlist is given, extracts the playlist ID
+
 Needed by several other adjacent spotify tools
 
 This is quite a slow O(n) operation as it has to iterate through all playlists until it finds a matching name to
@@ -58,6 +60,10 @@ export SPOTIFY_PLAYLIST_EXACT_MATCH=1
 playlist_name_to_id(){
     local playlist_name="$1"
     shift || :
+    if [[ "$playlist_name" =~ https://open.spotify.com/playlist/ ]]; then
+        playlist_name="${playlist_name##https://open.spotify.com/playlist/}"
+        playlist_name="${playlist_name%%\?*}"
+    fi
     # if it's not a playlist id, scan all playlists and take the ID of the first matching playlist name
     if is_spotify_playlist_id "$playlist_name"; then
         echo "$playlist_name"
