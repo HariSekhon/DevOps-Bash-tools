@@ -29,7 +29,7 @@ Uses Spotify API to translate a Spotify public playlist name to ID
 
 If a Spotify playlist ID is given, returns it as is (this is for coding convenience when calling from other scripts)
 
-If a Spotify link to playlist is given, extracts the playlist ID
+If a Spotify link to playlist is given, extracts the playlist ID and skips the API lookup
 
 Needed by several other adjacent spotify tools
 
