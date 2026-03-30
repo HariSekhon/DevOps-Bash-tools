@@ -67,6 +67,10 @@ playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_
 
 export SPOTIFY_DUPLICATE_TRACK_POSITIONS=1
 
+if [[ "$playlist" =~ https://open.spotify.com/playlist/ ]]; then
+    playlist="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id")"
+fi
+
 timestamp "Finding and deleting duplicate tracks in playlist \"$playlist\" by exact \"Artist - Track\" name match:"
 duplicates="$("$srcdir/spotify_duplicate_tracks_in_playlist.sh" "$playlist_id")"
 
