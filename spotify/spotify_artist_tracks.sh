@@ -38,6 +38,8 @@ Useful to chain with the following scripts:
     spotify_delete_any_duplicates_in_playlist.sh
 
 
+Can accept a Spotify link to artist too
+
 $usage_auth_help
 "
 
