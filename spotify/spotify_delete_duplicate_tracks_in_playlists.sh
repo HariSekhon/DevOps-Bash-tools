@@ -55,7 +55,8 @@ export SPOTIFY_PRIVATE=1
 
 spotify_token
 
-# this script returns the ID if it's already in the correct format, otherwise queries and returns the playlist ID for the playlist
+# this script returns the ID if it's already in the correct format, otherwise queries
+# and returns the playlist ID for the playlist
 playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist")"
 
 export SPOTIFY_DUPLICATE_TRACK_POSITIONS=1
