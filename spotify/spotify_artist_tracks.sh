@@ -43,7 +43,7 @@ $usage_auth_help
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<spotify_artist>"
+usage_args="<spotify_artist_name_or_id>"
 
 help_usage "$@"
 
