@@ -66,8 +66,10 @@ fi
 
 spotify_token
 
-artist="${artist%%\?*}"
-artist="${artist#https://open.spotify.com/artist/}"
+if [[ "$artist" =~ https://open.spotify.com/artist/ ]]; then
+    artist="${artist#https://open.spotify.com/artist/}"
+    artist="${artist%%\?*}"
+fi
 
 if [ "${#artist}" = 22 ] &&
    [[ "$artist" =~ ^[[:alnum:]]+$ ]]; then
