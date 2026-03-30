@@ -50,6 +50,11 @@ min_args 1 "$@"
 
 artist="$*"
 
+market=""
+if not is_blank "${SPOTIFY_MARKET:-}"; then
+    market="&market=$SPOTIFY_MARKET"
+fi
+
 # no longer passing $@ to spotify_api.sh as I never use this in practice
 #shift || :
 
@@ -84,7 +89,7 @@ fi
 
 # $offset defined in lib/spotify.sh
 # shellcheck disable=SC2154
-url_path="/v1/artists/$artist_id/albums?limit=50&offset=$offset&include_groups=album,single"  # API limit max is 50
+url_path="/v1/artists/$artist_id/albums?limit=50&offset=$offset&include_groups=album,single${market:+$market}"  # API limit max is 50
 
 timestamp "Getting list of albums for artist:"
 echo >&2
