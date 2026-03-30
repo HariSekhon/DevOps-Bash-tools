@@ -30,15 +30,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Outputs track URIs for a given Spotify artist
 
-Artist argument can be an artist name or preferably an artist ID (get this from the app -> Share -> Copy link to artist)
+Artist argument can be an artist name, ID, or link to artist (get this from the app -> Share -> Copy link to artist)
 
 Useful to chain with the following scripts:
 
     spotify_add_to_playlist.sh
     spotify_delete_any_duplicates_in_playlist.sh
-
-
-Can accept a Spotify link to artist too
 
 $usage_auth_help
 "
