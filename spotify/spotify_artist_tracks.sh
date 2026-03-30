@@ -32,6 +32,8 @@ Outputs track URIs for a given Spotify artist
 
 Artist argument can be an artist name, ID, or link to artist (get this from the app -> Share -> Copy link to artist)
 
+You can export SPOTIFY_MARKET=US or GB or similar to find releases not present in your local market
+
 Useful to chain with the following scripts:
 
     spotify_add_to_playlist.sh
