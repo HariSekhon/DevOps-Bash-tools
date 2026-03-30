@@ -28,11 +28,17 @@ Deletes duplicate Spotify URIs in a given playlist
 
 Playlist must be specified as the first argument and can be either a Spotify playlist ID or a full playlist name (see spotify_playlists.sh)
 
-To see which URIs would be deleted, you can first run spotify_duplicate_uri_in_playlist.sh <playlist_name_or_id> and optionally pipe that through spotify_uri_to_name.sh to translate to human readable names eg for a playlist called 'test':
+To see which URIs would be deleted, you can first run:
 
-spotify_duplicate_uri_in_playlist.sh MyPlaylist
+    spotify_duplicate_uri_in_playlist.sh <playlist_name_or_id>
 
-spotify_duplicate_uri_in_playlist.sh MyPlaylist | spotify_uri_to_name.sh
+and optionally pipe that through spotify_uri_to_name.sh to translate to human readable names
+
+eg. for a playlist called 'MyPlaylist':
+
+    spotify_duplicate_uri_in_playlist.sh MyPlaylist
+
+    spotify_duplicate_uri_in_playlist.sh MyPlaylist | spotify_uri_to_name.sh
 
 $usage_playlist_help
 
