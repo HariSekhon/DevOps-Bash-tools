@@ -34,6 +34,12 @@ but is usually the same song
 Playlist must be specified as the first argument and can be either a Spotify playlist ID, link or full playlist name
 (see spotify_playlists.sh)
 
+You can first see which tracks would be deleted by running spotify_duplicate_tracks_in_playlist.sh
+which this script calls to find them:
+
+    spotify_duplicate_tracks_in_playlist.sh <playlist>
+
+
 $usage_playlist_help
 
 $usage_auth_help
