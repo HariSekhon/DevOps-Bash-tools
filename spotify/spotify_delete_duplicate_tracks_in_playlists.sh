@@ -24,9 +24,15 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Deletes duplicate Spotify tracks in a given playlist (by Artist - Track name match, may be from different albums / singles and not 100% identical performances)
+Deletes duplicate Spotify tracks in a given playlist
 
-Playlist must be specified as the first argument and can be either a Spotify playlist ID or a full playlist name (see spotify_playlists.sh)
+Does this by Artist - Track name match
+
+Such tracks may be from different albums / singles and not 100% identical performances in practice,
+but is usually the same song
+
+Playlist must be specified as the first argument and can be either a Spotify playlist ID, link or full playlist name
+(see spotify_playlists.sh)
 
 $usage_playlist_help
 
