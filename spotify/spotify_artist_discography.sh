@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
-#  args: "Sia"
+#  args: 50 Cent
 #
 #  Author: Hari Sekhon
 #  Date: 2026-03-31 00:29:48 -0500 (Tue, 31 Mar 2026)
@@ -89,7 +89,7 @@ else
         "$srcdir/spotify_search_json.sh" "$artist" |
         jq -r "
             .artists.items[] |
-            select(.name | ascii_downcase == \"$artist\") |
+            select(.name | ascii_downcase == (\"$artist\" | ascii_downcase) ) |
             .id
         " |
         head -n1
