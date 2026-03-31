@@ -31,7 +31,7 @@ Returns the core discography of Albums and Singles for a given Spotify artist in
 
 Output:
 
-<release_date>    <album_ID>    <album_name>
+<release_date>    <type>    <ID>    <name>
 
 
 Artist argument can be an artist name, ID, or link to artist (get this from the app -> Share -> Copy link to artist)
@@ -75,6 +75,10 @@ fi
 if [ "${#artist}" = 22 ] &&
    [[ "$artist" =~ ^[[:alnum:]]+$ ]]; then
     artist_id="$artist"
+    artist="$("$srcdir/spotify_api.sh" "/v1/artists/$artist_id" | jq -r '.name')"
+    if is_blank "$artist"; then
+        die "ERROR: failed to resolve artist name for given artist ID: $artist_id"
+    fi
 else
     timestamp "Resolving artist '$artist' to artist ID"
     artist_id="$(
@@ -95,14 +99,17 @@ fi
 
 # $offset defined in lib/spotify.sh
 # shellcheck disable=SC2154
-url_path="/v1/artists/$artist_id/albums?limit=50&offset=$offset&include_groups=album,single${market:+$market}"  # API limit max is 50
+# API limit max is 50 - we paginate further down
+url_path="/v1/artists/$artist_id/albums?limit=50&offset=$offset&include_groups=album,single${market:+$market}"
 
-timestamp "Getting list of albums for artist:"
+timestamp "Getting discography of albums and singles for artist:"
 echo >&2
 while not_null "$url_path"; do
     output="$("$srcdir/spotify_api.sh" "$url_path")"
     #die_if_error_field "$output"
     url_path="$(get_next "$output")"
-    jq -r '.items[] | [.release_date, .id, .name] | @tsv' <<< "$output"
+    # for some reason the type field is always 'album' even for singles,
+    # but using the album_type correctly differentiates albums vs singles
+    jq -r '.items[] | [.release_date, .album_type, .id, .name] | @tsv' <<< "$output"
 done |
 sort
