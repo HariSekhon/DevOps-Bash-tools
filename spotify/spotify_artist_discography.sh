@@ -75,10 +75,12 @@ fi
 if [ "${#artist}" = 22 ] &&
    [[ "$artist" =~ ^[[:alnum:]]+$ ]]; then
     artist_id="$artist"
+    timestamp "Resolving given artist ID"
     artist="$("$srcdir/spotify_api.sh" "/v1/artists/$artist_id" | jq -r '.name')"
     if is_blank "$artist"; then
         die "ERROR: failed to resolve artist name for given artist ID: $artist_id"
     fi
+    timestamp "Artist ID '$artist_id' resolved to: $artist"
 else
     timestamp "Resolving artist '$artist' to artist ID"
     artist_id="$(
@@ -102,7 +104,7 @@ fi
 # API limit max is 50 - we paginate further down
 url_path="/v1/artists/$artist_id/albums?limit=50&offset=$offset&include_groups=album,single${market:+$market}"
 
-timestamp "Getting discography of albums and singles for artist:"
+timestamp "Getting discography of albums and singles for artist: $artist"
 echo >&2
 while not_null "$url_path"; do
     output="$("$srcdir/spotify_api.sh" "$url_path")"
