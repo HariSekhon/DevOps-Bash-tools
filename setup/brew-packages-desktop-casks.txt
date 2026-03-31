@@ -33,6 +33,7 @@ minikube
 minishift
 multipass  # instant Ubuntu VMs
 #omnidisksweeper  # GUI disk space analysis
+#only-switch
 podman
 postman
 powershell
