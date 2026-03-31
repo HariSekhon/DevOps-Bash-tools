@@ -52,11 +52,6 @@ min_args 1 "$@"
 
 artist="$*"
 
-market=""
-if ! is_blank "${SPOTIFY_MARKET:-}"; then
-    market="&market=$SPOTIFY_MARKET"
-fi
-
 # no longer passing $@ to spotify_api.sh as I never use this in practice
 #shift || :
 
@@ -66,51 +61,12 @@ fi
 
 spotify_token
 
-if [[ "$artist" =~ https://open.spotify.com/artist/ ]]; then
-    artist="${artist#https://open.spotify.com/artist/}"
-    artist="${artist%%\?*}"
-fi
-
-if [ "${#artist}" = 22 ] &&
-   [[ "$artist" =~ ^[[:alnum:]]+$ ]]; then
-    artist_id="$artist"
-else
-    timestamp "Resolving artist '$artist' to artist ID"
-    artist_id="$(
-        SPOTIFY_SEARCH_TYPE=artist \
-        SPOTIFY_SEARCH_LIMIT=50 \
-        "$srcdir/spotify_search_json.sh" "$artist" |
-        jq -r "
-            .artists.items[] |
-            select(.name | ascii_downcase == \"$artist\") |
-            .id
-        " |
-        head -n1
-    )"
-    is_blank "$artist_id" && die "ERROR: failed to get artist ID, is this name correct: $artist"
-    timestamp "Got artist ID: $artist_id"
-echo >&2
-fi
-
-# $offset defined in lib/spotify.sh
-# shellcheck disable=SC2154
-url_path="/v1/artists/$artist_id/albums?limit=50&offset=$offset&include_groups=album,single${market:+$market}"  # API limit max is 50
-
-timestamp "Getting list of albums for artist:"
-echo >&2
-albums="$(
-    while not_null "$url_path"; do
-        output="$("$srcdir/spotify_api.sh" "$url_path")"
-        #die_if_error_field "$output"
-        url_path="$(get_next "$output")"
-        jq -r '.items[] | [.id, .name] | @tsv' <<< "$output"
-    done | tee /dev/stderr
-)"
+discography="$("$srcdir/spotify_artist_discography.sh" "$artist" | tee /dev/stderr)"
 echo >&2
 
 offset=0
-while read -r album_id album_name; do
-    timestamp "Getting list of tracks for album '$album_name'"
+while read -r _release_date type album_id album_name; do
+    timestamp "Getting list of tracks for $type: $album_name"
     echo >&2
     # $offset defined in lib/spotify.sh
     # shellcheck disable=SC2154
@@ -124,4 +80,4 @@ while read -r album_id album_name; do
         jq -r '.items[].id' <<< "$output"
     done
     echo >&2
-done <<< "$albums"
+done <<< "$discography"
