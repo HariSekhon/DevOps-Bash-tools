@@ -112,6 +112,15 @@ while not_null "$url_path"; do
     url_path="$(get_next "$output")"
     # for some reason the type field is always 'album' even for singles,
     # but using the album_type correctly differentiates albums vs singles
-    jq -r '.items[] | [.release_date, .album_type, .id, .name] | @tsv' <<< "$output"
+    jq -r '
+        .items[] |
+        [
+            .release_date,
+            .album_type,
+            .id,
+            .name
+        ] |
+        @tsv
+    ' <<< "$output"
 done |
 sort
