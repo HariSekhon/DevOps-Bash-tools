@@ -1606,6 +1606,7 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 - `spotify_liked_tracks*.sh` - lists your `Liked Songs` in URI or human readable formats
 - `spotify_liked_artists*.sh` - list artists from `Liked Songs` in URI or human readable formats
 - `spotify_artists_followed*.sh` - lists all followed artists in URI or human readable formats
+- `spotify_artist_discography.sh`- lists the core discography of Albums and Singles for a given Spotify artist in chronological order
 - `spotify_artist_tracks.sh` - gets all track URIs for a given artist, from both albums and single for chain loading to playlists
 - `spotify_follow_artists.sh` - follows artists for the given URIs from files or standard input
 - `spotify_follow_top_artists.sh` - follows all artists in your current Spotify top artists list
