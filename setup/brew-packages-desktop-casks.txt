@@ -26,6 +26,7 @@ grandperspective  # like Disk Inventory X - GUI disk space analysis
 hammerspoon  # system event handler
 hiddenbar  # collapsable space to tuck away menu bar items
 #intellij-idea-ce  # in main packages now
+jordanbaird-ice  # menu bar manager
 keepassxc
 keka
 minikube
