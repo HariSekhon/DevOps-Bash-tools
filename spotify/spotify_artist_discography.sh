@@ -27,7 +27,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns the Albums for a given Spotify artist in chronological order
+Returns the core discography of Albums and Singles for a given Spotify artist in chronological order
 
 Output:
 
