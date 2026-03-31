@@ -87,6 +87,7 @@ else
         " |
         head -n1
     )"
+    is_blank "$artist_id" && die "ERROR: failed to get artist ID, is this name correct: $artist"
     timestamp "Got artist ID: $artist_id"
 echo >&2
 fi
