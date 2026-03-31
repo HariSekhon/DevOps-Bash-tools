@@ -115,7 +115,13 @@ while not_null "$url_path"; do
     jq -r '
         .items[] |
         [
-            .release_date,
+            (
+                if ( .release_date? // "" | test("^[0-9]{4}$") ) then
+                    .release_date + "-??-??"
+                else
+                    .release_date
+                end
+            ),
             .album_type,
             .id,
             .name
