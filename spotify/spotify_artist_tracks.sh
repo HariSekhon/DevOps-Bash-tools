@@ -53,7 +53,7 @@ min_args 1 "$@"
 artist="$*"
 
 market=""
-if not is_blank "${SPOTIFY_MARKET:-}"; then
+if ! is_blank "${SPOTIFY_MARKET:-}"; then
     market="&market=$SPOTIFY_MARKET"
 fi
 
