@@ -104,6 +104,7 @@ e2fsprogs
 #ec2-api-tools
 eksctl
 entr  # execute commands upon file changes
+eslint  # Javascript linter
 expect
 etcd
 exiftool  # view image metadata
