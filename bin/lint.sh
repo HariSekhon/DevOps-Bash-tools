@@ -64,6 +64,8 @@ lint_hint="$(parse_lint_hint "$filename")"
 dirname="$(dirname "$filename")"
 basename="${filename##*/}"
 
+checkdir="$srcdir/../checks"
+
 cd "$dirname"
 
 #echo "Running lint.sh on: $*"
@@ -85,13 +87,13 @@ else
              Makefile)  check_makefiles.sh "$basename"
                         ;;
            Dockerfile)  #hadolint "$basename"
-                        check_yaml.sh "$basename"
-                        check_dockerfiles.sh "$basename"
+                        "$checkdir/checks/check_yaml.sh" "$basename"
+                        "$checkdir/checks/check_dockerfiles.sh" "$basename"
                         ;;
 *docker-compose*.y*ml)  #yamllint "$basename"
                         #docker-compose -f "$basename" config
-                        check_yaml.sh "$basename"
-                        check_docker_compose.sh "$basename"
+                        "$checkdir/checks/check_yaml.sh" "$basename"
+                        "$checkdir/checks/check_docker_compose.sh" "$basename"
                         ;;
                         # TODO: add linting for CloudBuild and Kustomize
   #  cloudbuild*.y*ml)  yamllint "$basename"
@@ -100,7 +102,7 @@ else
   #                     ;;
 *.y*ml|autoinstall-user-data)
                         #yamllint "$basename"
-                        check_yaml.sh "$basename"
+                        "$checkdir/checks/check_yaml.sh" "$basename"
                         ;;
               #.envrc)  cd "$dirname" && direnv allow .
                .envrc)  shellcheck "$basename"
@@ -108,6 +110,10 @@ else
                  *.d2)  d2 fmt "$basename"
                         ;;
                  *.go)  go fmt -w "$basename"
+                        ;;
+                 *.js)  "$srcdir/../checks/check_javascript_eslint.sh" "$basename"
+                        ;;
+                 *.md)  mdl "$basename"
                         ;;
                 *.lua)  luacheck "$basename"
                         ;;
@@ -120,8 +126,6 @@ else
  *.pkr.hcl|*.pkr.json)  packer init "$basename" &&
                         packer validate "$basename" &&
                         packer fmt -diff "$basename"
-                        ;;
-                 *.md)  mdl "$basename"
                         ;;
              Fastfile) if [[ "$(readlink -f "$basename")" =~ /fastlane/Fastfile ]]; then
                             ruby -c "$basename"
