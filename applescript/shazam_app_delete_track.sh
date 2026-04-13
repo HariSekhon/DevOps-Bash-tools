@@ -44,7 +44,7 @@ dbpath="$(
     find ~/Library/Group\ Containers \
         -type f \
         -path '*/*group.com.shazam/com.shazam.mac.Shazam/ShazamDataModel.sqlite' 2>/dev/null |
-    head -n 1
+    head -n 1 || :
     )"
 
 if [ -z "$dbpath" ]; then
