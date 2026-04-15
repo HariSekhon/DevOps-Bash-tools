@@ -347,6 +347,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `diff_line_threshold.sh` - compares two files vs a line count diff threshold to determine if they are radically different. Used to avoid overwriting files which are not mere updates but completely different files
 - `mv.sh` - moves directory trees resumably and removes the source files as they're copied over. Useful to migrate data from one disk to another, optionally with checksums. Uses rsync and shows the overall % of files transferred and the MB/s data transfer rate
 - `network_gateway.sh` - get the network gateway IP address on Linux or Mac
+- `network_randomize_mac_address.sh` - assigns a new random mac address to your network interface
 - `open.sh` - opens given arg, file or URL using whatever default system opener is available for Linux or Mac
 - `organize_downloads.sh` - moves files of well-known extensions in the `$HOME/Downloads` directory older than 1 week to capitalized subdirectories of their type to keep the `$HOME/Downloads/` directory tidy
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
