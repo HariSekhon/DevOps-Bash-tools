@@ -71,6 +71,11 @@ timestamp "Assigning new random MAC address to interface: $interface"
 
 if is_mac; then
     $sudo ifconfig "$interface" ether "$new_mac_address"
+    #
+    # results on this due to restrictions on newer Macs:
+    #
+    #   ifconfig: ioctl (SIOCAIFADDR): Can't assign requested address
+    #
 elif is_linux; then
     $sudo ifconfig "$interface" hw ether "$new_mac_address"
 else
