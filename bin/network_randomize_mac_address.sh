@@ -33,6 +33,8 @@ This can be useful:
 - for network testing of gateway behaviours
 - to test switch port security against unassigned mac addresses being used on ports or mac spoofing
 
+Tested on Linux
+
 Doesn't work on newer Macs which result in this error:
 
     ifconfig: ioctl (SIOCAIFADDR): Can't assign requested address
