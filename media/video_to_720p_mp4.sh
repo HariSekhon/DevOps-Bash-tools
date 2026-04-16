@@ -64,6 +64,7 @@ format=720
 scale="-1:$format"
 if [ -n "${FORMAT_480:-}" ]; then
     format=480
+    # -2 forces the auto-calculated width to be divisible by 2 to avoid breaking libx264
     scale="-2:$format"
 fi
 
