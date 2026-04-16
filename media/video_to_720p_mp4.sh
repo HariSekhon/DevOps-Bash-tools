@@ -27,6 +27,9 @@ Converts one or more video files to 720p mp4 format using ffmpeg
 
 Useful to make good trade-off of quality vs size for social media sharing
 
+If the environment variable FORMAT_480 is set to any value, it will downscale it to 480p
+instead of 720p and adjust the naming accordingly
+
 Names the generated files the same except with the file extension replaced with '.720p.mp4'
 
 Skips files which already have a corresponding adjacent '.720.mp4' file for safety
@@ -57,19 +60,26 @@ check_bin ffmpeg
 
 SECONDS=0
 
+format=720
+scale="-1:$format"
+if [ -n "${FORMAT_480:-}" ]; then
+    format=480
+    scale="-2:$format"
+fi
+
 time \
 for filepath in "$@"; do
-    new_mp4_filepath="${filepath%.*}.720p.mp4"
+    new_mp4_filepath="${filepath%.*}.${format}p.mp4"
     if [ -s "$new_mp4_filepath" ]; then
         timestamp "File already exists, skipping: $new_mp4_filepath"
     else
         # shellcheck disable=SC2016
         trap_cmd 'echo; echo "removing partially done file:"; rm -fv -- "$new_mp4_filepath"; untrap'
         timestamp "converting $filepath => $new_mp4_filepath"
-        time nice ffmpeg -i "$filepath" -vf "scale=-1:720" -c:v libx264 -crf 23 -preset medium -c:a copy -movflags +faststart -- "$new_mp4_filepath"
+        time nice ffmpeg -i "$filepath" -vf "scale=$scale" -c:v libx264 -crf 23 -preset medium -c:a copy -movflags +faststart -- "$new_mp4_filepath"
         echo >&2
     fi
-    "$srcdir/vidopen.sh" "$mp4_filepath"
+    "$srcdir/vidopen.sh" "$new_mp4_filepath"
 done
 
 echo >&2
