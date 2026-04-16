@@ -60,6 +60,12 @@ check_bin ffmpeg
 
 SECONDS=0
 
+# just use nice in front of the script
+#nice='nice'
+#if [ -n "${FAST_CONVERT:-}" ]; then
+#    nice=''
+#fi
+
 format=720
 scale="-1:$format"
 if [ -n "${FORMAT_480:-}" ]; then
@@ -77,7 +83,7 @@ for filepath in "$@"; do
         # shellcheck disable=SC2016
         trap_cmd 'echo; echo "removing partially done file:"; rm -fv -- "$new_mp4_filepath"; untrap'
         timestamp "converting $filepath => $new_mp4_filepath"
-        time nice ffmpeg -i "$filepath" -vf "scale=$scale" -c:v libx264 -crf 23 -preset medium -c:a copy -movflags +faststart -- "$new_mp4_filepath"
+        time ffmpeg -i "$filepath" -vf "scale=$scale" -c:v libx264 -crf 23 -preset medium -c:a copy -movflags +faststart -- "$new_mp4_filepath"
         echo >&2
     fi
     "$srcdir/vidopen.sh" "$new_mp4_filepath"
