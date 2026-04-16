@@ -60,12 +60,6 @@ check_bin ffmpeg
 
 SECONDS=0
 
-# just use nice in front of the script
-#nice='nice'
-#if [ -n "${FAST_CONVERT:-}" ]; then
-#    nice=''
-#fi
-
 format=720
 scale="-1:$format"
 if [ -n "${FORMAT_480:-}" ]; then
