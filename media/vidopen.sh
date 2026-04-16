@@ -82,7 +82,7 @@ if is_mac; then
         if [ -n "${DEFAULT_VIDEO_PLAYER:-}" ]; then
             opts+=(-a "$DEFAULT_VIDEO_PLAYER")
         fi
-        open "${opts[@]}" "$@" "$video"
+        open "${opts[@]}" "$@" -- "$video"
         if [ -n "${PLAY_VIDEO:-}" ]; then
             osascript -e "tell application \"${DEFAULT_VIDEO_PLAYER:-QuickTime Player}\" to play document 1"
         fi
