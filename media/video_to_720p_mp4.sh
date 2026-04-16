@@ -63,9 +63,9 @@ for filepath in "$@"; do
         timestamp "File already exists, skipping: $mp4_filepath"
     else
         # shellcheck disable=SC2016
-        trap_cmd 'echo; echo "removing partially done file:"; rm -fv "$mp4_filepath"; untrap'
+        trap_cmd 'echo; echo "removing partially done file:"; rm -fv -- "$mp4_filepath"; untrap'
         timestamp "converting $filepath => $mp4_filepath"
-        time nice ffmpeg -i "$filepath" -vf "scale=-1:720" -c:v libx264 -crf 23 -preset medium -c:a copy -movflags +faststart "$mp4_filepath"
+        time nice ffmpeg -i "$filepath" -vf "scale=-1:720" -c:v libx264 -crf 23 -preset medium -c:a copy -movflags +faststart -- "$mp4_filepath"
         echo >&2
     fi
     "$srcdir/vidopen.sh" "$mp4_filepath"
