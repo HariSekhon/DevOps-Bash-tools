@@ -32,7 +32,7 @@ instead of 720p and adjust the naming accordingly
 
 Names the generated files the same except with the file extension replaced with '.720p.mp4'
 
-Opens the video upon completion to check it unless environment variable NO_VIDEO_OPEN is set
+Opens the video upon completion to check it unless environment variable NO_VIDEO_OPEN is set to any value
 
 Skips files which already have a corresponding adjacent '.720.mp4' file for safety
 
