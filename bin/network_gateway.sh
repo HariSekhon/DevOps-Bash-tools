@@ -36,14 +36,13 @@ help_usage "$@"
 no_more_args "$@"
 
 if type -P ip &>/dev/null; then
-    ip route show default 2>/dev/null |
-    awk '{print $3; exit}'
+    # using <() process substitution avoids SIGPIPE 141 exit code errors from awk's early exit
+    awk '{print $3; exit}' < <(ip route show default 2>/dev/null)
 # Mac's route command is different, this will only work on Linux
 #elif type -P route &>/dev/null; then
 #    route -n 2>/dev/null |
 #    awk '$1 == "0.0.0.0" {print $2; exit}'
 elif type -P netstat &>/dev/null; then
-    netstat -rn 2>/dev/null |
     awk '
         $1 == "Internet:" { inet = 1; next }
         $1 == "Internet6:" { inet = 0 }
@@ -51,7 +50,8 @@ elif type -P netstat &>/dev/null; then
             print $2
             exit
         }
-    '
+    ' < <(netstat -rn 2>/dev/null)
+    # using <() process substitution avoids SIGPIPE 141 exit code errors from awk's early exit
 else
     die "Failed to get network gateway"
 fi
