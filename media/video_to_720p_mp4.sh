@@ -90,7 +90,7 @@ for filepath in "$@"; do
                     -- "$new_mp4_filepath"
         echo >&2
     fi
-    if [ -n "${NO_VIDEO_OPEN:-}" ]; then
+    if [ -z "${NO_VIDEO_OPEN:-}" ]; then
         "$srcdir/vidopen.sh" "$new_mp4_filepath"
     fi
 done
