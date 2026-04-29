@@ -1590,6 +1590,7 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 - `spotify_rename_playlist.sh` - renames a Spotify playlist
 - `spotify_set_playlists_public.sh` / `spotify_set_playlists_private.sh` - sets one or more given Spotify playlists to public / private
 - `spotify_add_to_playlist.sh` - adds tracks to a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input. Can be combined with many other tools listed here which output Spotify URIs, or appended from other playlists. Can also be used to restore a spotify playlist from backups
+- `spotify_add_filelist_to_playlist.sh` - searches the Spotify API for each track in a given file and adds the first matching track to the given playlist
 - `spotify_delete_from_playlist.sh` - deletes tracks from a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input, optionally prefixed with a track position to remove only specific occurrences (useful for removing duplicates from playlists)
 - `spotify_delete_from_playlist_if_in_other_playlists.sh` - deletes tracks from a given playlist if their URIs are found in the subsequently given playlists
 - `spotify_delete_from_playlist_if_track_in_other_playlists.sh` - deletes tracks from a given playlist if their 'Artist - Track' name match are found in the subsequently given playlists (less accurate than exact URI deletion above)
