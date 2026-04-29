@@ -33,7 +33,7 @@ Artist 2 \\t Song 2
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="artist-tracks.txt"
+usage_args="<artist-tracks.txt>"
 
 help_usage "$@"
 
