@@ -50,7 +50,7 @@ elif is_blank "$("$srcdir/../bin/decomment.sh" "$filelist")"; then
 fi
 
 while IFS=$'\t' read -r artist track; do
-    "$srcdir/spotify_app_search.sh" "$artist $track"
+    "$srcdir/spotify_app_search.sh" "artist: $artist track: $track"
     timestamp "Press enter to search for next track"
     read -r < /dev/tty
 done < <(
