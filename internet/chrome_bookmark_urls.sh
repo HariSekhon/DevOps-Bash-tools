@@ -25,30 +25,36 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Parses the Google Chrome bookmark URLs and prints them one per line
 
-Useful to combine with another tool like chrome.sh to open all those tabs in a staggered way to not overload a website
-and result in HTTP 429 Too Many Requests errors and time banning
+Useful to combine with another tool like chrome.sh to open all those tabs in a staggered throttled way
+in order to avoid overloading a website, which often results in HTTP 429 Too Many Requests errors and time banning
 
 You can specify the Google Chrome profile other than the Default profile - these may be called 'Profile N'
-instead of the name you see in your browser. You will need to investigate your directory structure to find this under:
+instead of the name you see in your browser and they aren't necessary continugous numbers either
+(perhaps you created and deleted profiles).
+
+You will need to investigate your directory structure to find these profile names under here on Linux:
 
     \$HOME/.config/google-chrome/\$profile
 
-        or on Mac:
+Or under here on Mac:
 
     \$HOME/Library/Application Support/Google/Chrome/\$profile
 
-You can also specify a subdirectory structure to return URLs from, for example if you have a
+
+You can also specify the Bookmarks folder structure to return URLs for bookmarks only within that folder and its subfolders.
+
+For example if you have a Bookmarks folder structure like this:
 
     Cities -> Czech Republic -> Prague
 
-folder structure that you want to extract only from under there:
+You can call this script like this to give only the URLs under there:
 
     ${0##*/} 'Profile 5' 'Cities.Czechia.Prague'
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<profile> <folder.folder2.folder3>]"
+usage_args="[<profile> <folder.subfolder2.subfolder3>]"
 
 help_usage "$@"
 
