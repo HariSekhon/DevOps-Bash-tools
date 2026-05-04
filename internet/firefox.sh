@@ -57,7 +57,7 @@ help_usage "$@"
     # don't use open because it requires figuring out what is the URL (or prefixing it with http(s):// )
     # and what are the --args to pass to Firefox
     #open -a 'Firefox' -u "$url" --args "$@"
-    # just call Firefox directly by path for simpler native chrome arg handling to be uniform across platforms
+    # just call Firefox directly by path for simpler native firefox arg handling to be uniform across platforms
 if is_mac &&
     [ -x "/Applications/Firefox.app/Contents/MacOS/firefox" ]; then
     "/Applications/Firefox.app/Contents/MacOS/firefox" "$@" &
