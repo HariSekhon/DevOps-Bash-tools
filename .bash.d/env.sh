@@ -137,6 +137,8 @@ if is_mac; then
     unset BROWSER
 elif type -P brave-browser &>/dev/null; then
     BROWSER=brave-browser
+elif type -P brave &>/dev/null; then
+    BROWSER=brave
 elif type -P google-chrome &>/dev/null; then
     BROWSER=google-chrome
 elif type -P firefox &>/dev/null; then
