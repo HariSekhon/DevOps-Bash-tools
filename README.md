@@ -396,6 +396,7 @@ Mac automation scripts to automate the Mac UI and settings
 - `mac_backup_du_in_progress.sh` - find large files in the currently in-progress Time Machine backup to find out what is taking so long and racking up so many more GB of changes than you expect. This helps discover large but unnecessary files that you might want to exclude using the adjacent script `mac_backup_exclude_paths.sh`
 - `mac_backup_exclude_paths.sh` - excludes many common large caches, docker and VM paths from macOS Time Machine backups
 - `mac_backup_find_excluded_paths.sh` - does a deep search for macOS Time Machine excluded backup paths on file/folder attributes. See [HariSekhon/Knowledge-Base Mac page](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md#time-machine) for why
+- `mac_command_return_to_current_window.sh` - runs a Mac command that opens a window and then switches back to the originally foregrounded window
 - `mac_rmdir.sh` - safely delete a directory on Mac only if it is empty of actual data, by first removing macOS hidden metadata files and dirs such as `.fseventsd/`, `.Spotlight-V100/` and `.DS_Store` - straight `rmdir` fails otherwise
 - `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
 - `mac_ramdisk.sh` - creates a mac ramdisk of given MB size. Useful for performance, or even testing disk write scripts such as `disk_speed_write_*.sh` without wearing out your SSD
