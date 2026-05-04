@@ -1429,6 +1429,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
 - `chrome.sh` - opens a URL in the Google Chrome browser in a portable way between Linux and Mac for use from other scripts. You may want to combine this with the `command_return_to_current_window.sh` script when automating opening tabs
+- `chrome_bookmark_urls.sh` - parses the Google Chrome bookmark URLs and prints them one per line. Supports different profiles and querying specific Bookmarks subfolders. Useful to combine with another tool like `chrome.sh` to open all those tabs in a staggered throttled way in order to avoid overloading a website, which often results in HTTP 429 Too Many Requests errors and time banning
 - `datadog_api.sh` - queries the [DataDog](https://www.datadoghq.com/) API with authentication
 - `dnsjson.sh` - queries dnsjson.com for DNS records
 - `domains_subdomains_environments.sh` - for a given list of domains, deduplicate and print dev / staging subdomains as well as root domain for prod. Used to generate a whole bunch of Ad Tech domains and pixel tracker subdomains for a project. Combine with `markdown_columns_to_table.sh` to generate the markdown documentation for your domains and subomains per project and environment
