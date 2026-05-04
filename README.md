@@ -1404,6 +1404,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
     - `file.io.sh` - uploads a file to <https://file.io> with 2 weeks, single download retention
     - `catbox.sh` - uploads a file to <https://catbox.moe/> with permanent retention (slow)
     - `litterbox.sh` - uploads a file to <https://litterbox.catbox.moe/> with temporary retention (slow)
+- `brave..sh` - opens a URL in the Brave browser in a portable way between Linux and Mac for use from other scripts. You may want to combine this with the `command_return_to_current_window.sh` script when automating opening tabs
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
   - see also the Digital Ocean CLI `doctl` (`install/install_doctl.sh`)
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
