@@ -34,6 +34,14 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+if ! is_linux; then
+    die "ERROR: only supported on Linux"
+fi
+
+if ! type -P xdotool &>/dev/null; then
+    "$srcdir/../packages/install_packages.sh" xdotool
+fi
+
 current="$(xdotool getwindowfocus)"
 
 "$@" &
