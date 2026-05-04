@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Runs a Linux command that opens a window and then switches back to the original foreground window
+
+Uses xdotool - attempts to install it if it's not found in the \$PATH
 "
 
 # used by usage() in lib/utils.sh
