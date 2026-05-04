@@ -24,6 +24,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Runs a Mac command that opens a window and then switches back to the original foreground window
+
+You can also use the native open command:
+
+    open --background APP
+
+For more about the Mac open tool, see the Mac page in my Knowledge-Base repo:
+
+    https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md#open
 "
 
 # used by usage() in lib/utils.sh
