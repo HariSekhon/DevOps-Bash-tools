@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Opens the Google Chrome browser in a portable way between Linux and Mac for use from other scripts
+Opens a URL in the Google Chrome browser in a portable way between Linux and Mac for use from other scripts
 
 If no URL is given then it defaults to Google.com
 
