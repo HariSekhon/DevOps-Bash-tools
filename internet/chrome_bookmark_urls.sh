@@ -65,23 +65,32 @@ if is_mac; then
 fi
 
 jq -r --arg path "$folder_path" '
-    ($path | select(. != "" and . != ".") | split(".")) as $parts
+  # recursive URL extractor
+  def urls_recursive:
+    if .type == "url" then
+      .url
+    elif .type == "folder" then
+      (.children // [])[] | urls_recursive
+    else
+      empty
+    end;
 
-    | def descend($node; $names):
-        if ($names | length) == 0 then
-            $node
-        else
-            (
-                $node.children
-                | map(select(.type == "folder" and .name == $names[0]))[0]
-            ) as $next
-            | if $next == null then empty
-                else descend($next; $names[1:])
-            end
-        end;
+  # strict folder descent
+  def descend($node; $names):
+    if ($names | length) == 0 then
+      $node
+    else
+      ($node.children // [])
+      | map(select(.type == "folder" and .name == $names[0]))[0] as $next
+      | if $next == null then empty
+        else descend($next; $names[1:])
+        end
+    end;
 
-  descend(.roots.bookmark_bar; $parts)
-  | .children[]
-  | select(.type == "url")
-  | .url
+  # parse path
+  ($path | if . == "" or . == "." then [] else split(".") end) as $parts
+
+  # choose starting point, then recurse
+  | descend(.roots.bookmark_bar; $parts)
+  | urls_recursive
 ' "$bookmarks_path"
