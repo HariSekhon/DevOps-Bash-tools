@@ -25,6 +25,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Parses the Google Chrome bookmark URLs and prints them one per line
 
+Supports different profiles and querying specific Bookmarks subfolders
+
 Useful to combine with another tool like chrome.sh to open all those tabs in a staggered throttled way
 in order to avoid overloading a website, which often results in HTTP 429 Too Many Requests errors and time banning
 
