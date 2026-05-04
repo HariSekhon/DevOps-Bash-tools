@@ -351,6 +351,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `network_gateway.sh` - get the network gateway IP address on Linux or Mac
 - `network_randomize_mac_address.sh` - assigns a new random mac address to your network interface
 - `open.sh` - opens given arg, file or URL using whatever default system opener is available for Linux or Mac
+- `chrome.sh` - opens a site in the Google Chrome browser in a portable way between Linux and Mac for use from other scripts
 - `organize_downloads.sh` - moves files of well-known extensions in the `$HOME/Downloads` directory older than 1 week to capitalized subdirectories of their type to keep the `$HOME/Downloads/` directory tidy
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
@@ -1426,6 +1427,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
   - `cloudflare_ssl_verified.sh` - gets the Cloudflare zone SSL verification status for a given zone
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
+- `chrome.sh` - opens a site in the Google Chrome browser in a portable way between Linux and Mac for use from other scripts
 - `datadog_api.sh` - queries the [DataDog](https://www.datadoghq.com/) API with authentication
 - `dnsjson.sh` - queries dnsjson.com for DNS records
 - `domains_subdomains_environments.sh` - for a given list of domains, deduplicate and print dev / staging subdomains as well as root domain for prod. Used to generate a whole bunch of Ad Tech domains and pixel tracker subdomains for a project. Combine with `markdown_columns_to_table.sh` to generate the markdown documentation for your domains and subomains per project and environment
