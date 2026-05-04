@@ -103,6 +103,9 @@ jq -r --arg path "$folder_path" '
     ($path | if . == "" or . == "." then [] else split(".") end) as $parts
 
     # choose starting point, then recurse
-    | descend(.roots.bookmark_bar; $parts)
+    | .roots
+    | to_entries[]
+    | .value
+    | descend(.; $parts)
     | urls_recursive
 ' "$bookmarks_path"
