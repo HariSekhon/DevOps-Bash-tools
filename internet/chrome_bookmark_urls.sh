@@ -73,39 +73,40 @@ if is_mac; then
 fi
 
 jq -r --arg path "$folder_path" '
-    def urls_recursive:
-        if .type == "url" then
+    def urls:
+        if type == "object" and .type == "url" then
             .url
-        elif .type == "folder" then
-            (.children // [])[] | urls_recursive
+        elif type == "object" and .type == "folder" then
+            (.children // [])[] | urls
         else
             empty
         end;
 
-    def descend($node; $names):
-        if ($names | length) == 0 then
-            $node
-        else
-            ($node.children // [])
-            | map(
-                    select(
-                        .type == "folder"
-                            and
-                        (.name | ascii_downcase) == ($names[0] | ascii_downcase)
-                    )
-                )[0] as $next
-            | if $next == null then empty
-                else descend($next; $names[1:])
-                end
-        end;
+    def match($name):
+        select(
+            .type == "folder"
+            and (.name | ascii_downcase) == ($name | ascii_downcase)
+        );
 
-    # parse path
     ($path | if . == "" or . == "." then [] else split(".") end) as $parts
 
-    # choose starting point, then recurse
     | .roots
     | to_entries[]
     | .value
-    | descend(.; $parts)
-    | urls_recursive
+    | (if ($parts | length) == 0 then
+        urls
+     else
+        . as $node
+        | $parts
+        | reduce .[] as $p (
+            [$node];
+            map(
+                .children // []
+                | .[]
+                | match($p)
+            )
+        )
+        | .[]
+        | urls
+     end)
 ' "$bookmarks_path"
