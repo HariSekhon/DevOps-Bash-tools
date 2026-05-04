@@ -87,7 +87,13 @@ jq -r --arg path "$folder_path" '
             $node
         else
             ($node.children // [])
-            | map(select(.type == "folder" and .name == $names[0]))[0] as $next
+            | map(
+                    select(
+                        .type == "folder"
+                            and
+                        (.name | ascii_downcase) == ($names[0] | ascii_downcase)
+                    )
+                )[0] as $next
             | if $next == null then empty
                 else descend($next; $names[1:])
                 end
