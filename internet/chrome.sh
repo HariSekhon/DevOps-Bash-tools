@@ -3,7 +3,7 @@
 #
 #  Author: Hari Sekhon
 #  Date: 2019-08-11 15:59:59 +0100
-#  Migrated out of .bash.d/functions.sh
+#  Migrated out of .bash.d/network.sh
 #
 #  https///github.com/HariSekhon/DevOps-Bash-tools
 #
