@@ -344,6 +344,8 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `ldapsearch.sh` - shortens `ldapsearch` command by inferring switches from environment variables
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `linux_distro_versions.sh` - quickly returns the list of major versions for a given Linux distro
+- `linux_command_return_to_current_window.sh` - runs a Linux command that opens a window and then switches back to the original foreground window
+- `mac_command_return_to_current_window.sh` - runs a Mac command that opens a window and then switches back to the original foreground window
 - `diff_line_threshold.sh` - compares two files vs a line count diff threshold to determine if they are radically different. Used to avoid overwriting files which are not mere updates but completely different files
 - `mv.sh` - moves directory trees resumably and removes the source files as they're copied over. Useful to migrate data from one disk to another, optionally with checksums. Uses rsync and shows the overall % of files transferred and the MB/s data transfer rate
 - `network_gateway.sh` - get the network gateway IP address on Linux or Mac
