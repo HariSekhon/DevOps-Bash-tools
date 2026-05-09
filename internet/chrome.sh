@@ -63,12 +63,12 @@ chrome(){
         # just call Chrome directly by path for simpler native chrome arg handling to be uniform across platforms
     if is_mac &&
         [ -x "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]; then
-        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" "$@" &
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" "$@"
     else
         if ! type -P google-chrome &>/dev/null; then
             die "ERROR: google-chrome not found in \$PATH"
         fi
-        google-chrome "$@" &
+        google-chrome "$@"
     fi
 }
 
@@ -76,6 +76,7 @@ chrome_stdin(){
     warn "Reading URLs from stdin"
     lines=0
     while read -r line; do
+        is_blank "$line" && continue
         timestamp "Opening Chrome with args + stdin URL: $* $line"
         chrome "$@" "$line"
         lines="$((lines + 1))"
