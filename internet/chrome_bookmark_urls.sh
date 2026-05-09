@@ -47,7 +47,7 @@ You can also specify the Bookmarks folder structure to return URLs for bookmarks
 
 For example if you have a Bookmarks folder structure like this:
 
-    Cities -> Czech Republic -> Prague
+    Cities -> Czechia -> Prague
 
 You can call this script like this to give only the URLs under there:
 
