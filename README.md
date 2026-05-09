@@ -1405,6 +1405,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
     - `catbox.sh` - uploads a file to <https://catbox.moe/> with permanent retention (slow)
     - `litterbox.sh` - uploads a file to <https://litterbox.catbox.moe/> with temporary retention (slow)
 - `brave.sh` - opens URL(s) in the Brave browser in a portable way between Linux and Mac for use from other scripts from args or stdin. You may want to combine this with the `command_return_to_current_window.sh` script when automating opening tabs
+- `brave_bookmark_urls.sh` - parses the Brave browser bookmark URLs and prints them one per line. Supports different profiles and querying specific Bookmarks subfolders. Useful to combine with another tool like `brave.sh` to open all those tabs in a staggered throttled way in order to avoid overloading a website, which often results in HTTP 429 Too Many Requests errors and time banning
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
   - see also the Digital Ocean CLI `doctl` (`install/install_doctl.sh`)
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
