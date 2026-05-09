@@ -30,7 +30,9 @@ default_url="https://google.com"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Opens a URL in the Firefox browser in a portable way between Linux and Mac for use from other scripts
+Opens URL(s) in the Firefox browser in a portable way between Linux and Mac for use from other scripts
+
+URLs must be prefixed by http:// or https:// otherwise they are ignore and firefox just opens a blank tab
 
 If no URL is given defaults to $default_url
 
@@ -63,12 +65,12 @@ firefox(){
         # just call Firefox directly by path for simpler native firefox arg handling to be uniform across platforms
     if is_mac &&
         [ -x "/Applications/Firefox.app/Contents/MacOS/firefox" ]; then
-        "/Applications/Firefox.app/Contents/MacOS/firefox" "$@"
+        "/Applications/Firefox.app/Contents/MacOS/firefox" "$@" &
     else
         if ! type -P firefox &>/dev/null; then
             die "ERROR: firefox not found in \$PATH"
         fi
-        command firefox "$@"
+        command firefox "$@" &
     fi
 }
 
