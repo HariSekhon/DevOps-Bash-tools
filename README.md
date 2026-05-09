@@ -1404,7 +1404,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
     - `file.io.sh` - uploads a file to <https://file.io> with 2 weeks, single download retention
     - `catbox.sh` - uploads a file to <https://catbox.moe/> with permanent retention (slow)
     - `litterbox.sh` - uploads a file to <https://litterbox.catbox.moe/> with temporary retention (slow)
-- `brave..sh` - opens a URL in the Brave browser in a portable way between Linux and Mac for use from other scripts. You may want to combine this with the `command_return_to_current_window.sh` script when automating opening tabs
+- `brave.sh` - opens URL(s) in the Brave browser in a portable way between Linux and Mac for use from other scripts from args or stdin. You may want to combine this with the `command_return_to_current_window.sh` script when automating opening tabs
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
   - see also the Digital Ocean CLI `doctl` (`install/install_doctl.sh`)
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
@@ -1428,13 +1428,13 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
   - `cloudflare_ssl_verified.sh` - gets the Cloudflare zone SSL verification status for a given zone
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
-- `chrome.sh` - opens a URL in the Google Chrome browser in a portable way between Linux and Mac for use from other scripts. You may want to combine this with the `command_return_to_current_window.sh` script when automating opening tabs
+- `chrome.sh` - opens URL(s) in the Google Chrome browser in a portable way between Linux and Mac for use from other scripts from args or stdin. You may want to combine this with the `command_return_to_current_window.sh` script when automating opening tabs
 - `chrome_bookmark_urls.sh` - parses the Google Chrome bookmark URLs and prints them one per line. Supports different profiles and querying specific Bookmarks subfolders. Useful to combine with another tool like `chrome.sh` to open all those tabs in a staggered throttled way in order to avoid overloading a website, which often results in HTTP 429 Too Many Requests errors and time banning
 - `datadog_api.sh` - queries the [DataDog](https://www.datadoghq.com/) API with authentication
 - `dnsjson.sh` - queries dnsjson.com for DNS records
 - `domains_subdomains_environments.sh` - for a given list of domains, deduplicate and print dev / staging subdomains as well as root domain for prod. Used to generate a whole bunch of Ad Tech domains and pixel tracker subdomains for a project. Combine with `markdown_columns_to_table.sh` to generate the markdown documentation for your domains and subomains per project and environment
 - `gitguardian_api.sh` - queries the [GitGuardian](https://www.gitguardian.com/) API with authentication
-- `firefox.sh` - opens a URL in the Firefox browser in a portable way between Linux and Mac for use from other scripts. You may want to combine this with the `command_return_to_current_window.sh` script when automating opening tabs
+- `firefox.sh` - opens URL(s) in the Firefox browser in a portable way between Linux and Mac for use from other scripts from args or stdin. You may want to combine this with the `command_return_to_current_window.sh` script when automating opening tabs
 - `google_maps_link.sh` - queries for a search string, returns the first hit and then generates a stable fixed place ID url to the result. Useful for sharing in documentation links to places like [HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base) Travel pages
 - `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
 - `kong_api.sh` - queries the [Kong API Gateway](https://docs.konghq.com/gateway/latest/)'s Admin API, handling authentication if enabled
