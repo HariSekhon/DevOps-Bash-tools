@@ -30,7 +30,7 @@ default_url="https://google.com"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Opens a URL in the Brave browser in a portable way between Linux and Mac for use from other scripts
+Opens URL(s) in the Brave browser in a portable way between Linux and Mac for use from other scripts
 
 If no URL is given defaults to $default_url
 
