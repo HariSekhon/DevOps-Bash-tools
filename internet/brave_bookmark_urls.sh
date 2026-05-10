@@ -56,15 +56,23 @@ You can call this script like this to give only the URLs under there:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<profile> <folder.subfolder2.subfolder3>]"
+usage_args="[<profile>] [<folder.subfolder2.subfolder3>]"
 
 help_usage "$@"
 
 #min_args 1 "$@"
 
-profile="${1:-Default}"
+profile="Default"
+folder_path="."
 
-folder_path="${2:-.}"
+if [ $# -eq 1 ]; then
+    folder_path="$1"
+elif [ $# -eq 2 ]; then
+    profile="$1"
+    folder_path="$2"
+else
+    usage
+fi
 
 bookmarks_path="$HOME/.config/BraveSoftware/Brave-Browser/$profile/Bookmarks"
 
