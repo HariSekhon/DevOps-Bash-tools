@@ -39,6 +39,7 @@ Tests:
 - Public IP is reachable (ping to known major public IP 1.1.1.1)
 - DNS resolution is working (resolves google.com)
 - Public Domain is reachable (ping to google.com)
+- Google.com and GitHub.com websites are available over HTTPS
 "
 
 # used by usage() in lib/utils.sh
@@ -109,6 +110,16 @@ check_domain_ping() {
     fi
 }
 
+check_https(){
+    local website="$1"
+    if curl -sS --fail "https://$website" &>/dev/null; then
+        timestamp "OK: $website HTTPS reachable"
+    else
+        timestamp "FAIL: $website HTTPS unreachable"
+        return 1
+    fi
+}
+
 timestamp "Detecting Default Gateway IP..."
 while :; do
     gateway_ip=$(get_gateway)
@@ -142,6 +153,13 @@ done
 timestamp "Checking Domain IP reachable: $domain"
 while ! check_domain_ping; do
     sleep "$sleep_seconds"
+done
+
+for website in google.com github.com; do
+    timestamp "Checking HTTPS reachable: $website"
+    while ! check_https "$website"; do
+        sleep "$sleep_seconds"
+    done
 done
 
 timestamp "Internet Connection OK within $SECONDS secs"
