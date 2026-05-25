@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Shows the Git push stats to the remote origin for the current branch - number of commits and lines of diff
 
+Used by git_review_push.sh
+
 Utilizes adjacent scripts:
 
     git_origin_commit_count_to_push.sh
@@ -33,6 +35,8 @@ Utilizes adjacent scripts:
     git_origin_diff_to_push.sh
 
     git_origin_files_to_push.sh
+
+    git_origin_dates_to_push.sh
 "
 
 # used by usage() in lib/utils.sh
@@ -63,12 +67,20 @@ files_other="$(grep -c -v '^[AMDR]' <<< "$files" || :)"
 
 files_total="$(grep -c '.' <<< "$files" || :)"
 
+dates="$("$srcdir/git_origin_dates_to_push.sh")"
+
+start_date="$(awk '/^Start:/{print $2}' <<< "$dates" | sed 's/T.*//')"
+end_date="$(awk '/^Start:/{print $2}' <<< "$dates" | sed 's/T.*//')"
+
 cat <<EOF
 Stats for Push to Origin:
 
     $(git remote -v | awk '/^origin[[:space:]]/{print $2; exit}')
 
 Number of Commits: $num_commits
+
+Start Date: $start_date
+End   Date: $end_date
 
 Number of Lines Changed: $num_lines_changed
 
