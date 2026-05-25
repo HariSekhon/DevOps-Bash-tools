@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -29,6 +30,8 @@ You can give git log options like --oneline
 Example:
 
     ${0##*/} --oneline | wc -l
+
+Used by git_push_stats.sh
 "
 
 # used by usage() in lib/utils.sh
