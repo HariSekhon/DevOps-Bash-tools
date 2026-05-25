@@ -79,9 +79,6 @@ Stats for Push to Origin:
 
 Number of Commits: $num_commits
 
-Start Date: $start_date
-End   Date: $end_date
-
 Number of Lines Changed: $num_lines_changed
 
 Number of Lines Diff: $num_lines_diff
@@ -92,6 +89,9 @@ Files Deleted:  $files_deleted
 Files Renamed:  $files_renamed
 Files Other:    $files_other
 Files Total:    $files_total
+
+Start Date: $start_date
+End   Date: $end_date
 
 EOF
 
