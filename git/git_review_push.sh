@@ -9,7 +9,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -34,6 +35,8 @@ Migrated from .gitconfig alias and vimrc hotkey
 
 Ported to external script be callable from IntelliJ as an External Tool because it's less keystrokes
 and no mouse movement compared to IntelliJ's own hot key git commit tooling
+
+Uses adjacent script git_push_stats.sh
 "
 
 # used by usage() in lib/utils.sh
