@@ -70,7 +70,7 @@ files_total="$(grep -c '.' <<< "$files" || :)"
 dates="$("$srcdir/git_origin_dates_to_push.sh")"
 
 start_date="$(awk '/^Start:/{print $2}' <<< "$dates" | sed 's/T.*//')"
-end_date="$(awk '/^Start:/{print $2}' <<< "$dates" | sed 's/T.*//')"
+end_date="$(awk '/^End:/{print $2}' <<< "$dates" | sed 's/T.*//')"
 
 cat <<EOF
 Stats for Push to Origin:
