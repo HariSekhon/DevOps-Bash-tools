@@ -136,6 +136,18 @@ Fast, Advanced Systems Engineering, Automation, APIs, shorter CLIs, etc.
 
 Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon) ([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 600+ [CI builds](https://harisekhon.github.io/CI-CD/).
 
+## Quick Start Examples
+
+If you are new to DevOps or just exploring the repo, these commands are a good starting point:
+
+```shell
+make help
+make system-packages
+make test
+```
+
+You can also use `make github`, `make status`, or `make ls-scripts` to quickly discover what is available.
+
 ## Summary
 
 - Scripts for many popular DevOps technologies, see [Index](#index) below for more details
