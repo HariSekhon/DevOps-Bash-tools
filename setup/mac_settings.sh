@@ -42,6 +42,10 @@ echo "backing up mac settings to $backup before applying new settings"
 defaults read > "$backup"
 
 # ============================================================================ #
+# Use High Power Mode when on power adapter
+sudo pmset -a powermode 2
+
+# ============================================================================ #
 # Set Dark Theme without requiring restart
 
 # will prompt to allow Terminal to control System Events which is useful to enable anyway for Apple Scripting eg. ../applescript/*.scpt
