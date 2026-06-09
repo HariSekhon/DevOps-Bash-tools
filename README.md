@@ -1151,6 +1151,7 @@ Maintain your Git `README.md` and similar Markdown documentation well.
     `<https://github.com/HariSekhon/Knowledge-Base>` to shorthand links with an OctoCat emoji and without the redundant `https://github.com/` prefix such as
     [:octocat: HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base)
   - `markdown_replace_links_with_jsdelivr.sh` - replaces local GitHub repo file links in the given markdown file(s) with JSDelivr CDN links
+  - `markdown_youtube_thumbnail_link.sh` - creates a markdown thumbnail link for the given youtube video URL and copies it to the clipboard for quick pasting into your markdown
 
 ### CI/CD - Continuous Integration / Continuous Deployment
 
