@@ -34,7 +34,7 @@ Names the generated files the same except with the file extension replaced with 
 
 Opens the video upon completion to check it unless environment variable NO_VIDEO_OPEN is set to any value
 
-Skips files which already have a corresponding adjacent '.720.mp4' file for safety
+Skips files which already have a corresponding adjacent '.720p.mp4' file for safety
 
 Will fail if given a video that is already below that resolution
 
@@ -46,6 +46,15 @@ Installs ffmpeg using OS package manager if not already installed
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="<video_files>"
+
+
+scriptname="${0##*/}"
+
+if [[ "$scriptname" =~ 480p ]]; then
+    export FORMAT_480=1
+    usage_description="$(sed '/environment variable FORMAT_480\|instead of 720p/d' <<< "$usage_description")"
+    usage_description="${usage_description//720p/480p}"
+fi
 
 help_usage "$@"
 
