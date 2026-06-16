@@ -1572,6 +1572,7 @@ Each of these three scripts creates an animated Git from running terminal comman
   - `x_download_video.sh` - same as above for X / Twitter
 - `youtube_download_channel.sh` - downloads all videos from a given YouTube channel using yt-dlp
 - `video_to_720p_mp4` - converts one or more video files to 720p mp4 format using ffmpeg. Useful to make good trade-off of quality vs size for social media sharing
+- `video_to_480p_mp4` - symlink to above script converts to 480p mp4 format
 - `vidopen.sh` - opens the given video file using whatever available tool is found on Linux or Mac
 
 See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Knowledge-Base/blob/main/multimedia.md).
