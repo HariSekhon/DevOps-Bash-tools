@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Finds all unique file paths in Git history
 
-Useful for prepraring to 'git filter-branch' eg. for repo splicing
+Useful for preparing to 'git filter-branch' eg. for repo splicing
 
 Must be run from within a git repository, assumes the 'git' command is installed and in the \$PATH
 
@@ -40,5 +40,9 @@ help_usage "$@"
 # technically --all isn't that relevant to git filter-branch as it'll list things on other branches, but in terms of listing all files in history, it's more correct to include it as it won't break filter-branch derived usage
 # -e '^[[:alpha:]]+:' filters out Author: , Date: , Merge: etc.
 git log --all --name-only --no-color |
-grep -Ev -e '^commit' -e '^[[:alpha:]]+:' -e '^Date:' -e '^[[:space:]]' -e '^[[:space:]]*$' |
+grep -Ev -e '^commit' \
+         -e '^[[:alpha:]]+:' \
+         -e '^Date:' \
+         -e '^[[:space:]]' \
+         -e '^[[:space:]]*$' |
 sort -u
