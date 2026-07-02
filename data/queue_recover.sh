@@ -68,6 +68,7 @@ mkdir -p "$pending_dir" "$processing_dir"
 stale_items="$(find "$processing_dir" -maxdepth 1 -type f -ctime "+${stale_minutes_threshold}m")"
 
 if is_blank "$stale_items"; then
+    timestamp "No stale queue items found"
     exit 0
 fi
 
