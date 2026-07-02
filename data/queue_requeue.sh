@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Moves an item from processing back to pending for a given queue item
+Requeues the given item for reprocessing by moving it from processing/ back to pending/ dir
 
 Expects a full file path to a queue_basedir/processing/<item> as emitted by the adjacent scripts:
 
