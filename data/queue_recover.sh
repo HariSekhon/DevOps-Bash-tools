@@ -52,7 +52,7 @@ else
     if [ $# -eq 1 ]; then
         stale_minutes_threshold="$1"
     else
-        warng "Using default stale minutes threshold: $stale_minutes_threshold"
+        warn "Using default stale minutes threshold: $stale_minutes_threshold"
     fi
 fi
 
