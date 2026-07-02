@@ -48,8 +48,9 @@ if ! [[ "$queue_item" =~ /processing/ ]]; then
     die "Invalid queue item path given, must be a path to a queue_basedir/processing/item"
 fi
 
-pending_dir="${queue_item%%/processing/*}"
+pending_dir="${queue_item%%/processing/*}/pending"
 
 mkdir -pv "$pending_dir"
 
-mv -v "$queue_item" "$pending_dir/"
+timestamp "Requeuing item: $queue_item"
+mv "$queue_item" "$pending_dir/"
