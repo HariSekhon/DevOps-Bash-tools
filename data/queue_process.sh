@@ -25,8 +25,9 @@ queue_basedir="$HOME/.queue"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Atomically takes the next queued item, moves it from the 'pending/' to 'processing/' dir and returns the file
-path reference for a script to read the queue item's data to begin processing
+Returns the next queued item path after atomically moving it to 'processing/' dir
+
+Th calling script can then read the queue item's data to begin processing
 
 The calling script is responsible for removing the returned item path if processing completed successfully,
 or else calling queue_requeue.sh against it to move it back to the pending/ queue dir
