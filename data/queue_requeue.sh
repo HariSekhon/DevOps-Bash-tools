@@ -40,7 +40,7 @@ usage_args="<queue_item>"
 
 help_usage "$@"
 
-numx_args 1 "$@"
+num_args 1 "$@"
 
 queue_item="$1"
 
