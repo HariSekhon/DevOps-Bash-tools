@@ -41,6 +41,9 @@ help_usage "$@"
 max_args 1 "$@"
 
 if [ $# -eq 1 ]; then
+    "$srcdir/../data/queue_add.sh" "$queue_basedir" "$1"
+else
+    warn "reading URLs from stdin"
     while read -r line; do
         if is_blank "$line"; then
             continue
