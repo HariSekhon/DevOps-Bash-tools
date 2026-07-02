@@ -76,5 +76,5 @@ while read -r line; do
     if is_blank "$line"; then
         continue
     fi
-    mv -v "$line" "$pending_dir/"
+    "$srcdir/queue_requeue.sh" "$line"
 done <<< "$stale_items"
