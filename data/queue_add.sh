@@ -40,7 +40,6 @@ usage_args="[<queue_basedir> <data>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
 max_args 2 "$@"
 
 if [ $# -eq 2 ]; then
