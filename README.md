@@ -906,7 +906,7 @@ See also [Knowledge Base notes for Docker](https://github.com/HariSekhon/Knowled
 - `ini_config_duplicate_sections.sh` - lists duplicate INI config sections that are using the same value for a given key in the given .ini file
 - `ini_config_duplicate_section_names.sh` - lists duplicate INI config section names that are using the same value for a given key in the given .ini file
 - `ini_grep_section.sh` - prints the named section from a given .ini file to stdout
-- `queue_*.sh` - simple fast atomic durable local files based queuing:
+- `queue_*.sh` - simple fast atomic durable local files based queuing using safe independent filesystem semantics:
   - `queue_add.sh` - creates an atomic queue file at the given location with the given data
   - `queue_process.sh` - atomically returns the next queued item
   - `queue_requeue.sh` - requeues the given item for reprocessing
