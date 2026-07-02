@@ -26,8 +26,8 @@ stale_minutes_threshold="120"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Searches for queue processing items that have not been updated in N minutes and moves them back to pending queue
-for reprocessing (for cases where a script reader has died and another script will re-run on it)
+Scans for stale queue processing items more than N minutes old and requeues them for reprocessing
+using adjacent script queue_requeue.sh (for cases where a script reader has died and another script will re-run on it)
 
 If no queue basedir is provided, defaults to:
 
