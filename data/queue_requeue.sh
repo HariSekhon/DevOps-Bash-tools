@@ -48,6 +48,10 @@ if ! [[ "$queue_item" =~ /processing/ ]]; then
     die "Invalid queue item path given, must be a path to a queue_basedir/processing/item"
 fi
 
+if ! [ -f "$queue_item" ]; then
+    die "Queue item not found; $queue_item"
+fi
+
 pending_dir="${queue_item%%/processing/*}/pending"
 
 mkdir -pv "$pending_dir"
