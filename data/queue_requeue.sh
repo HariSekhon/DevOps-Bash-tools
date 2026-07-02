@@ -49,7 +49,7 @@ if ! [[ "$queue_item" =~ /processing/ ]]; then
 fi
 
 if ! [ -f "$queue_item" ]; then
-    die "Error: queue item not found; $queue_item"
+    die "Error: queue item not found: $queue_item"
 fi
 
 pending_dir="${queue_item%%/processing/*}/pending"
