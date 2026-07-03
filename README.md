@@ -909,7 +909,7 @@ See also [Knowledge Base notes for Docker](https://github.com/HariSekhon/Knowled
 - `queue_*.sh` - simple fast atomic durable local files based queuing using safe independent filesystem semantics:
   - `queue_add.sh` - creates an atomic queue file at the given location with the given data
   - `queue_process.sh` - returns the next queued item after atomically moving it to processing state
-  - `queue_requeue.sh` - requeues the given item for reprocessing
+  - `queue_requeue.sh` - requeues the given item for reprocessing at the back of the queue so calling scripts don't get blocked retrying faulty queue items
   - `queue_recover.sh` - scans for stale queue processing items more than N minutes old and requeues them for reprocessing (for cases where a queue reader script has died without completion)
 - `wordcount.sh` - counts and ranks words by their frequency in file(s) or stdin
 - Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/HariSekhon/DevOps-Python-tools):
