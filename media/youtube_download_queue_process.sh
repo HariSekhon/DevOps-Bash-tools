@@ -43,7 +43,7 @@ while true; do
     fi
     url="$(cat "$queue_item")"
     if "$srcdir/youtube_download_video.sh" "$url"; then
-    timestamp "Completed - removing queued item: $queue_item"
+        timestamp "Completed - removing queued item: $queue_item"
         rm -f "$queue_item"
     else
         "$srcdir/../data/queue_requeue.sh" "$queue_item"
