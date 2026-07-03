@@ -46,6 +46,6 @@ while true; do
     timestamp "Completed - removing queued item: $queue_item"
         rm -f "$queue_item"
     else
-        "$srcdir/queue_requeue.sh" "$queue_item"
+        "$srcdir/../data/queue_requeue.sh" "$queue_item"
     fi
 done
