@@ -231,7 +231,7 @@ findup(){
 
 cdup(){
     local arg="$1"
-    cd "$(findup "$arg")"
+    cd "$(findup "$arg")" || return 1
 }
 
 lld(){
