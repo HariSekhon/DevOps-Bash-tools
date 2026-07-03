@@ -36,7 +36,7 @@ Otherwise a future queue_recover.sh process will detect the tiem as stale and mo
 which will result in duplicate processing if the calling script forgets to 'ack' it as completed by removing it
 from the processing/ queue dir
 
-if processing will take longer than the queue_recover.sh time then the client script is also responsible for 'touch'ing
+If processing will take longer than the queue_recover.sh time then the client script is also responsible for 'touch'ing
 the processing item file at a frequency more frequent than the queue_recover.sh stale threshold
 
 If no queue basedir is provided, defaults to:
