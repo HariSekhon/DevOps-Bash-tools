@@ -124,7 +124,7 @@ dle(){
     if [[ "$PWD" =~ $HOME(/Downloads(/Transmission)?)?$ ]]; then
         echo "Switching to $HOME/Downloads/YouTube"
         mkdir -p -v ~/Downloads/YouTube
-        cd ~/Downloads/YouTube || return 1
+        pushd ~/Downloads/YouTube || return 1
         if [ -f .envrc ]; then
             eval "$(direnv export bash)"
         fi
@@ -149,7 +149,7 @@ dlp(){
     if [[ "$PWD" =~ $HOME(/Downloads(/Transmission)?)?$ ]]; then
         echo "Switching to $HOME/Downloads/YouTube"
         mkdir -p -v ~/Downloads/YouTube
-        cd ~/Downloads/YouTube || return 1
+        pushd ~/Downloads/YouTube || return 1
         if [ -f .envrc ]; then
             eval "$(direnv export bash)"
         fi
