@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Requeues the given item for reprocessing by moving it from processing/ back to pending/ dir
+and moves it to the back of the queue so if it's a faulty item it doesn't makes a calling
+script's processing loop get stuck
 
 Expects a full file path to a queue_basedir/processing/<item> as emitted by the adjacent scripts:
 
@@ -56,5 +58,7 @@ pending_dir="${queue_item%%/processing/*}/pending"
 
 mkdir -pv "$pending_dir"
 
-timestamp "Requeuing item: $queue_item"
-mv "$queue_item" "$pending_dir/"
+requeued_item="$pending_dir/$(date '+%F_%H%M%S')-$$-$RANDOM"
+
+ timestamp "Requeuing item $queue_item to $requeued_item"
+mv "$queue_item" "$requeued_item"
