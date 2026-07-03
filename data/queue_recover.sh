@@ -48,11 +48,11 @@ if [ $# -eq 2 ]; then
     queue_basedir="$1"
     stale_minutes_threshold="$2"
 else
-    warn "Using default queue basedir: $queue_basedir"
+    warn "Using default stale minutes threshold: $stale_minutes_threshold"
     if [ $# -eq 1 ]; then
-        stale_minutes_threshold="$1"
+        queue_basedir="$1"
     else
-        warn "Using default stale minutes threshold: $stale_minutes_threshold"
+        warn "Using default queue basedir: $queue_basedir"
     fi
 fi
 
