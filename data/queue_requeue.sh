@@ -27,11 +27,7 @@ Requeues the given item for reprocessing by moving it from processing/ back to p
 and moves it to the back of the queue so if it's a faulty item it doesn't block a calling
 script's processing loop
 
-Expects a full file path to a queue_basedir/processing/<item> as emitted by the adjacent scripts:
-
-    queue_add.sh
-        or
-    queue_recover.sh
+Expects a full file path to a queue_basedir/processing/<item> as emitted by the adjacent script queue_add.sh
 
 Infers the queue_basedir from the full queue item path
 "
