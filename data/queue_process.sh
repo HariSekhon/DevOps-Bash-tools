@@ -32,7 +32,7 @@ Th calling script can then read the queue item's data to begin processing
 The calling script is responsible for removing the returned item path if processing completed successfully,
 or else calling queue_requeue.sh against it to move it back to the pending/ queue dir
 
-Otherwise a future queue_recover.sh process will detect the tiem as stale and move it back to the pending/ queue dir,
+Otherwise a future queue_recover.sh process will detect the time as stale and move it back to the pending/ queue dir,
 which will result in duplicate processing if the calling script forgets to 'ack' it as completed by removing it
 from the processing/ queue dir
 
