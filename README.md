@@ -130,7 +130,7 @@ awkward URLs more nicely replaced with shields.io
 
 [git.io/bash-tools](https://git.io/bash-tools)
 
-1000+ DevOps Shell Scripts and Advanced Bash environment.
+1200+ DevOps Shell Scripts and Advanced Bash environment.
 
 Fast, Advanced Systems Engineering, Automation, APIs, shorter CLIs, etc.
 
