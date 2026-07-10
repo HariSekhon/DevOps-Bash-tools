@@ -120,6 +120,31 @@ is_file_tracked_in_git(){
     git ls-files --error-unmatch -- "$filename" &>/dev/null
 }
 
+is_git_hashref(){
+    local hashref="$1"
+    if is_git_hashref_long "$hashref" ||
+       is_git_hashref_short "$hashref"; then
+        return 0
+    fi
+    return 1
+}
+
+is_git_hashref_long(){
+    local hashref="$1"
+    if [[ "$hashref" =~ ^[0-9a-fA-F]{40}$ ]]; then
+        return 0
+    fi
+    return 1
+}
+
+is_git_hashref_short(){
+    local hashref="$1"
+    if [[ "$hashref" =~ ^[0-9a-fA-F]{7}$ ]]; then
+        return 0
+    fi
+    return 1
+}
+
 git_commit_short_sha(){
     git rev-parse --short HEAD
 }
