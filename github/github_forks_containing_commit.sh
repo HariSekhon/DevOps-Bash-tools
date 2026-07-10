@@ -63,6 +63,9 @@ while read -r fork; do
     log "Fetching branches for fork: $fork"
     # ignore 404 error with error exit code - fork returns no branches, repo might have been deleted
     branches="$(gh api "repos/$fork/branches" --paginate --jq '.[].name' || :)"
+    if [[ "$branches" =~ Not.Found|"status":"404" ]]; then
+        continue
+    fi
     for branch in $branches; do
         log "Checking if commit hash is an ancestor of '$fork' branch '$branch'"
         # ignore 404 errors which means the commit is not found in the repo
