@@ -65,7 +65,7 @@ while read -r fork; do
     branches="$(gh api "repos/$fork/branches" --paginate --jq '.[].name' || :)"
     for branch in $branches; do
         log "Checking if commit hash is an ancestor of '$fork' branch '$branch'"
-        # ignore 404 errors
+        # ignore 404 errors which means the commit is not found in the repo
         commit_ancestry_status="$(
             gh api "repos/$fork/compare/${commit_hashref}...$branch" \
                 --jq .status 2>/dev/null || :
