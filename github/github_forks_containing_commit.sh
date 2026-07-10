@@ -27,7 +27,7 @@ Finds all forks for a given repo that contain a given commit hash to find privat
 
 If a repo is not specified, operates on the current repo
 
-Requires GitHub CLI to be installed and configured
+Requires GitHub CLI to be installed and configured for authentication
 "
 
 # used by usage() in lib/utils.sh
