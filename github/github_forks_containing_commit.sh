@@ -25,6 +25,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Finds all forks of a repo that contain a given commit hash to find private information for removal requests
 
+This includes checking all branches, tags, pull requests and any other refs for thoroughness
+
 If a repo is not specified, operates on the current repo
 
 Requires GitHub CLI to be installed and configured for authentication
