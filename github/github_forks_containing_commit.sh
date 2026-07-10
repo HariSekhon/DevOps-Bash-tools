@@ -59,23 +59,24 @@ if ! is_git_hashref "$commit_hashref"; then
     usage "Invalid Git commit hashref given: $commit_hashref"
 fi
 
-log "Fetching forks for repo: $owner_repo"
+timestamp "Fetching forks for repo: $owner_repo"
 gh api "repos/$owner_repo/forks?per_page=100" --paginate --jq '.[].full_name' |
 while read -r fork; do
-    log "Fetching all refs for fork: $fork"
+    timestamp "Fetching all refs for fork: $fork"
     # ignore 404 error with error exit code - fork returns no branches, repo might have been deleted
     refs="$(gh api "repos/$fork/git/matching-refs/" --paginate --jq '.[].ref' || :)"
     if [[ "$refs" =~ Not.Found|"status":"404" ]]; then
         continue
     fi
     for ref in $refs; do
-        log "Checking if commit hash is an ancestor of '$fork' ref '$ref'"
+        timestamp "Checking if commit hash is an ancestor of '$fork' ref '$ref'"
         # ignore 404 errors which means the commit is not found in the repo
         commit_ancestry_status="$(
             gh api "repos/$fork/compare/${commit_hashref}...$ref" \
                 --jq .status 2>/dev/null || :
         )"
         if [[ "$commit_ancestry_status" =~ ^(ahead|identical)$ ]]; then
+            timestamp "FOUND hashref in fork:"
             echo "https://github.com/$fork"
             break
         fi
