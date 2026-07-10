@@ -57,9 +57,17 @@ if ! is_git_hashref "$commit_hashref"; then
     usage "Invalid Git commit hashref given: $commit_hashref"
 fi
 
+log "Fetching forks for repo: $owner_repo"
 gh api "repos/$owner_repo/forks?per_page=100" --paginate --jq '.[].full_name' |
 while read -r fork; do
-    if gh api "repos/$fork/commits/$commit_hashref" >/dev/null 2>&1; then
-        echo "https://github.com/$fork"
-    fi
+    log "Fetching branches for fork: $fork"
+    branches="$(gh api "repos/$fork/branches" --paginate --jq '.[].name' || :)"  # fork returns no branches, might have been deleted
+    for branch in $branches; do
+        log "Checking if commit hash is an ancestor of '$fork' branch '$branch'"
+        commit_ancestry_status="$(gh api "repos/$fork/compare/${commit_hashref}...$branch" --jq .status 2>/dev/null || :)"
+        if [[ "$commit_ancestry_status" =~ ^(ahead|identical)$ ]]; then
+            echo "https://github.com/$fork"
+            break
+        fi
+    done
 done
