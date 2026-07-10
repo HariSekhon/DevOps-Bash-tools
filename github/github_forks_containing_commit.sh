@@ -27,6 +27,9 @@ Finds all forks of a repo that contain a given commit hash to find private infor
 
 This includes checking all branches, tags, pull requests and any other refs for thoroughness
 
+If found, outputs the fork GitHub url to stdout, while all logging is to stderr,
+so you can easily capture a clean list to a file or pipe for further processing
+
 If a repo is not specified, operates on the current repo
 
 Requires GitHub CLI to be installed and configured for authentication
