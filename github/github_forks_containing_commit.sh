@@ -61,10 +61,15 @@ log "Fetching forks for repo: $owner_repo"
 gh api "repos/$owner_repo/forks?per_page=100" --paginate --jq '.[].full_name' |
 while read -r fork; do
     log "Fetching branches for fork: $fork"
-    branches="$(gh api "repos/$fork/branches" --paginate --jq '.[].name' || :)"  # fork returns no branches, might have been deleted
+    # ignore 404 error with error exit code - fork returns no branches, repo might have been deleted
+    branches="$(gh api "repos/$fork/branches" --paginate --jq '.[].name' || :)"
     for branch in $branches; do
         log "Checking if commit hash is an ancestor of '$fork' branch '$branch'"
-        commit_ancestry_status="$(gh api "repos/$fork/compare/${commit_hashref}...$branch" --jq .status 2>/dev/null || :)"
+        # ignore 404 errors
+        commit_ancestry_status="$(
+            gh api "repos/$fork/compare/${commit_hashref}...$branch" \
+                --jq .status 2>/dev/null || :
+        )"
         if [[ "$commit_ancestry_status" =~ ^(ahead|identical)$ ]]; then
             echo "https://github.com/$fork"
             break
