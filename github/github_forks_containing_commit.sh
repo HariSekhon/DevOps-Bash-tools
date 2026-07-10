@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds all forks for a given repo that contain a given commit hash to find private information for removal requests
+Finds all forks of a repo that contain a given commit hash to find private information for removal requests
 
 If a repo is not specified, operates on the current repo
 
