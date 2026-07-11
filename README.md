@@ -205,6 +205,49 @@ make
 
 `make install` sets your shell profile to source this repo. See [Individual Setup Parts](#individual-setup-parts) below for more install/uninstall options.
 
+### Beginner Usage Examples
+
+Most scripts print usage information with `--help`, so a safe first step is to inspect the script before running it:
+
+```shell
+./bin/urlencode.sh --help
+./aws/aws_account_summary.sh --help
+./kubernetes/kubernetes_foreach_context.sh --help
+```
+
+You can run scripts directly from a clone without installing the shell profile integration first. A few examples:
+
+```shell
+# URL-encode text for use in API calls or query strings
+./bin/urlencode.sh "hello world?team=devops"
+
+# Find repeated lines in a text file
+./bin/find_duplicate_lines.sh hosts.txt
+
+# Find duplicate files by size before deciding whether to do deeper checksum checks
+./bin/find_duplicate_files_by_size.sh ~/Downloads
+```
+
+Cloud scripts usually infer credentials from the same environment variables and config files as the vendor CLI. For example:
+
+```shell
+# Print an AWS account summary using your current AWS CLI credentials
+./aws/aws_account_summary.sh
+
+# Or run the same check against a named AWS profile
+./aws/aws_account_summary.sh production
+```
+
+Kubernetes helpers use your current `kubectl` configuration. Start with read-only inventory commands before running scripts that change clusters:
+
+```shell
+# Run a command once for every context in your kubeconfig
+./kubernetes/kubernetes_foreach_context.sh 'kubectl get namespaces'
+
+# List empty namespaces for review
+./kubernetes/kubectl_empty_namespaces.sh
+```
+
 ## Index
 
 - [Dot Configs](#dot-configs) - `.gitconfig`, `.vimrc`, `.screenrc`, `.tmux.conf`, `.toprc`, `.gitignore`...
