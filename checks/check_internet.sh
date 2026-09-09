@@ -60,7 +60,7 @@ SECONDS=0
 #      call this after gateway test at least
 configure_sites_to_test(){
     # China detection is best effort and ignore if it fails and just stick with the defaults
-    country="$(curl -sS ifconfig.co/json | jq -r '.country' || :)"
+    country="$(curl -sS https://ifconfig.co/json | jq -r '.country' || :)"
 
     if [ "$country" = "China" ]; then
         domain="baidu.com"
@@ -97,6 +97,7 @@ check_gateway() {
 }
 
 check_public_ip() {
+    configure_sites_to_test
     if ping -c "$ping_count" -W "$ping_timeout" "$public_ip" &>/dev/null; then
         timestamp "OK: Public IP reachable"
     else
@@ -106,6 +107,7 @@ check_public_ip() {
 }
 
 check_dns() {
+    configure_sites_to_test
     if type -P getent &>/dev/null; then
         getent hosts "$domain" &>/dev/null
     elif type -P dig &>/dev/null; then
@@ -122,6 +124,7 @@ check_dns() {
 }
 
 check_domain_ping() {
+    configure_sites_to_test
     if ping -c "$ping_count" -W "$ping_timeout" "$domain" &>/dev/null; then
         timestamp "OK: Domain IP reachable"
     else
@@ -131,6 +134,7 @@ check_domain_ping() {
 }
 
 check_https(){
+    configure_sites_to_test
     local website="$1"
     if curl -sS --fail "https://$website" &>/dev/null; then
         timestamp "OK: $website HTTPS reachable"
