@@ -73,6 +73,8 @@ configure_sites_to_test(){
         domain="baidu.com"
         public_ip="111.63.65.103"
         # Sometimes Github.com works and sometimes it doesn't - Great Firewall interference?
+        # I cannot replace this with another site as this is one of the primary reasons to check internet availability
+        # before doing git pushes
         websites="baidu.com github.com"
     else
         timestamp "Configuring Site Tests: Default"
