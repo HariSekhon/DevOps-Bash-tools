@@ -59,6 +59,12 @@ SECONDS=0
 # XXX: catch 22 - I need to detect if public IP is in China to be able to switch tests to Chinese accessible sites
 #      call this after gateway test at least
 configure_sites_to_test(){
+    if [ -n "${country:-}" ]; then
+        # if we're already successfully determined the country and configured relevant sites, skip this
+        # this allows repeated calling at each stage to recover in case on stage fails to detect which
+        # could result in a stuck loop from race condition when calling this inside China
+        return
+    fi
     # China detection is best effort and ignore if it fails and just stick with the defaults
     country="$(curl -sS https://ifconfig.co/json | jq -r '.country' || :)"
 
