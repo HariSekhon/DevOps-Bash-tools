@@ -69,10 +69,12 @@ configure_sites_to_test(){
     country="$(curl -sS https://ifconfig.co/json | jq -r '.country' || :)"
 
     if [ "$country" = "China" ]; then
+        timestamp "Configuring Site Tests: for China"
         domain="baidu.com"
         public_ip="111.63.65.103"
         websites="baidu.com github.com"
     else
+        timestamp "Configuring Site Tests: Default"
         domain="google.com"
         public_ip="1.1.1.1"
         websites="google.com github.com"
