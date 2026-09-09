@@ -72,6 +72,7 @@ configure_sites_to_test(){
         timestamp "Configuring Site Tests: for China"
         domain="baidu.com"
         public_ip="111.63.65.103"
+        # Sometimes Github.com works and sometimes it doesn't - Great Firewall interference?
         websites="baidu.com github.com"
     else
         timestamp "Configuring Site Tests: Default"
