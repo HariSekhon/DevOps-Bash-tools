@@ -41,7 +41,9 @@ Tests:
 - Public Domain is reachable (ping to google.com)
 - Google.com or Baidu.com (if you're running this inside China since Google is blocked there) over HTTPS
 - Important Websites available over HTTPS - defaults to GitHub.com but you can override this to others using
-  environment variable \$CHECK_INTERNET_IMPORTANT_WEBSITES
+  environment variable \$CHECK_INTERNET_IMPORTANT_WEBSITES. In China github.com was often extraordinarily slow to
+  respond, probably due to The Great Firewall inspection, so I overrode this for my Spotify-Playlists repo
+  to just check api.spotify.com
 - China mode - detects if your public IP is in China and if so switches to Chinese accessible site baidu.com
   instead of google.com for DNS, IP and HTTPS tests since Google is blocked in China by The Great Firewall
   (if you're on a VPN in China your public IP will probably be in a different country and it'll use the default
