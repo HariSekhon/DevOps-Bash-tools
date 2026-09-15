@@ -44,7 +44,7 @@ There are two ways this script can be used as:
 2. a locking line in a script where the calling script is then responsible for removing the pid file and locking
    directory afterwards, recommended using a trap like so:
 
-    trap 'rm -f \"\$pidfile\"; rmdir \"\$lockdir\"' EXIT INT TERM HUP
+    trap 'rm -f \"\$pidfile\"; rmdir \"\$lockdir\"' EXIT
 
 Warning: a 'kill -9' of the script may leave behind the lock dir and require manual cleanup
 "
