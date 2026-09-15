@@ -325,6 +325,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
   the exact same checksum for safety. Prompts to delete per file. To auto-accept deletions, do
   `yes | delete_duplicate_files.sh`. This is a fast way of cleaning up your `~/Downloads` directory and can be put your
   user crontab
+- `diff_line_threshold.sh` - compares two files vs a line count diff threshold to determine if they are radically different. Used to avoid overwriting files which are not mere updates but completely different files
 - `disk_speed_read_sequential_dd.sh` - runs a sequential read speed test from the given file using dd and bypassing filesystem cache for a more accurate test
 - `disk_speed_read_random_dd.sh` - runs a random I/O read speed test from the given file using dd and bypassing filesystem cache for a more accurate test
 - `disk_speed_write_sequential_dd.sh` - runs a sequential write speed test to a file in the given or current directory using dd and bypassing filesystem cache for a more accurate test
@@ -347,7 +348,6 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `linux_distro_versions.sh` - quickly returns the list of major versions for a given Linux distro
 - `linux_command_return_to_current_window.sh` - runs a Linux command that opens a window and then switches back to the original foreground window
 - `mac_command_return_to_current_window.sh` - runs a Mac command that opens a window and then switches back to the original foreground window
-- `diff_line_threshold.sh` - compares two files vs a line count diff threshold to determine if they are radically different. Used to avoid overwriting files which are not mere updates but completely different files
 - `mv.sh` - moves directory trees resumably and removes the source files as they're copied over. Useful to migrate data from one disk to another, optionally with checksums. Uses rsync and shows the overall % of files transferred and the MB/s data transfer rate
 - `network_gateway.sh` - get the network gateway IP address on Linux or Mac
 - `network_randomize_mac_address.sh` - assigns a new random mac address to your network interface
