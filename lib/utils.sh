@@ -37,7 +37,9 @@ export PATH="$PATH:/usr/local/bin"
 #. "$srcdir_bash_tools_utils/ruby.sh"
 
 # consider adding ERR as set -e handler, not inherited by shell funcs / cmd substitutions / subshells without set -E
-export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
+# don't trap INT and EXIT with the same handler as INT triggers on Control-C and so a script exit runs the handler twice
+#export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
+export TRAP_SIGNALS="QUIT TRAP ABRT TERM EXIT"
 
 # prevents illegal byte encoding errors when piping to filenames with unicode characters
 # doesn't work in CentOS 8 docker, gets this error
