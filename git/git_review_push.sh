@@ -47,10 +47,15 @@ help_usage "$@"
 
 num_args 0 "$@"
 
-timestamp "Pulling to ensure we have the latest remote contents"
-echo >&2
-git pull
-echo >&2
+# doesn't work, needs to be online to resolve FETCH_HEAD further down for the diff
+#if is_online; then
+    timestamp "Pulling to ensure we have the latest remote contents"
+    echo >&2
+    git pull
+    echo >&2
+#else
+#    timestamp "Offline, skipping git pull to just show existing outgoing changeset"
+#fi
 
 timestamp "Comparing HEAD vs FETCH_HEAD"
 echo >&2
