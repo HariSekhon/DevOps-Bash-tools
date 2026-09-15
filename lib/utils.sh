@@ -228,6 +228,37 @@ is_interactive(){
     return 1
 }
 
+# normalizes two paths using readlink and then returns true if they are the same
+# relies on GNU readlink (greadlink on mac) and the mac portability layer in this library to ensure it uses the right one
+is_same_path(){
+    local path1="$1"
+    local path2="$2"
+    [ "$(readlink -f "$path1")" != "$(readlink -f "$path2")" ]
+}
+
+is_directory_populated(){
+    local dir="$1"
+    local exceptfile="$2"  # useful for locking dirs with only a pidfile, pass the pid file as an arg
+    if [ -f "$dir" ]; then
+        die "File passed to is_directory_populated() function: $dir"
+    # scripts should check themselves if they expect the directory to pre-exist
+    # eg. I want to use this in lockdir.sh and in that case the atomic locking dir must not pre-exist
+    #elif ! [ -d "$dir" ]; then
+        #warn "Directory does not exist: $dir"
+    fi
+    if is_same_path "$dir" "$(dirname "$exceptfile")"; then
+        die "Exceptfile passed to is_directory_populated() function is not within the given directory: $dir vs $exceptfile"
+    fi
+    # trailing slash will fail if it's not a directory
+    # silently ignore if the directory is not found
+    if [ "$(find "$dir/" 2>/dev/null | grep -c . || :)" -gt 1 ]; then
+        return 0
+    elif [ "$(find "$dir/" | sed "/\/$exceptfile$/d" | grep -c . || :)" -gt 0 ]; then
+        return 0
+    fi
+    return 1
+}
+
 file_newer_than_mins(){
     local mins="$1"
     local file="$2"
@@ -492,6 +523,8 @@ trap_debug_env(){
     if is_CI &&
        ! type trap_function &>/dev/null &&
        type docker_image_cleanup &>/dev/null; then
+        # trap_function is not called here
+        # shellcheck disable=SC2329
         trap_function(){
             # shellcheck disable=SC2317
             docker_image_cleanup
