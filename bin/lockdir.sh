@@ -51,7 +51,7 @@ Warning: a 'kill -9' of the script may leave behind the lock dir and require man
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<lockdir> <commands>"
+usage_args="<lockdir> [<commands>]"
 
 help_usage "$@"
 
