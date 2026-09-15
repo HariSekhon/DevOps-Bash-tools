@@ -31,8 +31,7 @@ or API rate limits
 Written for my Spotify backups so I can schedule them safely while guaranteeing now concurrency
 that could trip the Spotify API rate limits
 
-Uses flock if available for its enhanced kernel integration to clean up locks (not POSIX compliant),
-otherwise falls back to mkdir atomic directory locking for portability
+If you're on Linux you should use flock if available for its enhanced kernel integration to clean up locks.
 
 The lock directory must NOT be the current or any existing directory, otherwise this script will wait indefinitely
 and should be unique to your script or collection of related scripts that you want to share a mutually exclusive lock between
@@ -66,35 +65,20 @@ if [ -f "$lockdir" ]; then
     usage "Lockdir given is an existing file, must specify a directory, not a file: $lockdir"
 fi
 
-lock_mkdir(){
-    timestamp "Acquiring directory lock on: $lockdir"
-    while ! mkdir "$lockdir" 2>/dev/null; do
-        # the second arg is an excepted file, here we ignore the "pid" file if this is the only contents as it is caused by this or related script invocation and not a general directory that is really populated
-        if is_directory_populated "$lockdir" "pid"; then
-            warn "Directory already exists with content, possible incorrect usage giving pre-existing data directory?"
-        fi
-        timestamp "Lock directory already exists, waiting for it to be released and not exist..."
-        sleep 1
-    done
+timestamp "Acquiring directory lock on: $lockdir"
+while ! mkdir "$lockdir" 2>/dev/null; do
+    # the second arg is an excepted file, here we ignore the "pid" file if this is the only contents as it is caused by this or related script invocation and not a general directory that is really populated
+    if is_directory_populated "$lockdir" "pid"; then
+        warn "Directory already exists with content, possible incorrect usage giving pre-existing data directory?"
+    fi
+    timestamp "Lock directory already exists, waiting for it to be released and not exist..."
+    sleep 1
+done
 
-    pid="$$"
-    #timestamp "Adding pid to $pidfile"
-    echo "$pid" >> "$pidfile"
-    timestamp "Lock acquired by pid: $$"
-    trap_cmd "rm -f '$pidfile'; rmdir '$lockdir'"
-}
-
-# test once flock is installed after landing
-#lock_flock(){
-#    timestamp "Acquiring flock on: $lockdir"
-#    exec 9>"$lockdir"
-#    flock 9
-#}
-
-if type -P flock &>/dev/null; then
-    lock_flock
-else
-    lock_mkdir
-fi
+pid="$$"
+#timestamp "Adding pid to $pidfile"
+echo "$pid" >> "$pidfile"
+timestamp "Lock acquired by pid: $$"
+trap_cmd "rm -f '$pidfile'; rmdir '$lockdir'"
 
 "$@"
