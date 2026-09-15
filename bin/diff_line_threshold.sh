@@ -26,7 +26,7 @@ Compares two files vs a line count diff threshold to determine if they are radic
 
 Used to avoid overwriting files which are not mere updates but completely different files
 
-The max_line_diff threshold is 100 is not specified
+The max_line_diff threshold is 100 if not specified
 
 Used by the following scripts to avoid overwriting configs in adjacent repos:
 
