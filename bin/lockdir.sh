@@ -81,7 +81,7 @@ lock_mkdir(){
     #timestamp "Adding pid to $pidfile"
     echo "$pid" >> "$pidfile"
     timestamp "Lock acquired by pid: $$"
-    trap 'rm -f "$pidfile"; rmdir "$lockdir"' EXIT INT TERM HUP
+    trap_cmd 'rm -f "$pidfile"; rmdir "$lockdir"'
 }
 
 # test once flock is installed after landing
