@@ -46,8 +46,8 @@ There are two ways this script can be used as:
 
     trap 'rm -f \"\$pidfile\"; rmdir \"\$lockdir\"' EXIT
 
-Warning: a 'kill -9' of the script cannot be trapped and will leave behind the lock dir and pidfile and
-         require a manual cleanup using the same rm and rmdir command combo (safer than rm -rf)
+Warning: a 'kill -9' of the script cannot be trapped and will leave behind the lock dir and pidfile.
+         That would require a manual cleanup using the same rm and rmdir command combo (safer than rm -rf)
 "
 
 # used by usage() in lib/utils.sh
