@@ -357,6 +357,15 @@ is_min_version(){
     return 0
 }
 
+is_online(){
+    if is_mac; then
+        ping -c1 -W1 1.1.1.1 &>/dev/null && return 0
+    else
+        ping -c1 -t1 1.1.1.1 &>/dev/null && return 0
+    fi
+    return 1
+}
+
 is_semver(){
     # shellcheck disable=SC2178
     local version="$1"
