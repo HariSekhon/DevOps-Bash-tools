@@ -246,14 +246,27 @@ is_directory_populated(){
     #elif ! [ -d "$dir" ]; then
         #warn "Directory does not exist: $dir"
     fi
+    if ! [[ "$exceptfile" =~ / ]]; then
+        exceptfile="$dir/$exceptfile"
+    fi
     if is_same_path "$dir" "$(dirname "$exceptfile")"; then
         die "Exceptfile passed to is_directory_populated() function is not within the given directory: $dir vs $exceptfile"
     fi
     # trailing slash will fail if it's not a directory
     # silently ignore if the directory is not found
-    if [ "$(find "$dir/" 2>/dev/null | grep -c . || :)" -gt 1 ]; then
+    if [ "$(
+            find "$dir/" 2>/dev/null |
+            sed 's|//|/|g' |
+            grep -Fxv -e "$dir" -e "$dir/" |
+            grep -c . || :
+           )" -gt 1 ]; then
         return 0
-    elif [ "$(find "$dir/" | sed "/\/$exceptfile$/d" | grep -c . || :)" -gt 0 ]; then
+    elif [ "$(
+                find "$dir/" |
+                sed 's|//|/|g' |
+                grep -Fxv -e "$dir" -e "$dir/" -e "$exceptfile" |
+                grep -c . || :
+             )" -gt 0 ]; then
         return 0
     fi
     return 1
