@@ -67,6 +67,7 @@ if [ -f "$lockdir" ]; then
 fi
 
 lock_mkdir(){
+    trap 'rm -f "$pidfile"; rmdir "$lockdir"' EXIT INT TERM HUP
     timestamp "Acquiring directory lock on: $lockdir"
     while ! mkdir "$lockdir" 2>/dev/null; do
         # the second arg is an excepted file, here we ignore the "pid" file if this is the only contents as it is caused by this or related script invocation and not a general directory that is really populated
@@ -81,8 +82,6 @@ lock_mkdir(){
     #timestamp "Adding pid to $pidfile"
     echo "$pid" >> "$pidfile"
     timestamp "Lock acquired by pid: $$"
-
-    trap 'rm -f "$pidfile"; rmdir "$lockdir"' EXIT INT TERM HUP
 }
 
 # test once flock is installed after landing
