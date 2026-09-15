@@ -28,10 +28,10 @@ Creates a portable atomic lock using a given directory
 Useful for a script to prevent two instances from running at the same time to avoid either data corruption
 or API rate limits
 
-Written for my Spotify backups so I can schedule them safely while preventing concurrent runs that could trip the
+Written for my Spotify backups so I can schedule them safely while preventing concurrent runspthat could trip the
 Spotify API rate limits
 
-If you're on Linux you should use flock if available for its enhanced kernel integration to clean up locks.
+If you're on Linux you should use flock if available for its enhanced kernel integration to clean up locks
 
 The lock directory must NOT be the current or any existing directory, otherwise this script will wait indefinitely
 and should be unique to your script or collection of related scripts that you want to share a mutually exclusive lock between
