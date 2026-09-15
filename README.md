@@ -347,6 +347,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `linux_distro_versions.sh` - quickly returns the list of major versions for a given Linux distro
 - `linux_command_return_to_current_window.sh` - runs a Linux command that opens a window and then switches back to the original foreground window
+- `lockdir.sh` - creates a portable atomic lock using a given directory. Useful for a script to prevent two instances from running at the same time to avoid either data corruption or API rate limits. If you're on Linux you should use `flock` if available for its enhanced kernel integration
 - `mac_command_return_to_current_window.sh` - runs a Mac command that opens a window and then switches back to the original foreground window
 - `mv.sh` - moves directory trees resumably and removes the source files as they're copied over. Useful to migrate data from one disk to another, optionally with checksums. Uses rsync and shows the overall % of files transferred and the MB/s data transfer rate
 - `network_gateway.sh` - get the network gateway IP address on Linux or Mac
