@@ -28,8 +28,8 @@ Creates a portable atomic lock using a given directory
 Useful for a script to prevent two instances from running at the same time to avoid either data corruption
 or API rate limits
 
-Written for my Spotify backups so I can schedule them safely while guaranteeing now concurrency
-that could trip the Spotify API rate limits
+Written for my Spotify backups so I can schedule them safely while preventing concurrent runs that could trip the
+Spotify API rate limits
 
 If you're on Linux you should use flock if available for its enhanced kernel integration to clean up locks.
 
