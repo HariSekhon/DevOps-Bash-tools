@@ -62,8 +62,6 @@ for basedir in "${@:-.}"; do
             # shellcheck disable=SC2016
             trap_cmd 'echo; echo "removing partially done file:"; rm -fv "$mov_filepath"; untrap'
             timestamp "converting $filepath => $mov_filepath"
-            #time nice ffmpeg -i "$filepath" -- "$mp4_filepath" < /dev/null  # don't let the ffmpeg command eat the incoming filenames
-            #time nice ffmpeg -i "$filepath" -vcodec copy -acodec copy -scodec mov_text -movflags +faststart -- "$mov_filepath" < /dev/null
             time nice ffmpeg -i "$filepath" -c copy -- "$mov_filepath" < /dev/null
             echo
         fi
