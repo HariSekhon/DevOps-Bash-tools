@@ -48,7 +48,7 @@ SECONDS=0
 
 time \
 for basedir in "${@:-.}"; do
-    if ! [[ "$basedir" =~ ^/ ]]; then
+    if ! [[ "$basedir" =~ ^\.*/ ]]; then
         basedir="./$basedir"
     fi
     while read -r filepath; do
