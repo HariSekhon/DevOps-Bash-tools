@@ -83,7 +83,7 @@ fi
 
 time \
 for filepath in "$@"; do
-    if ! [[ "$filepath" =~ ^/ ]]; then
+    if ! [[ "$filepath" =~ ^\.*/ ]]; then
         filepath="./$filepath"
     fi
     new_mp4_filepath="${filepath%.*}.${format}p.mp4"
