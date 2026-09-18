@@ -51,6 +51,7 @@ asdf
 autoconf
 autojump
 autossh
+avidemux  # video editor
 #awsume
 #aws-iam-authenticator
 bash  # version 5, not old version 3 from Apple due to licensing
