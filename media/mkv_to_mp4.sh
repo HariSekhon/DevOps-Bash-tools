@@ -47,10 +47,18 @@ SECONDS=0
 
 time \
 for basedir in "${@:-.}"; do
+    if ! [[ "$basedir" =~ ^/ ]]; then
+        basedir="./$basedir"
+    fi
     while read -r filepath; do
+        if ! [[ "$filepath" =~ ^/ ]]; then
+            filepath="./$filepath"
+        fi
         mp4_filepath="${filepath%.mkv}.mp4"
         #if [ -n "${FORCE_OVERWRITE:-}" ] ||
-        if ! [ -s "$mp4_filepath" ]; then
+        if [ -s "$mp4_filepath" ]; then
+            timestamp "File already exists, skipping: $mp4_filepath"
+        else
             # shellcheck disable=SC2016
             trap_cmd 'echo; echo "removing partially done file:"; rm -fv "$mp4_filepath"; untrap'
             timestamp "converting $filepath => $mp4_filepath"
