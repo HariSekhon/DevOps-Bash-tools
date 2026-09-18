@@ -1573,6 +1573,7 @@ Each of these three scripts creates an animated Git from running terminal comman
 
 - `avi_to_mp4.sh` - converts avi files to mp4 using ffmpeg. Useful to be able to play videos on devices like smart TVs that may not recognize newer codecs otherwise
 - `mkv_to_mp4.sh` - converts mkv files to mp4 using ffmpeg. Same use case as above
+- `mp4_to_mov.sh` - quickly repackages mp4 files to mov using ffmpeg. Useful to be able to edit mp4 files with mp3 audio in QuickTime that otherwise ignore the mp3 audio but works when converted to mov
 - `youtube_download_video.sh` - downloads a YouTube video to mp4 with maximum quality and compatibility usng yt-dlp
   - `facebook_download_video.sh` - same as above for Facebook
   - `twitter_download_video.sh` - same as above for Twitter / X
