@@ -51,7 +51,7 @@ asdf
 autoconf
 autojump
 autossh
-avidemux  # video editor
+#avidemux  # video editor - doesn't install, fails gatekeeper check
 #awsume
 #aws-iam-authenticator
 bash  # version 5, not old version 3 from Apple due to licensing
