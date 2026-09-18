@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -47,9 +48,14 @@ SECONDS=0
 
 time \
 for basedir in "${@:-.}"; do
+    if ! [[ "$basedir" =~ ^/ ]]; then
+        basedir="./$basedir"
+    fi
     while read -r filepath; do
         mp4_filepath="${filepath%.avi}.mp4"
-        if ! [ -s "$mp4_filepath" ]; then
+        if [ -s "$mp4_filepath" ]; then
+            timestamp "File already exists, skipping: $mp4_filepath"
+        else
             # shellcheck disable=SC2016
             trap_cmd 'echo; echo "removing partially done file:"; rm -fv "$mp4_filepath"; untrap'
             timestamp "converting $filepath => $mp4_filepath"
