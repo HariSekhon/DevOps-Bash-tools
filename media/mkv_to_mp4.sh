@@ -47,13 +47,10 @@ SECONDS=0
 
 time \
 for basedir in "${@:-.}"; do
-    if ! [[ "$basedir" =~ ^/ ]]; then
+    if ! [[ "$basedir" =~ ^\.*/ ]]; then
         basedir="./$basedir"
     fi
     while read -r filepath; do
-        if ! [[ "$filepath" =~ ^/ ]]; then
-            filepath="./$filepath"
-        fi
         mp4_filepath="${filepath%.mkv}.mp4"
         #if [ -n "${FORCE_OVERWRITE:-}" ] ||
         if [ -s "$mp4_filepath" ]; then
