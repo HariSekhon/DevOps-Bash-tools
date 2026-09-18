@@ -83,6 +83,9 @@ fi
 
 time \
 for filepath in "$@"; do
+    if ! [[ "$filepath" =~ ^/ ]]; then
+        filepath="./$filepath"
+    fi
     new_mp4_filepath="${filepath%.*}.${format}p.mp4"
     if [ -s "$new_mp4_filepath" ]; then
         timestamp "File already exists, skipping: $new_mp4_filepath"
