@@ -39,6 +39,7 @@ postman
 powershell
 protonvpn
 raycast
+rectangle
 spotify
 transmission
 tor-browser
