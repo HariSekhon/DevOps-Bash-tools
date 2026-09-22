@@ -255,7 +255,9 @@ chrome(){
 }
 
 ff(){
-    if is_mac; then
+    if [ -x "$bash_tools/internet/firefox.sh" ]; then
+        "$bash_tools/internet/firefox.sh" "$@"
+    elif is_mac; then
         open -a 'Firefox' "http://${*:-www.google.com}"
     else
         checkprog firefox || return 1
