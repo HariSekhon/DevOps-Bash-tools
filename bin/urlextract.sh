@@ -23,6 +23,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Extracts the URLs from a given string arg, file or standard input
+
+See Also:
+
+    html_grep_hrefs.sh
 "
 
 # used by usage() in lib/utils.sh
