@@ -241,6 +241,19 @@ isupme(){
     browser "http://www.isup.me/$1"
 }
 
+brave(){
+    if [ -x "$bash_tools/internet/brave.sh" ]; then
+        "$bash_tools/internet/brave.sh" "$@"
+    elif is_mac; then
+        # opens in most recent Brave window
+        # could use one of these: --new --args --incognito --new-window
+        open -a 'Brave' "${*:-http://www.google.com}"
+    else
+        checkprog brave || return 1
+        brave "${*:-http://search.brave.com}" &
+    fi
+}
+
 chrome(){
     if [ -x "$bash_tools/internet/chrome.sh" ]; then
         "$bash_tools/internet/chrome.sh" "$@"
