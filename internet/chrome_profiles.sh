@@ -23,8 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists the folders and names of Chrome profiles to be passed to the chrome command when using automation like chrome.sh
-multi-url stdin staggered opening
+Parses Chrome brower's local state and lists the user and profile to be passed to the chrome command
+when using automation like chrome.sh multi-url stdin staggered opening
 
 Uses jq to parse the Chrome local state, attempts to install jq if not present using whichever package manager
 is available
