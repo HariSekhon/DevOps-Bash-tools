@@ -29,7 +29,7 @@ Uses xmllint for correct parsing and ignores parsing errors as many HTML pages h
 
 This is a very general solution and will collect all types of links, so you might want to:
 
-    grep -i 'https*://'
+    grep -Ei 'https?://'
 
 Attempts to install xmllint using whatever package manager is available if it not found in \$PATH
 
