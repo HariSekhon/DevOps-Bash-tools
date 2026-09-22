@@ -27,6 +27,10 @@ Parses href links out of an HTML page given as a file or read from standard inpu
 
 Uses xmllint for correct parsing and ignores parsing errors as many HTML pages have imperfections
 
+This is a very general solution and will collect all types of links, so you might want to:
+
+    grep -i 'https*://'
+
 Attempts to install xmllint using whatever package manager is available if it not found in \$PATH
 
 For a simpler pure shell HTTP(S) URL extractor, see also:
