@@ -242,7 +242,9 @@ isupme(){
 }
 
 chrome(){
-    if is_mac; then
+    if [ -x "$bash_tools/internet/chrome.sh" ]; then
+        "$bash_tools/internet/chrome.sh" "$@"
+    elif is_mac; then
         # opens in most recent Chrome window
         # could use one of these: --new --args --incognito --new-window
         open -a 'Google Chrome' "${*:-http://www.google.com}"
@@ -250,7 +252,6 @@ chrome(){
         checkprog google-chrome || return 1
         google-chrome "${*:-http://www.google.com}" &
     fi
-
 }
 
 ff(){
