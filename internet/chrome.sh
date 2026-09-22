@@ -101,6 +101,9 @@ else
         else
             args+=("$arg")
         fi
+        if [ "$arg" == "--headless" ]; then
+            args+=("--dump-dom")  # hangs otherwise on headless mode
+        fi
     done
 
     if [ "$stdin" = 1 ]; then
