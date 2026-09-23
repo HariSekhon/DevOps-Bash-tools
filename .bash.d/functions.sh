@@ -18,6 +18,8 @@
 #                  B a s h   G e n e r a l   F u n c t i o n s
 # ============================================================================ #
 
+# Functions that haven't been split off into other more specific libraries
+
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090,SC1091
@@ -39,10 +41,6 @@ retmode(){
     fi
 }
 
-cddir(){
-    cd "$(dirname "$1")" || return 1
-}
-
 jq(){
     command jq -CS "$@"
 }
@@ -50,16 +48,6 @@ jq(){
 envg(){
     env |
     eval grep -i "$(for arg; do echo -n " -e '$arg'"; done)"
-}
-
-new(){
-    if [ $# -eq 2 ]; then
-        title "${2#modules/}"
-    else
-        title "$1"
-    fi
-    command new.pl "$@"
-    title "$LAST_TITLE"
 }
 
 # generates bash autocompletion if not available
@@ -190,12 +178,6 @@ function count() {
     bell
 }
 
-dum(){
-    du -max "${@:-.}" |
-    sort -k1n |
-    tail -n 10000
-}
-
 typer(){
     local alias_target
     local type_output
@@ -215,34 +197,6 @@ typer(){
     done
 }
 
-findup(){
-    local arg="$1"
-    current_dir="${PWD:-$(pwd)}"
-    while [ "$current_dir" != "" ]; do
-        if [ -e "$current_dir/$arg" ]; then
-            echo "$current_dir/$arg"
-            return 0
-        fi
-        current_dir="${current_dir%/*}"
-    done
-    echo "Not found in above path: $arg" >&2
-    return 1
-}
-
-cdup(){
-    local arg="$1"
-    cd "$(findup "$arg")" || return 1
-}
-
-lld(){
-    {
-        local target="$1"
-        ls -ld "$target"
-        [ "$target" = "/" ] && return
-        lld "$(dirname "$target")"
-    } | column -t
-}
-
 # shellcheck disable=SC2120
 unquote(){
     sed '
@@ -253,40 +207,6 @@ unquote(){
 
 bell(){
     echo -e '\a'
-}
-
-resolve_symlinks(){
-    local readlink=readlink
-    if is_mac; then
-        if type -P greadlink &>/dev/null; then
-            readlink=greadlink
-        else
-            readlink=""
-        fi
-    fi
-    if [ -z "$readlink" ]; then
-        echo "$*"
-        return
-    fi
-    for x in "$@"; do
-        "$readlink" -m "$x"
-    done
-}
-
-# for all files listed, return the highest directory - useful for pushd to the right git root following symlinks before doing git diff and commmits, used by gitu() in git.sh which is called in inline vimrc 'nmap ;;'
-basedir(){
-    local dir_list=""
-    for x in "$@"; do
-        dir_list="$dir_list $(dirname "$x")"
-    done
-    # assumes they share the same base and that the shortest one will be right - could put more comparison here and return error if not
-    local output
-    output="$(tr ' ' '\n'  <<< "$dir_list" | grep -v '^[[:space:]]*$' | sort | head -n 1)"
-    if [ -z "$output" ]; then
-        echo "ERROR: empty basedir"
-        return 1
-    fi
-    echo "$output"
 }
 
 toLower(){
@@ -312,16 +232,6 @@ normalize_spaces(){
 
 remove_last_column(){
     awk '{$NF=""; print $0}'
-}
-
-strip_basedirs(){
-    local basedir="$1"
-    shift
-    while read -r filename; do
-        filename="${filename#"${basedir%%/}"/}"
-        filename="${filename##/}"
-        echo "$filename"
-    done <<< "$@"
 }
 
 user(){
@@ -416,45 +326,6 @@ topcommands(){
 }
 alias topcmds=topcommands
 
-# easy quick find recursing down current directory tree
-#
-#f(){
-#    [ -n "$*" ] || { echo "usage: f <partial_pattern>"; return 1; }
-#    pattern=""
-#    for x in $*; do
-#        pattern+="*$x"
-#    done
-#    pattern+="*"
-#    find -L . -iname "$pattern"
-#}
-#
-# shellcheck disable=SC2032
-f(){
-    local grep=""
-    # shellcheck disable=SC2013
-    for x in "${@//[^A-Za-z0-9_-]/.}"; do
-        if [[ "$x" =~ [a-zA-Z0-9._-] ]]; then
-            grep="$grep | grep -i --color=auto $x"
-        fi
-    done
-    # times about the same
-    #eval find -L . -type f -iname "\*$1\*" $grep
-    eval find -L . -type f "$grep"
-}
-
-fll(){
-    local grep=""
-    # shellcheck disable=SC2013
-    for x in "${@//[^A-Za-z0-9_-]/.}"; do
-        if [[ "$x" =~ [a-zA-Z0-9._-] ]]; then
-            grep="$grep | grep -i --color=auto $x"
-        fi
-    done
-    # times about the same
-    #eval find -L . -type f -iname "\*$1\*" $grep
-    eval find -L . -type f -exec ls -lh {} \\\; "$grep"
-}
-
 dgrep(){
     local pattern="$*"
     # auto-exported in aliases.sh when iterating git repos
@@ -484,56 +355,6 @@ foreachfile(){
     done
 }
 
-# vim which
-# vw() moved to vim.sh
-
-# file which
-fw(){
-    local path
-    for x in "$@"; do
-        path="$(which "$x")"
-        if [ -z "$path" ]; then
-            return 1
-        fi
-        file "$path"
-        echo
-        # shellcheck disable=SC2086
-        ls -l $LS_OPTIONS "$path"
-    done
-}
-
-cdwhich(){
-    local path
-    local directory
-    if [ $# -ne 1 ]; then
-        echo "usage: cdwhich programname"
-        return 1
-    fi
-    path="$(which "$1")"
-    if [ -z "$path" ]; then
-        echo
-        echo "$1 could not be found in \$PATH"
-        return 1
-    fi
-    directory="$(dirname "$path")"
-    if [ -z "$directory" ]; then
-        echo "cannot find directory for $path"
-        return 2
-    fi
-    echo "$directory"
-    cd "$directory" || return 1
-}
-
-whichall(){
-    local bin="$1"
-    shift || :
-    which -a "$bin" |
-    while read -r bin; do
-        echo -n "$bin: "
-        "$bin" "$@"
-    done
-}
-
 add_etc_host(){
     local host_line="$*"
     # $sudo is set in .bashrc if needed
@@ -541,8 +362,6 @@ add_etc_host(){
     $sudo grep -q "^$host_line" /etc/hosts ||
     $sudo echo "$host_line" >> /etc/hosts
 }
-
-# vihosts() moved to vim.sh
 
 proxy(){
     export proxy_host="${1:-${proxy_host:-localhost}}"
@@ -565,33 +384,6 @@ proxy(){
     export JAVA_OPTS="$JAVA_OPTS -Dhttp.proxyHost=$proxy_host -Dhttp.proxyPort=$proxy_port -Dhttp.proxyUser=$proxy_user -Dhttp.proxyPassword=$proxy_password -Dhttps.proxyHost=$proxy_host -Dhttps.proxyPort=$proxy_port_ssl -DnonProxyHosts='$JAVA_NO_PROXY'"
     export SBT_OPTS="$JAVA_OPTS"
 }
-
-readlink(){
-    if is_mac; then
-        greadlink "$@"
-    else
-        command readlink "$@"
-    fi
-}
-
-abspath(){
-    readlink --canonicalize-missing "$1"
-}
-#abspath(){
-#    if [ -z "$1" ]; then
-#        echo "NO PATH GIVEN!"
-#        return 1
-#    fi
-#    # shellcheck disable=SC2001
-#    sed 's@^\./@'"$PWD"'/@;
-#         s@^\([^\./]\)@'"$PWD"'/\1@;
-#         s@^\.\./@'"${PWD%/*}"'/@;
-#         s@/../@/@g;
-#         s@/\./@/@g;
-#         s@\(.*\/?\)\.\./?$@\1/@;
-#         s@//@/@g;
-#         s@/$@@;' <<< "$1"
-#}
 
 wcbash(){
     # $github defined in aliases.sh
@@ -758,13 +550,6 @@ progs2(){
     # shellcheck disable=SC2033
     find "${@:-.}" -type f -o -type l |
     grep -Evf ~/code_regex_exclude.txt
-}
-
-findpy(){
-    # not passing function f()
-    # shellcheck disable=SC2033
-    find "${@:-.}" -type f -iname '*.py' -o -type f -iname '*.jy' |
-    grep -vf ~/code_regex_exclude.txt
 }
 
 # ============================================================================ #
