@@ -43,6 +43,17 @@ rmdirempty(){
     find "${1:-.}" -type d -empty -exec rmdir "{}" \;
 }
 
+dfwatch(){
+    timestamp "Checking disk usage every 30 minutes"
+    echo
+    while true; do
+        timestamp "Disk Usage:"
+        df -h "${@:-.}"
+        sleep 1800
+    done
+}
+alias dfw=dfwatch
+
 dum(){
     du -max "${@:-.}" |
     sort -k1n |
@@ -175,9 +186,6 @@ foreachfile(){
         "$@"
     done
 }
-
-# vim which
-# vw() moved to vim.sh
 
 # file which
 fw(){
