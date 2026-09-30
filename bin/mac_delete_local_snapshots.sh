@@ -28,7 +28,7 @@ Deletes local macOS snapshots to free up disk space
 When there is a substantial discrepancy between what the 'df -h' command and the Finder UI shows,
 this is often the cause
 
-Path defaults to /
+Path defaults to the current directory
 
 Requires being run as root or having sudo privileges
 "
@@ -41,7 +41,7 @@ help_usage "$@"
 
 max_args 1 "$@"
 
-export path="${1:-/}"
+export path="${1:-.}"
 
 if ! [ -d "$path" ]; then
     die "ERROR: invalid directory given: $path"
