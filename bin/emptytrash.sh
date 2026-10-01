@@ -47,7 +47,7 @@ linux_trash=~/.local/share/Trash
 if is_mac; then
     timestamp "Emptying Trash on Mac"
     if ! ls -la ~/.Trash &>/dev/null; then
-        die "ERROR: Terminal does not have Full Disk Access to be able to empty the Trash"
+        die "ERROR: Terminal does not have Full Disk Access to be able to empty the Trash, see --help"
     fi
     rm -rf ~/.Trash/*
 elif is_linux; then
