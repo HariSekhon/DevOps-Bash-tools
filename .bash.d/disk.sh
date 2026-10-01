@@ -158,6 +158,7 @@ f(){
     eval find -L . -type f "$grep"
 }
 
+# find and ls -lh each file
 fl(){
     f "$@" |
     while read -r line; do
