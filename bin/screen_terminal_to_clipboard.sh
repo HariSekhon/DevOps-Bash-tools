@@ -33,6 +33,12 @@ Uses adjacent scripts:
     copy_to_clipboard.sh
 
 You can pass screen options as args, see screen_terminal_to_stdout.sh for details
+
+If you just want to copy GNU screen's copy buffer in to the system clipboard, you can just run the script
+
+    copy_to_clipboard.sh
+
+which waits for standard input, and then use the GNU screen hotkey Ctrl-] to paste directly into it's stdin
 "
 
 # used by usage() in lib/utils.sh
