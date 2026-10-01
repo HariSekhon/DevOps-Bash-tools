@@ -31,7 +31,7 @@ On macOS, requires granting Full Disk Access to your Terminal application:
 
 This command takes you straight there on macOS 14:
 
-    open 'x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension'
+    open 'x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_AllFiles'
 "
 
 # used by usage() in lib/utils.sh
