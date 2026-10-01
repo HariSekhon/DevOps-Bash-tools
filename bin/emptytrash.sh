@@ -46,7 +46,7 @@ linux_trash=~/.local/share/Trash
 
 if is_mac; then
     timestamp "Emptying Trash on Mac"
-    if ! ls -la ~/.Trash &>/dev/null; then
+    if ! ls -la ~/.Trash/ &>/dev/null; then
         die "ERROR: Terminal does not have Full Disk Access to be able to empty the Trash, see --help"
     fi
     rm -rf ~/.Trash/*
@@ -55,7 +55,7 @@ elif is_linux; then
     if type -P gio &>/dev/null; then
         gio trash --empty
     else
-        if ! ls -la "$linux_trash" &>/dev/null; then
+        if ! ls -la "$linux_trash/" &>/dev/null; then
             die "ERROR: permissions error accessing: $linux_trash"
         fi
         rm -rf "$linux_trash"/files/*
