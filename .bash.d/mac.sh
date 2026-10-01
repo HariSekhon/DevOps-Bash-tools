@@ -64,6 +64,7 @@ clearspace(){
     emptytrash.sh &&
     mac_delete_local_snapshots.sh
 }
+alias clsp=clearspace
 
 # used for Shazaming while on headphones - see:
 #
