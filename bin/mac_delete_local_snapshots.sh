@@ -32,7 +32,7 @@ Path defaults to the current directory
 
 Requires being run as root or having sudo privileges
 
-You may also want to first run this for max space clearing:
+You may also want to first run this as your regular user for max space clearing:
 
     emptytrash.sh
 "
