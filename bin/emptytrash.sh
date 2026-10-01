@@ -50,8 +50,8 @@ elif is_linux; then
     if type -P gio &>/dev/null; then
         gio trash --empty
     else
-        rm -rf ~/.local/share/Trash/files/*
-        rm -rf ~/.local/share/Trash/info/*
+        rm -r ~/.local/share/Trash/files/*
+        rm -r ~/.local/share/Trash/info/*
     fi
 else
     die "OS Not Supported: must be either Linux or Mac"
