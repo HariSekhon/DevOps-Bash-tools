@@ -44,14 +44,14 @@ no_more_args "$@"
 
 if is_mac; then
     timestamp "Emptying Trash on Mac"
-    rm -r ~/.Trash/*
+    rm -rf ~/.Trash/*
 elif is_linux; then
     timestamp "Emptying Trash on Linux"
     if type -P gio &>/dev/null; then
         gio trash --empty
     else
-        rm -r ~/.local/share/Trash/files/*
-        rm -r ~/.local/share/Trash/info/*
+        rm -rf ~/.local/share/Trash/files/*
+        rm -rf ~/.local/share/Trash/info/*
     fi
 else
     die "OS Not Supported: must be either Linux or Mac"
