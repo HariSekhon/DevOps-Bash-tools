@@ -45,6 +45,13 @@ open(){
     fi
 }
 
+clearspace(){
+    emptytrash.sh ## &&
+    # TODO: add Linux snapshot removal if necessary to ensure space reclaim
+    #mac_delete_local_snapshots.sh
+}
+alias clsp=clearspace
+
 alias reloadXdefaults="xrdb ~/.Xdefaults"
 
 #setxkbmap us
