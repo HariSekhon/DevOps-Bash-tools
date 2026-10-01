@@ -44,6 +44,9 @@ no_more_args "$@"
 
 if is_mac; then
     timestamp "Emptying Trash on Mac"
+    if ! ls -la ~/.Trash &>/dev/null; then
+        usage "Terminal does not have Full Disk Access to be able to empty the Trash"
+    fi
     rm -rf ~/.Trash/*
 elif is_linux; then
     timestamp "Emptying Trash on Linux"
