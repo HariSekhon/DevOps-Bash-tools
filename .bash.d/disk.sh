@@ -158,6 +158,13 @@ f(){
     eval find -L . -type f "$grep"
 }
 
+fl(){
+    f "$@" |
+    while read -r line; do
+        ls -lh "$line"
+    done
+}
+
 fll(){
     local grep=""
     # shellcheck disable=SC2013
