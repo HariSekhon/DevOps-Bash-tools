@@ -42,6 +42,8 @@ help_usage "$@"
 
 no_more_args "$@"
 
+linux_trash=~/.local/share/Trash
+
 if is_mac; then
     timestamp "Emptying Trash on Mac"
     if ! ls -la ~/.Trash &>/dev/null; then
@@ -53,8 +55,11 @@ elif is_linux; then
     if type -P gio &>/dev/null; then
         gio trash --empty
     else
-        rm -rf ~/.local/share/Trash/files/*
-        rm -rf ~/.local/share/Trash/info/*
+        if ! ls -la "$linux_trash" &>/dev/null; then
+            die "ERROR: permissions error accessing: $linux_trash"
+        fi
+        rm -rf "$linux_trash"/files/*
+        rm -rf "$linux_trash"/info/*
     fi
 else
     die "OS Not Supported: must be either Linux or Mac"
