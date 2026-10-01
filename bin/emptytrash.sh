@@ -44,7 +44,7 @@ no_more_args "$@"
 
 if is_mac; then
     timestamp "Emptying Trash on Mac"
-    rm -rf ~/.Trash/*
+    rm -r ~/.Trash/*
 elif is_linux; then
     timestamp "Emptying Trash on Linux"
     if type -P gio &>/dev/null; then
