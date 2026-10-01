@@ -336,6 +336,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `download_url_file.sh` - downloads a file from a URL using wget with no clobber and continue support, or curl with atomic replacement to avoid race conditions. Used by `github/github_download_release_file.sh`, `github_download_release_jar.sh`, and `install/download_*_jar.sh`
 - `curl_auth.sh` - shortens `curl` command by auto-loading your OAuth2 / JWT API token or username & password from environment variables or interactive starred password prompt through a ram file descriptor to avoid placing them on the command line (which would expose your credentials in the process list or OS audit log files). Used by many other adjacent API querying scripts
 - `curl_with_cookies.sh` - extracts cookies for a given URL from your `\$BROWSER`'s cookie jar and passes them to the `curl` command along with the rest of the args (workaround for older curl builds and Homebrew builds that don't have the newer `--cookies-from-browser functionality)
+- `emptytrash.sh` - empties the Trash portably on Linux and Mac. On Mac, combine with a post-run of `mac_delete_local_snapshots.sh` to ensure space is reclaimed
 - `find_duplicate_files*.sh` - finds duplicate files by size and/or checksum in given directory trees. Checksums are only done on files that already have matching byte counts for efficiency
 - `find_broken_links.sh` - find broken links with delays to avoid tripping defenses
 - `find_broken_symlinks.sh` - find broken symlinks pointing to non-existent files/directories
@@ -405,7 +406,7 @@ Mac automation scripts to automate the Mac UI and settings
 - `mac_rmdir.sh` - safely delete a directory on Mac only if it is empty of actual data, by first removing macOS hidden metadata files and dirs such as `.fseventsd/`, `.Spotlight-V100/` and `.DS_Store` - straight `rmdir` fails otherwise
 - `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
 - `mac_ramdisk.sh` - creates a mac ramdisk of given MB size. Useful for performance, or even testing disk write scripts such as `disk_speed_write_*.sh` without wearing out your SSD
-- `mac_delete_local_snapshots.sh` - deletes local macOS snapshots to free up disk space. When there is a substantial discrepancy between what the `df -h` command and the Finder UI shows, this is often the cause
+- `mac_delete_local_snapshots.sh` - deletes local macOS snapshots to free up disk space. When there is a substantial discrepancy between what the `df -h` command and the Finder UI shows, this is often the cause. Recommended to first run `emptytrash.sh`
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
 - `paste_from_clipboard_upon_changes.sh` - pastes from system clipboard to stdout on Linux or Mac whenever the clipboard changes
