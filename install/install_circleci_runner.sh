@@ -63,8 +63,7 @@ echo >&2
 mkdir -p "$platform"
 
 timestamp "Downloading CircleCI Launch Agent: $file"
-curl -sSL \
-     --fail \
+curl -sSLf \
      --compressed \
      --proto "=https" \
      -o "$file" \
