@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Sleep until the given HH:MM clock time
 
-Useful for delaying the run of a foreground application to inherit your terminal's environment variables
+Useful for delaying the run of a foreground terminal application to inherit your terminal's environment variables
 (which may contain API keys) or interactively manage a process in your terminal,
 which cannot be done with the 'at' command
 
