@@ -85,8 +85,7 @@ printf '%-30s   %-45s   %-7s   %-8s   %-10s\n' "NAME" "DESCRIPTION" "STARS" "OFF
 while [ $results -lt "$limit" ] &&
       [ "$page" -le "$num_pages" ]; do
     output="$(
-        curl -sSL \
-             --fail \
+        curl -sSLf \
              --connect-timeout 3 \
              --proto "=https" \
              "https://index.docker.io/v1/search?q=$query&page=${page}&n=100"
