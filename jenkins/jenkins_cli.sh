@@ -133,7 +133,7 @@ fi
 
 if ! [ -s "$jar" ]; then
     if type -P wget &>/dev/null; then
-        wget -cO "$jar" "$JENKINS_URL/jnlpJars/jenkins-cli.jar"
+        wget -cO "$jar" --max-redirect=0 "$JENKINS_URL/jnlpJars/jenkins-cli.jar"
     else
         curl -sSf >"$jar" "$JENKINS_URL/jnlpJars/jenkins-cli.jar"
     fi
