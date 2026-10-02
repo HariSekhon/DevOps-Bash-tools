@@ -23,7 +23,7 @@ if ! type -P codefresh &>/dev/null; then
         brew install codefresh
     else
         echo "Installing codefresh via npm"
-        npm install codefresh
+        npm install --ignore-scripts -- codefresh
     fi
 fi
 
