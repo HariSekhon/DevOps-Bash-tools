@@ -43,7 +43,7 @@ shift || :
 check_bin curl
 
 if ! type -P pycookiecheat &>/dev/null; then
-    pip install pycookiecheat
+    pip install --only-binary :all: pycookiecheat
 fi
 
 cookie="$(pycookiecheat "$url")"
