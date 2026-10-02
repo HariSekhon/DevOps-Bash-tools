@@ -59,7 +59,7 @@ else
     # needs to find Python 3 first in the path to work
     #PATH="/usr/local/opt/python/libexec/bin:$PATH" ./awscli-bundle/install -b ~/bin/aws
     if is_mac; then
-        wget -c "https://awscli.amazonaws.com/AWSCLIV2.pkg" -O "AWSCLIV2.pkg"
+        wget -c "https://awscli.amazonaws.com/AWSCLIV2.pkg" -O "AWSCLIV2.pkg" --max-redirect=0
         # defined in utils.sh lib
         # shellcheck disable=SC2154
         $sudo installer -pkg AWSCLIV2.pkg -target /
