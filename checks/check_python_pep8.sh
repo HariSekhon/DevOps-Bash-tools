@@ -9,7 +9,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help improve or steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -39,7 +40,8 @@ start_time="$(start_timer)"
 
 # $sudo defined in lib/util.sh
 # shellcheck disable=SC2154
-type -P pep8 &>/dev/null || $sudo pip install pep8
+type -P pep8 &>/dev/null ||
+    $sudo pip install --only-binary :all: pep8
 type -P pep8
 pep8 --version
 echo
