@@ -72,10 +72,10 @@ mirror=deb.debian.org # A CDN backed by cloudflare and fastly currently
 #arch="$(get_arch)"  # we are booting in an x86_64 VM, let it be $1 arg to script to override
 dist=stable
 
-wget "http://$mirror/debian/dists/$dist/main/installer-$arch/current/images/netboot/netboot.tar.gz"
-wget "http://$mirror/debian/dists/$dist/main/installer-$arch/current/images/SHA256SUMS"
-wget "http://$mirror/debian/dists/$dist/Release"
-wget "http://$mirror/debian/dists/$dist/Release.gpg"
+wget "https://$mirror/debian/dists/$dist/main/installer-$arch/current/images/netboot/netboot.tar.gz"
+wget "https://$mirror/debian/dists/$dist/main/installer-$arch/current/images/SHA256SUMS"
+wget "https://$mirror/debian/dists/$dist/Release"
+wget "https://$mirror/debian/dists/$dist/Release.gpg"
 
 sha256sum -c <(awk '/netboot\/netboot.tar.gz/{print $1 " netboot.tar.gz"}' SHA256SUMS)
 # netboot.tar.gz: OK
