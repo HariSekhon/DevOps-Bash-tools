@@ -51,8 +51,7 @@ fi
 if [ -n "${GITHUB_TOKEN:-}" ]; then
     "$srcdir/github_api.sh" "/repos/$owner_repo/releases/latest"
 else
-    curl -sSL \
-         --fail \
+    curl -sSLf \
          --proto "=https" \
          "https://api.github.com/repos/$owner_repo/releases/latest"
 fi |
