@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Uses Chrome in headless mode to dump the final HTML DOM from Javascript constructed pages to stdout
-for automated shell processing, such as piping to urlextract.sh or html_href.sh to extract all
+for automated shell processing, such as piping to urlextract.sh or html_hrefs.sh to extract all
 HTTP(S) or generic links respectively
 
 Chrome args can be passed as well as the URL
