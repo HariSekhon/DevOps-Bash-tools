@@ -84,7 +84,7 @@ tar="actions-runner-$os-x64-$VERSION.tar.gz"
 
 if ! [ -f "$tar" ]; then
     url="https://github.com/actions/runner/releases/download/v$VERSION/actions-runner-$os-x64-$VERSION.tar.gz"
-    curl -O -L i--proto "=https" "$url"
+    curl -sSLfO --proto "=https" "$url"
 fi
 
 if ! [ -f config.sh ]; then
