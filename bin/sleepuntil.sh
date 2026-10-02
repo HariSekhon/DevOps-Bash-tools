@@ -87,7 +87,7 @@ while true; do
     now_epoch="$(date '+%s')"
 
     if (( now_epoch >= target_time_epoch )); then
-        timestamp "target time reached"
+        timestamp "Target time reached"
         break
     fi
 
