@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -60,7 +61,10 @@ cd "$tmp"
 
 timestamp "Downloading latest codeql tarball"
 echo
-wget -cO "$tarball" "https://github.com/github/codeql-action/releases/latest/download/$tarball"
+curl -sSLf \
+     --proto "=https" \
+     -o "$tarball" \
+     "https://github.com/github/codeql-action/releases/latest/download/$tarball"
 echo
 
 timestamp "Extracting tarball"
