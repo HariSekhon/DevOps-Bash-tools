@@ -56,7 +56,7 @@ fi
 url="https://github.com/$owner_repo"
 
 timestamp "Fetching: $url"
-curl -sL "$url" |
+curl -sL --proto "=https" "$url" |
 grep -Eo '<img src="https?://camo.githubusercontent.com/[^"]+' |
 sed -e 's/<img src="//' |
 while read -r camo_url; do
