@@ -50,7 +50,10 @@ fi
 if [ -n "${GITHUB_TOKEN:-}" ]; then
     "$srcdir/github_api.sh" "/repos/$owner_repo/releases/latest"
 else
-    curl -sSL --fail "https://api.github.com/repos/$owner_repo/releases/latest"
+    curl -sSL \
+         --fail \
+         --proto "=https" \
+         "https://api.github.com/repos/$owner_repo/releases/latest"
 fi |
 jq_debug_pipe_dump |
 jq -e -r .tag_name ||
