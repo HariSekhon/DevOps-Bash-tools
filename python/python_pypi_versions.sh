@@ -38,7 +38,7 @@ package="$1"
 
 shift || :
 
-response="$(curl -sSL "https://pypi.org/pypi/$package/json" "$@")"
+response="$(curl -sSLf --proto "=https" "https://pypi.org/pypi/$package/json" "$@")"
 
 if ! jq -r '.releases | keys | .[]' <<< "$response"; then
     cat >&2 <<EOF
