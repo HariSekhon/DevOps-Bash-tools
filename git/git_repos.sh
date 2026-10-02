@@ -26,7 +26,7 @@ if [ -f "$repofile" ]; then
     cat "$repofile"
 else
     echo "fetching repos from GitHub repos.txt:" >&2
-    curl -sSL \
+    curl -sSLf \
          --proto "=https" \
          https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt
 fi |
