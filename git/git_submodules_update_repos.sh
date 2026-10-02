@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help improve or steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -75,7 +76,12 @@ else
         repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")"
     else
         echo "fetching repos from GitHub repo list"
-        repolist="$(curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt | sed 's/#.*//')"
+        repolist="$(
+            curl -sSL \
+                 --proto "=https" \
+                 https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt |
+            sed 's/#.*//'
+        )"
     fi
 fi
 
