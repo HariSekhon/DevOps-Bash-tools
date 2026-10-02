@@ -46,7 +46,7 @@ kubeconfig="${KUBECONFIG:-~/.kube/config}"
 
 timestamp "Installing K3s"
 
-curl -sfL https://get.k3s.io | sh -
+curl -sSLf --proto "=https" https://get.k3s.io | sh -
 
 timestamp "Copying $k3s_yaml to $kubeconfig so we can use regular 'kubectl' instead of 'k3s kubectl'"
 
