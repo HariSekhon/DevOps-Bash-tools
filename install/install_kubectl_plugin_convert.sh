@@ -47,7 +47,7 @@ if ! type -P kubectl &>/dev/null; then
 fi
 
 timestamp "Getting latest stable version number"
-version="$(curl -L -s https://dl.k8s.io/release/stable.txt)"
+version="$(curl -sSLf --proto "=https" https://dl.k8s.io/release/stable.txt)"
 timestamp "Stable version is: $version"
 
 echo
