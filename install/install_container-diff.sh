@@ -39,7 +39,10 @@ else
     url=https://storage.googleapis.com/container-diff/latest/container-diff-linux-amd64
 fi
 
-wget -O container-diff "$url"
+curl -sSLf \
+     --proto "=https" \
+     -o container-diff \
+     "$url"
 
 chmod +x container-diff
 
