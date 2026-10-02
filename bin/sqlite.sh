@@ -38,7 +38,8 @@ db=chinook.sqlite
 cd "$srcdir"
 
 if ! [ -f "$db" ]; then
-    wget -O "$db" --max-redirect=0 \
+    #wget -O "$db" --max-redirect=0 \
+    curl -sSLf -o "$db" --proto "=https" \
     'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sqlite?raw=true'
 fi
 
