@@ -47,7 +47,7 @@ download_url="https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-l
 install_base="/usr/local"
 
 timestamp "Downloading: $download_url"
-wget -c "$download_url"
+curl -sSLfO --proto "=https" "$download_url"
 echo
 
 # unsure the files are created as rwxr-xr-x octal permissions otherwise users will get this error trying to run the sql / sqlcl wrapper:
