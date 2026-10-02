@@ -75,7 +75,7 @@ EOF
             "$srcdir/../packages/apk_install_packages.sh" curl python3 python3-dev alpine-sdk musl-dev libffi-dev # openssl-dev conflicts with libressl-dev
         fi
         yes "" |
-        curl -L --proto "=https" https://aka.ms/InstallAzureCli |
+        curl -sSLf --proto "=https" https://aka.ms/InstallAzureCli |
         $sudo bash
     echo
         echo "OS '$uname_s' is not Mac / Linux - not supported"
