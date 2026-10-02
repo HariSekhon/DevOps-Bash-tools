@@ -57,7 +57,7 @@ arch="$(get_arch)"
 
 timestamp "Downloading kubectl-convert version '$version' for '$os' arch '$arch'"
 echo
-wget -c "https://dl.k8s.io/release/$version/bin/$os/$arch/kubectl-convert"
+curl -sSLfO --proto "=https" "https://dl.k8s.io/release/$version/bin/$os/$arch/kubectl-convert"
 echo
 timestamp "Downloaded binary"
 
