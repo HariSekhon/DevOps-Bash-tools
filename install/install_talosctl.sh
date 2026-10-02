@@ -33,4 +33,4 @@ usage_args=""
 
 help_usage "$@"
 
-curl -sSL https://talos.dev/install | sh
+curl -sSLf --proto "=https" https://talos.dev/install | sh
