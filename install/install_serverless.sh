@@ -32,7 +32,7 @@ usage_args=""
 help_usage "$@"
 
 if [ -n "${FORCE_INSTALL:-}" ] || ! type -P serverless &>/dev/null; then
-    curl -o- -sSLf --proto "=https"  https://slss.io/install | bash
+    curl -sSLf -o- --proto "=https"  https://slss.io/install | bash
 else
     echo "serverless is already installed. To upgrade run 'serverless upgrade'"
 fi
