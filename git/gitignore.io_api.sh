@@ -87,9 +87,6 @@ gitignore_api(){
         if type -P curl &>/dev/null; then
             curl -sSL --proto "=https" "${options[@]}" "$url";
         else
-            #if type -P wget &> /dev/null; then
-            #    wget -O - --max-redirect=0 "${options[*]}" "$url";
-            #fi;
             die "ERROR: curl not found in \$PATH"
         fi
     } | eval "$commas_to_newlines";
