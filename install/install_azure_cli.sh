@@ -41,7 +41,7 @@ uname_s="$(uname -s)"
 
 install_azure_cli(){
     if type -P apt-get &>/dev/null; then
-        curl -sL --proto "=https" https://aka.ms/InstallAzureCLIDeb | $sudo bash
+        curl -sSLf --proto "=https" https://aka.ms/InstallAzureCLIDeb | $sudo bash
     elif type -P yum &>/dev/null; then
         # Needs Python 3
 #        if ! type -P python3 &>/dev/null; then
