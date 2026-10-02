@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -65,7 +66,7 @@ echo
 
 timestamp "Getting SHA checksum"
 echo
-wget -c "https://dl.k8s.io/release/$version/bin/$os/$arch/kubectl-convert.sha256"
+curl -sSLfO --proto "=https" "https://dl.k8s.io/release/$version/bin/$os/$arch/kubectl-convert.sha256"
 echo
 timestamp "Downloaded checksum"
 
