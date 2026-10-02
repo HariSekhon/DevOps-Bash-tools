@@ -83,7 +83,7 @@ elif [ -f "$repofile" ]; then
 else
     log "fetching repos from GitHub repo list" >&2
     repolist="$(
-        curl -sSL \
+        curl -sSLf \
              --proto "=https" \
              https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt |
         sed 's/#.*//'
