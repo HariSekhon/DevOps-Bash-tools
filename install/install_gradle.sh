@@ -41,7 +41,9 @@ if [ -e "$BASE/gradle" ]; then
 else
     mkdir -pv "$BASE"
     cd "$BASE"
-    wget -c -t 10 --retry-connrefused "https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip"
+    curl -sSLfO \
+         --proto "=https" \
+         "https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip"
     unzip "gradle-$GRADLE_VERSION-bin.zip"
     rm -f -- "gradle-$GRADLE_VERSION-bin.zip"
     echo
