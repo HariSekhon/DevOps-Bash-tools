@@ -84,7 +84,13 @@ printf '%-30s   %-45s   %-7s   %-8s   %-10s\n' "NAME" "DESCRIPTION" "STARS" "OFF
 
 while [ $results -lt "$limit" ] &&
       [ "$page" -le "$num_pages" ]; do
-    output="$(curl -sSL --fail --connect-timeout 3 "https://index.docker.io/v1/search?q=$query&page=${page}&n=100")"
+    output="$(
+        curl -sSL \
+             --fail \
+             --connect-timeout 3 \
+             --proto "=https" \
+             "https://index.docker.io/v1/search?q=$query&page=${page}&n=100"
+    )"
     num_pages="$(jq -r .num_pages <<< "$output")"
     ((page+=1))
     while read -r name stars official automated description; do
