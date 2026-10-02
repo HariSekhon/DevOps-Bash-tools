@@ -85,7 +85,7 @@ gitignore_api(){
     fi;
     {
         if type -P curl &>/dev/null; then
-            curl -sSL --proto "=https" "${options[@]}" "$url";
+            curl -sSLf --proto "=https" "${options[@]}" "$url";
         else
             die "ERROR: curl not found in \$PATH"
         fi
