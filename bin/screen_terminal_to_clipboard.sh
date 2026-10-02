@@ -38,7 +38,7 @@ If you just want to copy GNU screen's copy buffer in to the system clipboard, yo
 
     copy_to_clipboard.sh
 
-which waits for standard input, and then use the GNU screen hotkey Ctrl-] to paste directly into it's stdin
+which waits for standard input, and then use the GNU screen hotkey Ctrl-] to paste directly into its stdin
 "
 
 # used by usage() in lib/utils.sh
