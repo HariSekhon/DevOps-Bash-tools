@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -35,7 +36,7 @@ fi
 
 cd /tmp
 
-wget -O "cliclick-$VERSION.zip" "https://github.com/BlueM/cliclick/archive/$VERSION.zip"
+wget -O "cliclick-$VERSION.zip" --max-redirect=0 "https://github.com/BlueM/cliclick/archive/$VERSION.zip"
 
 unzip -o "cliclick-$VERSION.zip"
 
