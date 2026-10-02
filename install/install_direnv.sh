@@ -51,7 +51,7 @@ export PATH
 # ensure we have at least one user writable directory
 mkdir -p -v ~/bin
 
-curl -sfL https://direnv.net/install.sh | bash
+curl -sSLf --proto "=https" https://direnv.net/install.sh | bash
 echo
 version="$(direnv version)"
 echo "Direnv version: $version"
