@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -49,7 +50,7 @@ elif is_mac; then
     url="https://download.oracle.com/otn_software/java/sqldeveloper/sqldeveloper-$version-$os-$arch.app.zip"
     zip="${url##*/}"
     timestamp "Downloading: $url"
-    wget -c "$url"
+    curl -sSLfO --proto "=https" "$url"
     echo
     timestamp "Unzipping: $zip"
     unzip -o "$zip"
