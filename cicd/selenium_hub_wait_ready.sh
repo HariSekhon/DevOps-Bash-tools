@@ -72,7 +72,7 @@ if [ -n "$max_secs" ] &&
 fi
 
 while :; do
-    status="$(curl -sSL "$hub_url/wd/hub/status")"
+    status="$(curl -sS "$hub_url/wd/hub/status")"
     ready="$(jq -r '.value.ready' <<< "$status" || die "FAILED to parse Selenium Hub response: $status" >&2)"
     if [[ "$ready" =~ true ]]; then
         timestamp "Selenium Grid Hub is up"
