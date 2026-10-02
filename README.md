@@ -344,7 +344,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `foreach_path_bin.sh` - runs each binary of the given name found in `$PATH` with the args given. Useful to find all the installed versions of a program in different paths eg. `~/bin/` vs `/usr/local/bin/` eg. `foreach_path_bin.sh terraform --version`
 - `http_duplicate_urls.sh` - find duplicate URLs in a given web page
 - `htmldecode.sh` - decodes HTML encoding. Detects available tools such as Perl, Python or xmlstarlet and uses whatever is available
-- `html_hrefs.sh` - parses href links out of an HTML page given as a file or read from stdin. See also `urlextract.sh` for a simpler pure bash HTTP(s) URL string extractor
+- `html_hrefs.sh` - parses href links out of an HTML page given as a file or read from stdin. See also `urlextract.sh` for a simpler pure bash HTTP(s) URL onlyonly  string extractor
 - `ldapsearch.sh` - shortens `ldapsearch` command by inferring switches from environment variables
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `linux_distro_versions.sh` - quickly returns the list of major versions for a given Linux distro
@@ -371,7 +371,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `shorten_text_selection.sh` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes out multiple blank lines. I use this for LinkedIn comments due to the short 1250 character limit
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
 - `shred_free_space.sh` - overwrites free space to prevent recovery of sensitive information for files that have already been deleted
-- `sleepuntil.sh` - sleep until the given HH:MM clock time. Useful for delaying the run of a foreground application to inherit your terminal's environment variables (which may contain API keys) or interactively manage a process in your terminal, which cannot be done with the `at` command. I use this for my [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) backup each night so it waits in terminal for me to arrive home and runs it interactively to allow human gate safety approvals before I Git committing any song removals from any playlist
+- `sleepuntil.sh` - sleep until the given HH:MM clock time. Useful for delaying the run of a foreground terminal program to inherit your terminal's environment variables (which may contain API keys) or interactively manage a process in your terminal, which cannot be done with the `at` command. I use this for my [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) backup each night so it waits in terminal for me to arrive home and runs it interactively to allow human gate safety approvals before Git committing any song removals from any playlist
 - `split.sh` - split large files into N parts (defaults to the number of your CPU cores) to parallelize operations on them
 - `ssl_get_cert.sh` - gets a remote `host:port` server's SSL cert in a format you can pipe, save and use locally, for example in Java truststores
 - `ssl_verify_cert.sh` - verifies a remote SSL certificate (battle tested more feature-rich version `check_ssl_cert.pl` exists in the [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins) repo)
