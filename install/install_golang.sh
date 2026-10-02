@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -76,7 +77,11 @@ url="https://golang.org/dl/go$version.$uname_s-amd64.tar.gz"
 mkdir -p -v "$install_location"
 
 echo "$(date '+%F %T')  Downloading $url"
-wget -cO "$tmp_tar" "$url"
+#wget -cO "$tmp_tar" "$url"
+curl -sSLf \
+     --proto "=https" \
+     -o "$tmp_tar" \
+     "$url"
 
 echo "$(date '+%F %T')  Unpacking to $install_location"
 tar zxf "$tmp_tar" -C "$install_location"
