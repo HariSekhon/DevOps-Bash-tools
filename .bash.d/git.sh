@@ -288,7 +288,9 @@ gitbrowse(){
 
 install_git_completion(){
     if ! [ -f ~/.git-completion.bash ]; then
-        wget -O ~/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+        wget -O ~/.git-completion.bash \
+             --max-redirect=0 \
+             https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
     fi
 }
 
