@@ -36,7 +36,10 @@ fi
 
 cd /tmp
 
-wget -O "cliclick-$VERSION.zip" --max-redirect=0 "https://github.com/BlueM/cliclick/archive/$VERSION.zip"
+curl -sSLf \
+     --proto "=https" \
+     -o "cliclick-$VERSION.zip" \
+     "https://github.com/BlueM/cliclick/archive/$VERSION.zip"
 
 unzip -o "cliclick-$VERSION.zip"
 
