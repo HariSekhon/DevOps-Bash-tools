@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -41,7 +42,7 @@ max_args 1 "$@"
 version="${1:-latest}"
 
 if ! is_mac; then
-    pip3 install keepercommander
+    pip3 install --only-binary :all: keepercommander
     exit 0
 fi
 
