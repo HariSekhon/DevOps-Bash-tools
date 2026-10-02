@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -68,7 +69,7 @@ if ! type -P terminalizer &>/dev/null; then
     if ! type -P npm &>dev/null; then
         "$srcdir/../packages/install_packages.sh" terminalizer
     fi
-    npm install terminalizer
+    npm install --ignore-scripts -- terminalizer
 fi
 
 if [ -z "${NO_RESIZE_TERMINAL:-}" ]; then
