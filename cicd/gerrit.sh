@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -40,7 +41,9 @@ gerrit_local(){
 
     mkdir -pv "$GERRIT_SITE"
 
-    wget -O "$WAR" "https://gerrit-releases.storage.googleapis.com/gerrit-$GERRIT_VERSION.war"
+    wget -O "$WAR" \
+         --max-redirect=0 \
+         "https://gerrit-releases.storage.googleapis.com/gerrit-$GERRIT_VERSION.war"
 
     java -jar "$WAR" init --batch --dev -d "$GERRIT_SITE"
 
