@@ -411,7 +411,7 @@ Mac automation scripts to automate the Mac UI and settings
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
 - `paste_from_clipboard_upon_changes.sh` - pastes from system clipboard to stdout on Linux or Mac whenever the clipboard changes
-- `paste_diff_settings.sh` - takes snapshots of before and after clipboard changes and diffs them to show config changes
+- `paste_diff_settings.sh` - takes snapshots of before and after clipboard changes and diffs them to show config changes. Useful to figure out how to backport UI generated changes that are exportable to a global Config-as-Code such as in Jenkins JCasC
 
 `applescript/` directory:
 
