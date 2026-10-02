@@ -28,10 +28,11 @@ echo "OS detected as $os"
 echo
 
 sudo=sudo
-pip_opts="--user"
+pip_opts="--only-binary :all:"
 if [ $EUID -eq 0 ]; then
     sudo=""
-    pip_opts=""
+else
+    pip_opts+=" --user"
 fi
 
 if [ -z "${UPDATE_ANSIBLE:-}" ]; then
