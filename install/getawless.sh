@@ -34,7 +34,7 @@ DOWNLOAD_URL="https://github.com/wallix/awless/releases/download/$LATEST_VERSION
 
 echo "Downloading awless from $DOWNLOAD_URL"
 
-if ! curl --fail -o "$FILENAME" -L "$DOWNLOAD_URL"; then
+if ! curl --fail -o "$FILENAME" -L --proto "=https" "$DOWNLOAD_URL"; then
     exit
 fi
 
