@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -27,7 +28,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Downloads, configures and runs GitHub Actions Runner to run on the local machine
 
-# XXX: WARNING: GitHub advises self-hosted runners only be used for Private repos to prevent arbitrary code execution on your runners via Pull Requests (or you can set 'Allow local actions only' in the Actions Runners configuration in the repo or org)
+# XXX: WARNING: GitHub advises self-hosted runners only be used for Private repos to prevent arbitrary code execution
+#      on your runners via Pull Requests (or you can set 'Allow local actions only' in the Actions Runners
+#      configuration in the repo or org)
 
 Repo URL can be supplied via \$GITHUB_ACTIONS_REPO, otherwise attempts to infer from the local checkout's git remote url
 
@@ -81,7 +84,7 @@ tar="actions-runner-$os-x64-$VERSION.tar.gz"
 
 if ! [ -f "$tar" ]; then
     url="https://github.com/actions/runner/releases/download/v$VERSION/actions-runner-$os-x64-$VERSION.tar.gz"
-    curl -O -L "$url"
+    curl -O -L i--proto "=https" "$url"
 fi
 
 if ! [ -f config.sh ]; then
