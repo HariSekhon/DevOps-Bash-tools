@@ -117,9 +117,6 @@ awkward URLs more nicely replaced with shields.io
 [![Alpine](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Alpine/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Alpine%22)
 [![Alpine 3](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Alpine%203/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Alpine+3%22)
 
-[![Python 3.7](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.7/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.7%22)
-[![Python 3.8](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.8/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.8%22)
-[![Python 3.9](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.9/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.9%22)
 [![Python 3.10](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.10/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.10%22)
 [![Python 3.11](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.11/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.11%22)
 <!--
