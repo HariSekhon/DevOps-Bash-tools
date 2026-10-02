@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help improve or steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -82,7 +83,9 @@ shift || :
 
 if ! [ -f "$COMPOSE_FILE" ]; then
     timestamp "downloading Concourse CI docker-compose.yml" # this is in Git so shouldn't run any more
-    wget -O "$COMPOSE_FILE" https://concourse-ci.org/docker-compose.yml
+    wget -O "$COMPOSE_FILE" \
+         --max-redirect=0 \
+         https://concourse-ci.org/docker-compose.yml
 fi
 
 if [ "$action" = up ]; then
