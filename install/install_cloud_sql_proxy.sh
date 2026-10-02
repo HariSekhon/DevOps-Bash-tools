@@ -37,10 +37,11 @@ tmpfile="$(mktemp)"
 echo "Downloading Google Cloud SQL Proxy"
 if type curl &>/dev/null; then
     curl -sS --proto "=https" "$url" > "$tmpfile"
-elif type wget &>/dev/null; then
-    wget -qO "$tmpfile" --max-redirect=0 "$url"
+# would probably break as the URL implies it will do a redirect
+#elif type wget &>/dev/null; then
+#    wget -qO "$tmpfile" --max-redirect=0 "$url"
 else
-    echo "Error: neither wget nor curl were found in your \$PATH, cannot download cloud_sql_proxy"
+    echo "Error: curl not found in your \$PATH, cannot download cloud_sql_proxy"
     exit 1
 fi
 
