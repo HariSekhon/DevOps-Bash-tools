@@ -9,7 +9,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -50,9 +51,13 @@ fi
 owner_repo="${owner_repo//\//%2F}"
 
 if [ -n "${GITHUB_TOKEN:-}" ]; then
-    CURL_OPTS="-ssL --fail" "$srcdir/gitlab_api.sh" "/projects/$owner_repo/releases/permalink/latest"
+    CURL_OPTS="-ssL --fail --proto '=https'" \
+    "$srcdir/gitlab_api.sh" "/projects/$owner_repo/releases/permalink/latest"
 else
-    curl -sSL --fail "https://api.github.com/projects/$owner_repo/permalink/releases/latest"
+    curl -sSL \
+         --fail \
+         --proto "=https" \
+         "https://api.github.com/projects/$owner_repo/permalink/releases/latest"
 fi |
 jq_debug_pipe_dump |
 jq -e -r .tag_name ||
