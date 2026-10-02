@@ -43,7 +43,7 @@ min_args 1 "$@"
 url="https://updates.jenkins.io/current/update-center.actual.json"
 
 log "* downloading json"
-json="$(curl -sSfL "$url" || die "failed to fetch json from '$url'")"
+json="$(curl -sSLf --proto "=https""$url" || die "failed to fetch json from '$url'")"
 
 log "* checking not blank"
 # extremely poor performance for large 3M json download
