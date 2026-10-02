@@ -49,6 +49,6 @@ else
 fi
 
 # could add ?page=1 to get the latest 10 builds and their coverage changes
-curl -sSL --proto "=https" "https://coveralls.io/github/$repo.json" "$@"
+curl -sSLf --proto "=https" "https://coveralls.io/github/$repo.json" "$@"
 # don't pass to jq in case repo doesn't exist you'll get back HTML and a weird
 # | jq
