@@ -9,7 +9,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -84,10 +85,10 @@ gitignore_api(){
     fi;
     {
         if hash curl 2> /dev/null; then
-            curl -sSL "${options[@]}" "$url";
+            curl -sSL --proto "=https" "${options[@]}" "$url";
         else
             if hash wget 2> /dev/null; then
-                wget -O - "${options[*]}" "$url";
+                wget -O - --max-redirect=0 "${options[*]}" "$url";
             fi;
         fi
     } | eval "$commas_to_newlines";
