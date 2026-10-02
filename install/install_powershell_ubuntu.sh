@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -44,7 +45,7 @@ else
     opts="-o DPkg::Lock::Timeout=1200"
     $sudo apt-get update $opts
     $sudo apt-get install -y $opts wget apt-transport-https
-    wget -q "https://packages.microsoft.com/config/ubuntu/$version/packages-microsoft-prod.deb"
+    curl -sSLfO --proto "=https" "https://packages.microsoft.com/config/ubuntu/$version/packages-microsoft-prod.deb"
     $sudo dpkg -i packages-microsoft-prod.deb
     $sudo apt-get update $opts
     $sudo apt-get install -y $opts powershell
