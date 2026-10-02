@@ -77,7 +77,6 @@ url="https://golang.org/dl/go$version.$uname_s-amd64.tar.gz"
 mkdir -p -v "$install_location"
 
 echo "$(date '+%F %T')  Downloading $url"
-#wget -cO "$tmp_tar" "$url"
 curl -sSLf \
      --proto "=https" \
      -o "$tmp_tar" \
