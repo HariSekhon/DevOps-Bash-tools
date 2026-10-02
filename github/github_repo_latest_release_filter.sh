@@ -9,7 +9,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -54,7 +55,10 @@ fi
 if [ -n "${GITHUB_TOKEN:-}" ]; then
     "$srcdir/github_api.sh" "/repos/$owner_repo/releases"
 else
-    curl -sSL --fail "https://api.github.com/repos/$owner_repo/releases"
+    curl -sSL \
+         --fail \
+         --proto "=https" \
+         "https://api.github.com/repos/$owner_repo/releases"
 fi |
 jq_debug_pipe_dump |
 jq -r "limit(1; .[] | select(.tag_name | test(\"$regex_filter\")) | .tag_name)"
