@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -45,7 +46,7 @@ timestamp "OS is: $os"
 zip="commandlinetools-$os-11076708_latest.zip"
 
 timestamp "Downloading Android platform tools for OS '$os'"
-wget -Nc "https://dl.google.com/android/repository/$zip"
+wget -Nc --max-redirect=0 "https://dl.google.com/android/repository/$zip"
 
 mkdir -p -v ~/Android/Sdk
 
