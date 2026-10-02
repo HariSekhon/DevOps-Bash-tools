@@ -77,7 +77,7 @@ else
     else
         echo "fetching repos from GitHub repo list"
         repolist="$(
-            curl -sSL \
+            curl -sSLf \
                  --proto "=https" \
                  https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt |
             sed 's/#.*//'
