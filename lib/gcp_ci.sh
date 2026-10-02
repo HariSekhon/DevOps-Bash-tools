@@ -116,7 +116,10 @@ replace_latest_with_build(){
 download_kustomize(){
     #curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
     # better to fix version in case later versions change behaviour or syntax
-    curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+    curl -sSLf \
+         --proto "=https" \
+         -o kustomize \
+         https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
     chmod u+x ./kustomize
 }
 
