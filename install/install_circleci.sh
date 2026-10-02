@@ -30,7 +30,7 @@ fi
 if is_mac; then
     "$srcdir/../packages/brew_install_packages.sh" circleci
 else
-    curl -fLSs --proto "=https" https://circle.ci/cli | DESTDIR=~/bin bash
+    curl -sSLf --proto "=https" https://circle.ci/cli | DESTDIR=~/bin bash
 fi
 
 # unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
