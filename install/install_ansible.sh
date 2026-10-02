@@ -28,7 +28,7 @@ echo "OS detected as $os"
 echo
 
 sudo=sudo
-pip_opts="--only-binary :all:"
+pip_opts=""
 if [ $EUID -eq 0 ]; then
     sudo=""
 else
@@ -86,14 +86,14 @@ elif [ "$os" = "Linux" ]; then
         $sudo emerge -av app-admin/ansible
     elif type -P pip &>/dev/null; then
         echo "Installing via Pip"
-        pip install $pip_opts ansible
+        pip install --only-binary :all: $pip_opts ansible
     else
         echo "Couldn't find Linux package manager!'"
         exit 1
     fi
 elif type -P pip &>/dev/null; then
     echo "Unsupported OS, installing via Pip"
-    pip install $pip_opts ansible
+    pip install --only-binary :all: $pip_opts ansible
 else
     echo "Unsupported OS and pip not available!"
     exit 2
