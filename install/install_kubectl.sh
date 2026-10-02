@@ -51,7 +51,7 @@ help_usage "$@"
 version="${1:-latest}"
 
 if [ "$version" = latest ]; then
-    version="$(curl -sSL https://dl.k8s.io/release/stable.txt)"
+    version="$(curl -sSLf --proto "=https" https://dl.k8s.io/release/stable.txt)"
     version="${version#v}"
     timestamp "latest version is '$version'"
 else
