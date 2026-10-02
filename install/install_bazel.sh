@@ -31,7 +31,9 @@ platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
 
 cd /tmp
 
-curl -fLO "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-$platform-x86_64.sh"
+curl -fLO \
+     --proto "=https" \
+     "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-$platform-x86_64.sh"
 
 chmod +x "bazel-${BAZEL_VERSION}-installer-$platform-x86_64.sh"
 ./"bazel-${BAZEL_VERSION}-installer-$platform-x86_64.sh" --user  # --user installs to ~/bin and sets the .bazelrc path to ~/.bazelrc
