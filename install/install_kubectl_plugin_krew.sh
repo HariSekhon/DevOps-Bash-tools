@@ -58,7 +58,7 @@ arch="$(get_arch)"
 krew="krew-${os}_${arch}"
 
 timestamp "Downloading latest $krew.tar.gz"
-curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/$krew.tar.gz"
+curl -fsSLO --proto "=https" "https://github.com/kubernetes-sigs/krew/releases/latest/download/$krew.tar.gz"
 echo
 
 timestamp "Extracting $krew.tar.gz"
