@@ -84,10 +84,10 @@ gitignore_api(){
         commas_to_newlines="tr ',' '\\n'";
     fi;
     {
-        if type -P curl 2>/dev/null; then
+        if type -P curl &>/dev/null; then
             curl -sSL --proto "=https" "${options[@]}" "$url";
         else
-            #if type -P wget 2> /dev/null; then
+            #if type -P wget &> /dev/null; then
             #    wget -O - --max-redirect=0 "${options[*]}" "$url";
             #fi;
             die "ERROR: curl not found in \$PATH"
