@@ -69,6 +69,6 @@ else
         echo "Installing HomeBrew on Mac as user ${USER:-whoami}"
         # now deprecated and replaced with the shell version below
         #curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
-        bash -c "$(echo "$cmds"; curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        bash -c "$(echo "$cmds"; curl -sSLf --proto "=https" https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
 fi
