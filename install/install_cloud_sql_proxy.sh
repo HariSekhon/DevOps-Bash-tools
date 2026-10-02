@@ -35,10 +35,10 @@ url="https://dl.google.com/cloudsql/cloud_sql_proxy.$os.amd64"
 tmpfile="$(mktemp)"
 
 echo "Downloading Google Cloud SQL Proxy"
-if type wget &>/dev/null; then
+if type curl &>/dev/null; then
+    curl -sS --proto "=https" "$url" > "$tmpfile"
+elif type wget &>/dev/null; then
     wget -qO "$tmpfile" --max-redirect=0 "$url"
-elif type curl &>/dev/null; then
-    curl -sS "$url" > "$tmpfile"
 else
     echo "Error: neither wget nor curl were found in your \$PATH, cannot download cloud_sql_proxy"
     exit 1
