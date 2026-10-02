@@ -83,8 +83,6 @@ shift || :
 
 if ! [ -f "$COMPOSE_FILE" ]; then
     timestamp "downloading Concourse CI docker-compose.yml" # this is in Git so shouldn't run any more
-    #wget -O "$COMPOSE_FILE" \
-    #     --max-redirect=0 \
     curl -sSLf \
          --proto "=https" \
          -o "$COMPOSE_FILE" \
