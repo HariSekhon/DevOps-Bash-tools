@@ -47,6 +47,11 @@ zip="commandlinetools-$os-11076708_latest.zip"
 
 timestamp "Downloading Android platform tools for OS '$os'"
 wget -Nc --max-redirect=0 "https://dl.google.com/android/repository/$zip"
+#curl -sSLf \
+#     --proto "=https" \
+#     -o "$zip" \
+#     "https://dl.google.com/android/repository/$zip"
+
 
 mkdir -p -v ~/Android/Sdk
 
