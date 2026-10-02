@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -41,7 +42,7 @@ fi
 platform="$os/$arch"
 
 base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
-agent_version=$(curl -sS --fail "${base_url}/release.txt")
+agent_version=$(curl -sS --fail --proto "=https" "${base_url}/release.txt")
 
 timestamp "Using CircleCI Launch Agent version $agent_version"
 echo >&2
