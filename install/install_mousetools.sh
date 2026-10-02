@@ -14,8 +14,6 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# XXX: looks like this tool has disappeared from the website
-
 # Installs MouseTools on Mac OS X
 #
 # http://www.hamsoftengineering.com/codeSharing/MouseTools/MouseTools.html
@@ -23,6 +21,8 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 #srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+echo "WARNING: it looks like this tool has disappeared from the website"
 
 if [ "$(uname -s)" != Darwin ]; then
     echo "Operating System is not Mac, cannot install MouseTools which is for Mac, aborting..."
