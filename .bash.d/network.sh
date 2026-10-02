@@ -65,7 +65,7 @@ ipinfo(){
 }
 
 ipify(){
-    curl http://api.ipify.org/
+    curl https://api.ipify.org/
     echo
 }
 
