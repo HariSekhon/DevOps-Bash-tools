@@ -1442,7 +1442,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
 - `chrome.sh` - opens URL(s) in the Google Chrome browser in a portable way between Linux and Mac for use from other scripts from args or stdin. You may want to combine this with the `command_return_to_current_window.sh` script when automating opening tabs
 - `chrome_profiles.sh` - parses Chrome brower's local state and lists the users and profile names to be passed to the chrome command when using automation like `chrome.sh` multi-url stdin staggered opening
-- `chrome_dump_dom.sh` - uses Chrome in headless mode to dump the final HTML DOM from Javascript constructed pages to stdout for automated shell processing, such as piping to `urlextract.sh` or `html_href.sh` to extract all HTTP(S) or generic links respectively
+- `chrome_dump_dom.sh` - uses Chrome in headless mode to dump the final HTML DOM from Javascript constructed pages to stdout for automated shell processing, such as piping to `urlextract.sh` or `html_hrefs.sh` to extract all HTTP(S) or generic links respectively
 - `chrome_bookmark_urls.sh` - parses the Google Chrome bookmark URLs and prints them one per line. Supports different profiles and querying specific Bookmarks subfolders. Useful to combine with another tool like `chrome.sh` to open all those tabs in a staggered throttled way in order to avoid overloading a website, which often results in HTTP 429 Too Many Requests errors and time banning
 - `datadog_api.sh` - queries the [DataDog](https://www.datadoghq.com/) API with authentication
 - `dnsjson.sh` - queries dnsjson.com for DNS records
