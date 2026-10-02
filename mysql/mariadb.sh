@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -125,7 +126,10 @@ db="$srcdir/chinook.mysql"
 if [ -n "${LOAD_SAMPLE_DB:-}" ] &&
    ! [ -f "$db" ]; then
     timestamp "downloading sample 'chinook' database"
-    wget -qcO "$db" 'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_MySql.sql?raw=true'
+    curl -sSLf \
+         --proto "=https" \
+         -o "$db" \
+         'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_MySql.sql?raw=true'
     #iconv -f ISO-8859-1 -t UTF-8 "$db" > "$db.utf8"
 fi
 
