@@ -123,7 +123,10 @@ db="$srcdir/chinook.psql"
 if [ -n "${LOAD_SAMPLE_DB:-}" ] &&
    ! [ -f "$db.utf8" ]; then
     timestamp "downloading sample 'chinook' database"
-    wget -qcO "$db" 'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql?raw=true'
+    curl -sSLfO \
+         --proto "=https"  \
+         -o "$db" \
+         'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql?raw=true'
     iconv -f ISO-8859-1 -t UTF-8 "$db" > "$db.utf8"
 fi
 
