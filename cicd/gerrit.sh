@@ -41,8 +41,9 @@ gerrit_local(){
 
     mkdir -pv "$GERRIT_SITE"
 
-    wget -O "$WAR" \
-         --max-redirect=0 \
+    curl -sSLf \
+         -o "$WAR" \
+         --proto "=https" \
          "https://gerrit-releases.storage.googleapis.com/gerrit-$GERRIT_VERSION.war"
 
     java -jar "$WAR" init --batch --dev -d "$GERRIT_SITE"
