@@ -65,7 +65,7 @@ else
         $sudo installer -pkg AWSCLIV2.pkg -target /
         rm -fr -- AWSCLIV2.pkg
     else
-        wget -c "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O "awscliv2.zip"
+        wget -c "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O "awscliv2.zip" --max-redirect=0
         unzip -o awscliv2.zip
         # defined in utils.sh lib
         # shellcheck disable=SC2154
