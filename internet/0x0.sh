@@ -90,7 +90,7 @@ command curl -sSlfi "$url" \
              -F "expires=$expiry" ||
     {
         timestamp "FAILED: repeating without the curl -f switch to get the error from the API:"
-        command curl -sSl "$url" \
+        command curl -sSli "$url" \
                      -F "file=@$file" \
                      -F "expires=$expiry"
         echo
