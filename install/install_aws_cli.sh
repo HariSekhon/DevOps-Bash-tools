@@ -86,7 +86,9 @@ if type -P ecs-cli &>/dev/null; then
 else
     echo "Installing AWS ECS CLI"
     if is_mac; then
-        wget -O ~/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-darwin-amd64-latest
+        wget -O ~/bin/ecs-cli \
+             --max-redirect=0 \
+             https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-darwin-amd64-latest
     else
         wget -O ~/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest
     fi
