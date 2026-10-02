@@ -81,7 +81,7 @@ EOF
 fi
 
 {
-command curl -sSlf "$url" \
+command curl -sSlfi "$url" \
              -F "file=@$file" \
              -F "expires=$expiry" ||
     {
