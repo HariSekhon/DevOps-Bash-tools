@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -35,7 +36,8 @@ fi
 
 cd /tmp
 
-wget -O MouseTools.zip http://www.hamsoftengineering.com/assets/MouseTools.zip
+# XXX: looks like this download is no longer available
+wget -O MouseTools.zip https://www.hamsoftengineering.com/assets/MouseTools.zip
 
 unzip -o -- MouseTools.zip
 
