@@ -40,7 +40,7 @@ start_time="$(date +%s)"
 echo
 
 if command -v yum 2>/dev/null; then
-    curl -sSL https://www.scala-sbt.org/sbt-rpm.repo |
+    curl -sSLf --proto "=https" https://www.scala-sbt.org/sbt-rpm.repo |
         $sudo tee /etc/yum.repos.d/sbt-rpm.repo
     $sudo yum install -y java-sdk
     $sudo yum install -y --nogpgcheck sbt
@@ -54,7 +54,7 @@ elif command -v apt-get 2>/dev/null; then
     echo "deb https://repo.scala-sbt.org/scalasbt/debian /" |
         $sudo tee /etc/apt/sources.list.d/sbt_old.list
     $sudo apt-get install -y $opts apt-transport-https curl gnupg
-    curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" |
+    curl -sSLf --proto "=https"  "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" |
         ${sudo:+$sudo -H} gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/scalasbt-release.gpg --import
     $sudo chmod 644 /etc/apt/trusted.gpg.d/scalasbt-release.gpg
     $sudo apt-get update $opts
