@@ -57,7 +57,7 @@ section "SQLFluff"
 if ! type -P sqlfluff &>/dev/null; then
     timestamp "SQLFluff not installed, attempting to install it now..."
     "$srcdir/../packages/install_package.sh" sqlfluff ||
-    pip install sqlfluff
+    pip install --only-binary :all: sqlfluff
     echo
 fi
 
