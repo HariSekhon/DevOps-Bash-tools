@@ -9,7 +9,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -41,6 +42,6 @@ min_args 1 "$@"
 address="$1"
 type="${2:-A}"
 
-curl -sSL "https://dnsjson.com/$address/$type.json" |
+curl -sSLf --proto "=https" "https://dnsjson.com/$address/$type.json" |
 jq -r '.results.records[]' |
 sort -n
