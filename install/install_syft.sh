@@ -47,5 +47,5 @@ else
     [[ "$version" =~ ^v ]] || version="v$version"
 fi
 
-curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh |
+curl -sSLf --proto "=https" https://raw.githubusercontent.com/anchore/syft/main/install.sh |
 sh -s -- -b ~/bin "$version"
