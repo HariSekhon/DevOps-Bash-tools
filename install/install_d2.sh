@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -50,7 +51,7 @@ help_usage "$@"
             "$srcdir/../packages/install_packages.sh" curl
         fi
 
-        curl -fsSL https://d2lang.com/install.sh | sh -s --
+        curl -sSLf --proto "=https" https://d2lang.com/install.sh | sh -s --
     fi
 #fi
 
