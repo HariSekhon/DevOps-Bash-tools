@@ -38,7 +38,9 @@ echo
 if ! [ -e "$BASE/groovy" ]; then
     mkdir -p "$BASE"
     cd "$BASE"
-    wget -t 100 --retry-connrefused "https://groovy.jfrog.io/artifactory/dist-release-local/groovy-zips/apache-groovy-binary-$GROOVY_VERSION.zip"
+    curl -sSLfO \
+         --proto "=https" \
+         "https://groovy.jfrog.io/artifactory/dist-release-local/groovy-zips/apache-groovy-binary-$GROOVY_VERSION.zip"
     unzip "apache-groovy-binary-$GROOVY_VERSION.zip"
     ln -sv -- "groovy-$GROOVY_VERSION" groovy
     rm -f -- "apache-groovy-binary-$GROOVY_VERSION.zip"
