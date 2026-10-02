@@ -19,6 +19,6 @@ set -euo pipefail
 #srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # installs to ~/.pulumi/bin/
-curl -fsSL --proto "=htt[s" https://get.pulumi.com | sh
+curl -fsSL --proto "=https" https://get.pulumi.com | sh
 echo
 ~/.pulumi/bin/pulumi version
