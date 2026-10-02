@@ -46,7 +46,7 @@ elif is_mac; then
     brew install buildkite-agent
 else
     TOKEN="$BUILDKITE_AGENT_TOKEN" \
-    bash -c "$(curl -sL --proto "=https" https://raw.githubusercontent.com/buildkite/agent/master/install.sh)"
+    bash -c "$(curl -sSLf --proto "=https" https://raw.githubusercontent.com/buildkite/agent/master/install.sh)"
 fi
 
 if is_mac; then
