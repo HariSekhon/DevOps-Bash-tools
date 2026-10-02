@@ -40,7 +40,10 @@ help_usage "$@"
 mappings="$srcdir/../resources/pipreqs_mapping.txt"
 
 if ! [ -f "$mappings" ]; then
-    wget -O "$mappings" https://raw.githubusercontent.com/bndr/pipreqs/master/pipreqs/mapping
+    curl -sSLf \
+         --proto "=https"
+         -o "$mappings" \
+         https://raw.githubusercontent.com/bndr/pipreqs/master/pipreqs/mapping
 fi
 
 sed_script="$(
