@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help improve or steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -16,6 +17,6 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-pip install caniusepython3
+pip install --only-binary :all: caniusepython3
 echo "Testing module dependencies for Python 3 compatibility"
 caniusepython3 -r requirements.txt
