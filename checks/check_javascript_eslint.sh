@@ -47,7 +47,7 @@ start_time="$(start_timer)"
 
 if ! type -P eslint &>/dev/null &&
     type -P npm; then
-    npm install eslint
+    npm install --ignore-scripts -- eslint
 fi
 
 if type -P eslint &>/dev/null; then
