@@ -83,7 +83,7 @@ latest_grace_epoch="$((target_time_epoch + grace_mins * 60))"
 
 timestamp "Waiting until $target_time (up to $grace_mins minutes late)..."
 
-while true; do
+while :; do
     now_epoch="$(date '+%s')"
 
     if (( now_epoch >= target_time_epoch )); then
