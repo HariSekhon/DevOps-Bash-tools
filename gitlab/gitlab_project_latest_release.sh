@@ -54,8 +54,7 @@ if [ -n "${GITHUB_TOKEN:-}" ]; then
     CURL_OPTS="-ssL --fail --proto '=https'" \
     "$srcdir/gitlab_api.sh" "/projects/$owner_repo/releases/permalink/latest"
 else
-    curl -sSL \
-         --fail \
+    curl -sSLf \
          --proto "=https" \
          "https://api.github.com/projects/$owner_repo/permalink/releases/latest"
 fi |
