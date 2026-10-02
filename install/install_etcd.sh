@@ -57,7 +57,9 @@ url="https://github.com/$owner_repo/releases/download/$version/etcd-$version-$os
 
 package="/tmp/etcd.$$.$ext"
 
-curl -sSLf "$url"  -o "$package"
+curl -sSLf "$url" \
+     --proto "=https" \
+     -o "$package"
 
 if [ "$ext" = "tar.gz" ]; then
     sudo tar -zxv --strip-components=1 -C /usr/local/bin/
