@@ -33,8 +33,8 @@ I use this for my HariSekhon/Spotify-Playlists backup each night so it waits in 
 and runs it interactively to allow human gate safety approvals before Git committing any song removals from
 any playlist
 
-You could also break this down into a CI/CD process with an Human Gate step but that requires more infrastructure
-and overhead while this is cheap and chearful like unix core utils
+You could also break this down into a CI/CD process with a Human Gate approval step but that requires more
+infrastructure and overhead while this is cheap and chearful like unix core utils
 
 If running on a laptop that wakes up <grace_minutes> after the time it'll also run
 
