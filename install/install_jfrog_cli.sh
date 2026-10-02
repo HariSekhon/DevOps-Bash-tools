@@ -31,7 +31,7 @@ cd "$tmp"
 #mv -iv -- jfrog ~/bin/jfrog
 
 # installs as 'jf' in /usr/local/bin
-curl -fL "https://install-cli.jfrog.io" | sh
+curl -sSLf --proto "=https" "https://install-cli.jfrog.io" | sh
 
 echo
 jf --version
