@@ -38,4 +38,4 @@ fi
 
 repo="$1"
 
-curl -sSL "https://hub.docker.com/api/build/v1/source?image=$repo"
+curl -sS "https://hub.docker.com/api/build/v1/source?image=$repo"
