@@ -36,7 +36,6 @@ fi
 
 cd /tmp
 
-# XXX: looks like this download is no longer available
 wget -O MouseTools.zip https://www.hamsoftengineering.com/assets/MouseTools.zip
 
 unzip -o -- MouseTools.zip
