@@ -41,7 +41,7 @@ uname_s="$(uname -s)"
 
 install_azure_cli(){
     if type -P apt-get &>/dev/null; then
-        curl -sL https://aka.ms/InstallAzureCLIDeb | $sudo bash
+        curl -sL --proto "=https" https://aka.ms/InstallAzureCLIDeb | $sudo bash
     elif type -P yum &>/dev/null; then
         # Needs Python 3
 #        if ! type -P python3 &>/dev/null; then
@@ -74,7 +74,9 @@ EOF
             # only works on Alpine 3 - Alpine 2.x doesn't support --no-cache and nor does it have Python 3 package dependency which Azure CLI requires
             "$srcdir/../packages/apk_install_packages.sh" curl python3 python3-dev alpine-sdk musl-dev libffi-dev # openssl-dev conflicts with libressl-dev
         fi
-        yes "" | curl -L https://aka.ms/InstallAzureCli | $sudo bash
+        yes "" |
+        curl -L --proto "=https" https://aka.ms/InstallAzureCli |
+        $sudo bash
     echo
         echo "OS '$uname_s' is not Mac / Linux - not supported"
         exit 1
