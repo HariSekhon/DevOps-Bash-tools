@@ -38,7 +38,7 @@ infoblox_ova="${INFOBLOX_URL##*/}"
 if [ "$infoblox_ova" ]; then
     echo "Found $infoblox_ova, skipping download"
 else
-    wget "$INFOBLOX_URL"
+    curl -sSLfO --proto "=https" "$INFOBLOX_URL"
 fi
 
 if vboxmanage list vms | grep "^\"$VM_NAME\""; then
