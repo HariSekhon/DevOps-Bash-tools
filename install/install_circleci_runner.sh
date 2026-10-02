@@ -56,7 +56,10 @@ tmp="$(mktemp -d)"
 cd "$tmp"
 
 timestamp "Downloading and verifying CircleCI Launch Agent Binary"
-curl -sSL --fail "$base_url/$agent_version/checksums.txt" -o checksums.txt
+curl -sSLf \
+     --proto "=https" \
+     -o checksums.txt \
+     "$base_url/$agent_version/checksums.txt"
 file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
 echo >&2
 
