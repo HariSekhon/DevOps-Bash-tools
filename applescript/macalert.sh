@@ -52,5 +52,5 @@ title="${title//\"}"
 message="${message//\"}"
 
 osascript -e "
-    display alert \"$title\" message \"$message\" as informational
+    display alert \"$title\" message \"$message\" as critical
 "
