@@ -27,6 +27,9 @@ usage_description="
 Generates a persistent pop-up alert in the middle of the screen on macOS
 
 Requires the OK button to be clicked to dismiss it
+
+See the HariSekhon/Knowledge-Base page on Mac for more details on the different types of desktop notifications and
+alerts that can be done
 "
 
 # used by usage() in lib/utils.sh
