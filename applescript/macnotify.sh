@@ -27,6 +27,9 @@ usage_description="
 Generates a temporary pop-up notification on macOS in the top right corner
 
 If not dismissed this persists in Notification Center until cleared
+
+See the HariSekhon/Knowledge-Base page on Mac for more details on the different types of desktop notifications and
+alerts that can be done
 "
 
 # used by usage() in lib/utils.sh
