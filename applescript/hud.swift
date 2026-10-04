@@ -18,8 +18,8 @@
 //
 // Use instead macnotify.sh or macalert.sh
 //
-// See the HariSekhon/Knowledge-Base page on Mac for more details on the different types of desktop notifications and
-// alerts that can be done
+// See the HariSekhon/Knowledge-Base page on Mac for more details
+// on the different types of desktop notifications and alerts that can be done
 
 import Cocoa
 
