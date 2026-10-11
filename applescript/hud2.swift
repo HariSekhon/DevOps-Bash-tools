@@ -17,7 +17,7 @@
 // HUD style (Heads-Up Display)
 //
 // This doesn't steal window focus so you won't have to stop typing to address it
-
+//
 // This is sample code only, for reference, I am not using this regularly
 //
 // Use instead macnotify.sh or macalert.sh
