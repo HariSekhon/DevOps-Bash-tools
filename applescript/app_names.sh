@@ -20,10 +20,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ $# -gt 0 ]; then
     cat <<EOF
 Prints sorted list of Applications running in the name format that can be passed to
-the adjacent script set_frontmost_process.scpt
+the adjacent script set_frontmost_process.applescript
 EOF
     exit 3
 fi
 
-"$srcdir/get_application_names.scpt" |
+"$srcdir/get_application_names.applescript" |
 sort -fu # money
