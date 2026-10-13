@@ -24,7 +24,7 @@
 
 set N to 10
 
-# see adjacent get_mouse_coordinates.scpt for how to get the mouse coordinates
+# see adjacent get_mouse_coordinates.applescript for how to get the mouse coordinates
 set x to 2455
 set y to 1273
 
