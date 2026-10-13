@@ -365,6 +365,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `screen_terminal_to_stdout.sh` - dumps the GNU Screen terminal output to stdout
 - `screen_terminal_to_clipboard.sh` - dumps the GNU Screen terminal output to a temp file and copies to clipboard for sharing & debugging purposes
 - `shields_embed_logo.sh` - base64 encodes a given icon file or url and prints the `logo=...` url parameter you need to add the [shields.io](https://shields.io/) badge url
+- `shorten_clipboard_text.sh` - shortens the text in clipboard to make social media comments shorter
 - `shorten_text_selection.sh` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes out multiple blank lines. I use this for LinkedIn comments due to the short 1250 character limit
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
 - `shred_free_space.sh` - overwrites free space to prevent recovery of sensitive information for files that have already been deleted
