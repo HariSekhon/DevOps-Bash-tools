@@ -46,10 +46,10 @@ if ! is_mac; then
     die "ERROR: only supported on Mac"
 fi
 
-current="$("$srcdir/../applescript/get_frontmost_process.scpt")"
+current="$("$srcdir/../applescript/get_frontmost_process.applescript")"
 
 "$@" &
 
 sleep 0.5
 
-"$srcdir/../applescript/set_frontmost_process.scpt" "$current"
+"$srcdir/../applescript/set_frontmost_process.applescript" "$current"
