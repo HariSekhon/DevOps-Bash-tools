@@ -362,15 +362,15 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
         "$srcdir/../bin/curl_with_cookies.sh" "$url"
     elif is_mac; then
         log "URL: $url"
-        frontmost_process="$("$applescript/get_frontmost_process.scpt")"
+        frontmost_process="$("$applescript/get_frontmost_process.applescript")"
         "$srcdir/../bin/urlopen.sh" "$url"
         # if using PKCE, need to add code to save and reuse refresh_token, otherwise it results in a fresh authorization page each time
         # send Tab, Tab, Tab, Space to accept the new prompt page
         #START_DELAY=1 SLEEP_SECS=1 "$srcdir/../applescript/keystrokes.sh" 1 48 48 48 49
         # don't close the tab too fast or the token isn't passed to the local callback handler
         wait
-        "$applescript/browser_close_tab.scpt"
-        "$applescript/set_frontmost_process.scpt" "$frontmost_process"
+        "$applescript/browser_close_tab.applescript"
+        "$applescript/set_frontmost_process.applescript" "$frontmost_process"
     else
         echo
         echo "Go to the following URL in your browser, authorize and then the token will be output on the command line:"
