@@ -18,7 +18,7 @@
 -- ============================================================================ #
 
 -- Gets the list of Applications running in the name format that can be passed to
--- the adjacent script set_frontmost_process.scpt
+-- the adjacent script set_frontmost_process.applescript
 
 tell application "System Events"
     set appList to (name of every application process)
