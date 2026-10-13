@@ -52,12 +52,12 @@ sleep "$SLEEP_SECS"
 applescript="$srcdir/../applescript"
 
 timestamp "Switching to Finder"
-"$applescript/set_frontmost_process.scpt" Finder
+"$applescript/set_frontmost_process.applescript" Finder
 
 sleep "$SLEEP_SECS"
 
 timestamp "Checking Finder is the frontmost process"
-if [ "$("$applescript/get_frontmost_process.scpt")" != Finder ]; then
+if [ "$("$applescript/get_frontmost_process.applescript")" != Finder ]; then
     die "Failed to switch to Finder - not the frontmost process"
 fi
 
