@@ -54,6 +54,6 @@ if ! is_float "$SLEEP_SECS"; then
 fi
 
 timestamp "Switching foreground window to Remote Desktop"
-"$srcdir/set_frontmost_process.scpt" "Microsoft Remote Desktop"
+"$srcdir/set_frontmost_process.applescript" "Microsoft Remote Desktop"
 
 exec "$srcdir/mouse_clicks.sh" -1
