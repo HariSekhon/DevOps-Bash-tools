@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -27,7 +28,7 @@
 # Tested on macOS 14
 
 set timestamp to do shell script "date '+%Y-%m-%d %H:%M:%S'"
-return timestamp & "  Switching to previous window"
+log timestamp & "  Switching to previous window"
 tell application "System Events"
 	key down command
 	keystroke tab
@@ -36,13 +37,16 @@ end tell
 
 delay 0.3
 
-# copy the selected text
+set timestamp to do shell script "date '+%Y-%m-%d %H:%M:%S'"
+log timestamp & "  Copying the selected text"
 tell application "System Events"
 	keystroke "c" using command down
 end tell
 
 delay 0.1
 
+set timestamp to do shell script "date '+%Y-%m-%d %H:%M:%S'"
+log timestamp & "  Shortening the text from the clipboard back to the clipboard"
 # - replace occurrences of the word "and" with "&" using sed with word boundaries
 # - crush out multiple blank lines to a single blank line between paragraphs
 #   - this is correct the pbpaste | pbcopy copying back multiplying the blank lines
@@ -50,7 +54,8 @@ do shell script "pbpaste | gsed -E 's/\\band\\b/\\&/g' | cat -s | pbcopy"
 
 delay 0.1
 
-# paste the modified text over the original selection
+set timestamp to do shell script "date '+%Y-%m-%d %H:%M:%S'"
+log timestamp & "  Pasting the modified text in clipboard back to window"
 tell application "System Events"
 	keystroke "v" using command down
 end tell
