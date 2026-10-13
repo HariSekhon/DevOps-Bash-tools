@@ -26,7 +26,8 @@
 
 # Tested on macOS 14
 
-# switch to previous window
+set timestamp to do shell script "date '+%Y-%m-%d %H:%M:%S'"
+return timestamp & "  Switching to previous window"
 tell application "System Events"
 	key down command
 	keystroke tab
