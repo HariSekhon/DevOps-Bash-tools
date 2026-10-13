@@ -105,11 +105,7 @@ xdotool key ctrl+c
 sleep 0.1
 echo
 
-timestamp "Replacing selected clipboard content - 'and' with '&' and collapse multiple blank lines"
-xclip -o -selection clipboard |
-sed -E 's/\band\b/\&/g' |
-cat -s |
-xclip -selection clipboard
+"$srcdir/shorten_clipboard_text.sh"
 sleep 0.1
 echo
 
