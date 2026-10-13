@@ -365,8 +365,8 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `screen_terminal_to_stdout.sh` - dumps the GNU Screen terminal output to stdout
 - `screen_terminal_to_clipboard.sh` - dumps the GNU Screen terminal output to a temp file and copies to clipboard for sharing & debugging purposes
 - `shields_embed_logo.sh` - base64 encodes a given icon file or url and prints the `logo=...` url parameter you need to add the [shields.io](https://shields.io/) badge url
-- `shorten_clipboard_text.sh` - shortens the text in clipboard to make social media comments shorter
-- `shorten_text_selection.sh` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes out multiple blank lines. I use this for LinkedIn comments due to the short 1250 character limit
+- `shorten_clipboard_text.sh` - shortens the text in clipboard to make social media comments shorter. Replaces `and` with `&` and crushes out multiple blank lines. I used this for LinkedIn comments due to the short 1250 character limit
+- `shorten_text_selection.sh` - shortens the selected text in the prior window. Faster way to use the above without having to copy and paste clipboard manually
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
 - `shred_free_space.sh` - overwrites free space to prevent recovery of sensitive information for files that have already been deleted
 - `sleepuntil.sh` - sleep until the given HH:MM clock time. Useful for delaying the run of a foreground terminal program to inherit your terminal's environment variables (which may contain API keys) or interactively manage a process in your terminal, which cannot be done with the `at` command. I use this for my [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) backup each night so it waits in terminal for me to arrive home and runs it interactively to allow human gate safety approvals before Git committing any song removals from any playlist
