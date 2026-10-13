@@ -47,7 +47,7 @@ help_usage "$@"
 no_more_args "$@"
 
 if is_mac; then
-    exec "$srcdir/../applescript/shorten_text_selection.scpt"
+    exec "$srcdir/../applescript/shorten_text_selection.applescript"
 fi
 
 for bin in xdotool xclip; do
