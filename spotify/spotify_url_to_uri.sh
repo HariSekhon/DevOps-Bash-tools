@@ -27,6 +27,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Cvonerts Spotify URLs to URIs
 
+Useful to work with offline playlist comparisons
+
 For example:
 
     https://open.spotify.com/track/...
