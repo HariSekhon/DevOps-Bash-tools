@@ -982,6 +982,10 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `precommit_run_changed_files.sh` - runs pre-commit on all files changed on the current branch vs the default branch. Useful to reproduce `pre-commit` checks that are failing in pull requests to get your PRs to pass
   - `git_diff_commit.sh` - quickly commits added or updated files to Git, showing a diff and easy enter prompt for each file. Super convenient for fast commits on the command line, and in vim and IDEs via hotkeys
   - `git_review_push.sh` - shows diff of what would be pushed upstream and prompts to push. Convenient for fast reviewed pushes via vim or IDEs hotkeys
+  - `git_rm_untracked.sh` - deletes untracked files from the local Git checkout's given base paths, with safety prompting
+  - `git_revert_line.sh` - reverts the first line that matches a given regex from the Git head commit's version of the same line number. Useful to revert some changes caused by over zealous sed'ing scripts, where you want to cherry-pick revert a single line change
+  - `git_files_no_uncommitted_changes.sh` - returns zero if given file(s) don't have uncommitted changes to Git, either staged or unstaged. Useful to be able to iterate over git files with in-place edits only if safe to do so without other uncommitted changes that would be at risk of being lost
+  - `git_grep_env_vars.sh` - find environment variables in the current git repo's code base in the format `SOME_VAR` (useful to find undocumented environment variables in internal or open source projects such as ArgoCD eg. [argoproj/argocd-cd #8680](https://github.com/argoproj/argo-cd/pull/8680))
   - `git_branch_delete_squash_merged.sh` - carefully detects if a squash merged branch you want to delete has no changes with the default trunk branch before deleting it.
      See [Squash Merges](https://github.com/HariSekhon/Knowledge-Base/blob/main/git.md#squash-merges-require-force-deleting-branches) in knowledge-base about why this is necessary.
   - `git_tag_release.sh` - creates a Git tag, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
@@ -1004,7 +1008,6 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_remotes_set_https_creds_helpers.sh` - adds Git credential helpers configuration to the local git repo to use http API tokens dynamically from environment variables if they're set
   - `git_repos_pull.sh` - pull multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
-  - `git_grep_env_vars.sh` - find environment variables in the current git repo's code base in the format `SOME_VAR` (useful to find undocumented environment variables in internal or open source projects such as ArgoCD eg. [argoproj/argocd-cd #8680](https://github.com/argoproj/argo-cd/pull/8680))
   - `git_log_empty_commits.sh` - find empty commits in git history (eg. if a `git filter-branch` was run but `--prune-empty` was forgotten, leaking metadata like subjects containing file names or other sensitive info)
   - `git_log_me.sh` - shows only commits in the Git log done by you. Useful to remind yourself what parts the current Git repo you've been working on for periodic reviews, reports or even updating your CV!
   - `git_log_me_added.sh` - same as above but only file addition commits
@@ -1015,9 +1018,6 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_graph_commit_times_gnuplot_all_repos.sh` - generates GNUplot graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
   - `git_graph_commit_times_mermaidjs_all_repos.sh` - generates MermaidJS graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
   - `github_public_lines_of_code.sh` - checks out all public original source GitHub repos for the current or given user and then counts all lines of code for them with breakdowns of languages, files, code, comments and blanks
-  - `git_rm_untracked.sh` - deletes untracked files from the local Git checkout's given base paths, with safety prompting
-  - `git_revert_line.sh` - reverts the first line that matches a given regex from the Git head commit's version of the same line number. Useful to revert some changes caused by over zealous sed'ing scripts, where you want to cherry-pick revert a single line change
-  - `git_files_no_uncommitted_changes.sh` - returns zero if given file(s) don't have uncommitted changes to Git, either staged or unstaged. Useful to be able to iterate over git files with in-place edits only if safe to do so without other uncommitted changes that would be at risk of being lost
   - `git_files_in_history.sh` - finds all filename / file paths in the git log history, useful for prepping for `git filter-branch`
   - `git_filter_branch_fix_author.sh` - rewrites Git history to replace author/committer name & email references (useful to replace default account commits). Powerful, read `--help` and `man git-filter-branch` carefully. Should only be used by Git Experts
   - `git_filter_repo_replace_text.sh` - rewrites Git history to replace a given text to scrub a credential or other sensitive token from history. Refuses to operate on tokens less than 8 chars for safety
