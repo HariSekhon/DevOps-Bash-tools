@@ -983,31 +983,6 @@ git_revert_typechange(){
     co $(git status --porcelain -s "${1:-.}" | awk '/^.T/{print $2}')
 }
 
-git_rm_untracked(){
-    if [ $# -lt 1 ]; then
-        echo "usage: rm_untracked <target_dir_or_files_or_glob>"
-        return 1
-    fi
-    # iterate on explicit targets only
-    # intentionally not including current directory to avoid accidentally wiping out untracked files - you must specify "rm_untracked ." if you really intend this
-    for x in "${@:-}"; do
-        git status --porcelain -s --untracked-files=all "$x" |
-        # this breaks the correct spacings for Spotify playlist filenames
-        #awk '/^\?\?/{$1=""; print}' |
-        grep '^??' |
-        sed 's/^?? //' |
-        while read -r filename; do
-            # git status --porcelain double quotes file paths when containing unicode chars which are representated in \xxx format
-            # you must set 'git config --global core.quotePath false' for this to work properly
-            #
-            # this doesn't help because you are still stuck with \xxx chars throughout
-            filename="${filename#\"}"
-            filename="${filename%\"}"
-            rm -v -- "$filename" || break
-        done
-    done
-}
-
 # example of usage of this in the function below - make sure to put '$repo' or "\$repo" somewhere in the argument body to make use of the iteration variable
 foreachrepo(){
     local repolist="${REPOLIST:-$bash_tools/setup/repos.txt}"
