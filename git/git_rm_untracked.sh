@@ -60,7 +60,7 @@ files_to_remove="$(
             #echo rm -fv -- "$filename"
             echo "$filename"
         done
-    done
+    done || :
 )"
 
 if is_blank "$files_to_remove"; then
