@@ -71,7 +71,7 @@ else
     echo
     echo "$files_to_remove"
     echo
-    read -r -p "Do you want remove these files? " answer
+    read -r -p "Are you sure you want remove these files? (y/N)" answer
     check_yes "$answer"
     echo
     echo "Deleting:"
