@@ -38,7 +38,7 @@ usage_args="<directories_or_files_or_glob>"
 
 help_usage "$@"
 
-num_args 1 "$@"
+min_args 1 "$@"
 
 # iterate on explicit targets only for safety
 # intentionally not including current directory to avoid accidentally wiping out untracked files
