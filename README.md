@@ -991,11 +991,11 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_foreach_repo_replace_readme_actions.sh` - updates the `README.md` badges for GitHub Actions to match the local repo name. Useful to bulk fix copied badges quickly and easily
   - `git_foreach_repo_update_readme.sh` - git-diff-commits the `README.md` for each Git repo checkout using adjacent `git_foreach_repo.sh` and `git_diff_commit.sh` scripts. Useful to quickly bulk update `README.md` in all your projects, such as when references need updating
   - `git_push_stats.sh` - shows the Git push stats to the remote origin for the current branch - number of commits and lines of diff, using the following `git_origin_*.sh` scripts:
-  - `git_origin_log_to_push.sh` - shows the Git log in local branch that would be pushed to remote origin
-  - `git_origin_files_to_push.sh` - shows the Git files in local branch that would be pushed to remote origin
-  - `git_origin_diff_to_push.sh` - shows the Git diff of lines in local branch that would be pushed to remote origin
-  - `git_origin_commit_count_to_push.sh` - shows the number of Git commits in local branch that would be pushed to remote origin
-  - `git_origin_line_count_to_push.sh` - shows the Git number of lines changed in local branch that would be pushed to remote origin. These are lines actually added / changed / removed without surrounding context lines
+    - `git_origin_log_to_push.sh` - shows the Git log in local branch that would be pushed to remote origin
+    - `git_origin_files_to_push.sh` - shows the Git files in local branch that would be pushed to remote origin
+    - `git_origin_diff_to_push.sh` - shows the Git diff of lines in local branch that would be pushed to remote origin
+    - `git_origin_commit_count_to_push.sh` - shows the number of Git commits in local branch that would be pushed to remote origin
+    - `git_origin_line_count_to_push.sh` - shows the Git number of lines changed in local branch that would be pushed to remote origin. These are lines actually added / changed / removed without surrounding context lines
   - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merges updates from master branch to all other branches to avoid drift on longer lived feature branches / version branches (eg. [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_remotes_add_origin_providers.sh` - auto-creates remotes for the 4 major public repositories ([GitHub](https://github.com/)/[GitLab](https://gitlab.com/)/[Bitbucket](https://bitbucket.org)/[Azure DevOps](https://dev.azure.com/)), useful for `git pull -all` to fetch and merge updates from all providers in one command
   - `git_remotes_set_multi_origin.sh` - sets up multi-remote origin for unified push to automatically keep the 4 major public repositories in sync (especially useful for [Bitbucket](https://bitbucket.org) and [Azure DevOps](https://dev.azure.com/) which don't have [GitLab](https://gitlab.com/)'s auto-mirroring from [GitHub](https://github.com/) feature)
@@ -1015,6 +1015,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_graph_commit_times_gnuplot_all_repos.sh` - generates GNUplot graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
   - `git_graph_commit_times_mermaidjs_all_repos.sh` - generates MermaidJS graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
   - `github_public_lines_of_code.sh` - checks out all public original source GitHub repos for the current or given user and then counts all lines of code for them with breakdowns of languages, files, code, comments and blanks
+  - `git_rm_untracked.sh` - deletes untracked files from the local Git checkout's given base paths, with safety prompting
   - `git_revert_line.sh` - reverts the first line that matches a given regex from the Git head commit's version of the same line number. Useful to revert some changes caused by over zealous sed'ing scripts, where you want to cherry-pick revert a single line change
   - `git_files_no_uncommitted_changes.sh` - returns zero if given file(s) don't have uncommitted changes to Git, either staged or unstaged. Useful to be able to iterate over git files with in-place edits only if safe to do so without other uncommitted changes that would be at risk of being lost
   - `git_files_in_history.sh` - finds all filename / file paths in the git log history, useful for prepping for `git filter-branch`
