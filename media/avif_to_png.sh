@@ -39,6 +39,11 @@ num_args 1 "$@"
 
 avif="$1"
 
+if is_mac; then
+    "$srcdir/../packages/install_packages_if_absent.sh" libheif
+    "$srcdir/../packages/install_packages_if_absent.sh" imagemagick
+fi
+
 shopt -s nocasematch
 if ! [[ "$avif" =~ \.avif$ ]]; then
     die "ERROR: file passed does not have an .avif file extension: $avif"
