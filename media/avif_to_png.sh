@@ -26,7 +26,12 @@ Converts a Avif image to PNG to be usable on websites that don't support Avif im
 
 Opens the converted PNG image to verify it
 
-Requires ImageMagick to be installed, attempts to install it if not found
+Requires ImageMagick and the heif library to be installed, attempts to install them if not already instealled
+
+On Mac you can pre-install them using these commands:
+
+    brew install libheif
+    brew install imagemagick
 "
 
 # used by usage() in lib/utils.sh
@@ -38,11 +43,6 @@ help_usage "$@"
 num_args 1 "$@"
 
 avif="$1"
-
-if is_mac; then
-    "$srcdir/../packages/install_packages_if_absent.sh" libheif
-    "$srcdir/../packages/install_packages_if_absent.sh" imagemagick
-fi
 
 shopt -s nocasematch
 if ! [[ "$avif" =~ \.avif$ ]]; then
