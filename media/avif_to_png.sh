@@ -74,6 +74,8 @@ convert(){
     return 1
 }
 
+# faster to just try to convert and if it fails then check for missing packages
+# rather than incur the overhead of checking for packages every time
 if convert; then
     converted=1
 else
