@@ -844,9 +844,10 @@ gitrename(){
         echo "usage: gitrename <original_filename> <new_filename>"
         return 1
     fi
-    if [ "$new" = "." ]; then
-        new="${PWD:-$(pwd)}"
-    elif [ -f "$new" ]; then
+    if [ -d "$new" ]; then
+        new="$new/${old##*/}"
+    fi
+    if [ -f "$new" ]; then
         local file_already_exists=1
         mv -iv -- "$new" "$new.tmp"
     fi
@@ -864,9 +865,10 @@ gitmv(){
         echo "usage: gitmv <original_filename> <new_filename>"
         return 1
     fi
-    if [ "$new" = "." ]; then
-        new="${PWD:-$(pwd)}"
-    elif [ -f "$2" ]; then
+    if [ -d "$new" ]; then
+        new="$new/${old##*/}"
+    fi
+    if [ -f "$new" ]; then
         local file_already_exists=1
         mv -iv -- "$new" "$new.tmp"
     fi
