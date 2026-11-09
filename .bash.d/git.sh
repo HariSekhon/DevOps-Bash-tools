@@ -844,6 +844,8 @@ gitrename(){
         echo "usage: gitrename <original_filename> <new_filename>"
         return 1
     fi
+    # if the target is a directory, then explicitly specify the path
+    # to prevent committing all uncommitted changes in that directory
     if [ -d "$new" ]; then
         new="$new/${old##*/}"
     fi
@@ -865,6 +867,8 @@ gitmv(){
         echo "usage: gitmv <original_filename> <new_filename>"
         return 1
     fi
+    # if the target is a directory, then explicitly specify the path
+    # to prevent committing all uncommitted changes in that directory
     if [ -d "$new" ]; then
         new="$new/${old##*/}"
     fi
