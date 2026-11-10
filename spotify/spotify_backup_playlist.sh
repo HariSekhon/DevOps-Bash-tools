@@ -9,7 +9,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -64,7 +65,8 @@ help_usage "$@"
 min_args 1 "$@"
 
 playlist="$1"
-if [ "$playlist" = liked ] || [ "$playlist" = saved ]; then
+if [ "$playlist" = liked ] ||
+   [ "$playlist" = saved ]; then
     playlist="Liked Songs"
 fi
 liked(){
