@@ -25,6 +25,8 @@ usage_description="
 Downloads all videos from an entire YouTube channel using yt-dlp
 
 Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package manager if not already installed
+
+If you have issues, the first thing you should do is upgrade yt-dlp and ffmpeg and then try again
 "
 
 # used by usage() in lib/utils.sh
