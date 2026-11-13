@@ -96,6 +96,7 @@ fi
 backup_dir_base="$backup_dir"
 backup_dir_spotify_base="$backup_dir/spotify"
 backup_dir_metadata="$backup_dir/.spotify_metadata"
+path_mappings_cache="$backup_dir_metadata/playlist_path_mappings_cache.sqlite3"
 unchanged_playlist=0
 
 mkdir -vp "$backup_dir_base"
@@ -138,10 +139,33 @@ load_path_mappings(){
     done < "$mappings_file"
 }
 
+# optimization using a sqlite db cache
+playlist_path_cache_set() {
+    local playlist_name="$1"
+    local playlist_path="$2"
+    if ! [ -f "$path_mappings_cache" ]; then
+        "$srcdir/../bin/sqlite_cache_initialize.sh" "$path_mappings_cache"
+    fi
+    #                                    db_filename            key              value
+    "$srcdir/../bin/sqlite_cache_set.sh" "$path_mappings_cache" "$playlist_name" "$playlist_path"
+}
+
+playlist_path_cache_get(){
+    local playlist_name="$1"
+    #                                    db_filename            key
+    "$srcdir/../bin/sqlite_cache_get.sh" "$path_mappings_cache" "$playlist_name"
+}
+
 get_path_mapping_subdir(){
     local base_dir="$1"
     local playlist_name="$2"
+    local playlist_path
     local debug_mappings="${DEBUG_MAPPINGS:-}"
+
+    # use fast cache if this playlist name was previously found
+    if playlist_path_cache_get "$playlist_name" 2>/dev/null; then
+        return 0
+    fi
 
     if [ -z "${path_map_dirs_loaded:-}" ]; then
         load_path_mappings "$base_dir"
@@ -159,7 +183,9 @@ get_path_mapping_subdir(){
                 echo "dir:           [${dirs[$i]}]"    >&2
                 echo
             fi
-            echo "${dirs[$i]}"
+            playlist_path="${dirs[$i]}"
+            echo "$playlist_path"
+            playlist_path_cache_set "$playlist_name" "$playlist_path"
             return 0
         fi
     done
@@ -173,7 +199,9 @@ get_path_mapping_subdir(){
                 echo "dir:      [${dirs[$i]}]"    >&2
                 echo
             fi
-            echo "${dirs[$i]}"
+            playlist_path="${dirs[$i]}"
+            echo "$playlist_path"
+            playlist_path_cache_set "$playlist_name" "$playlist_path"
             return 0
         fi
     done
