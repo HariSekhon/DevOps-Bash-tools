@@ -24,7 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Searches a sqlite3 db key cache table for a given key
 
-Assumes a single table called 'key_cache', created by the adjacent script sqlite_cache_initialize.sh
+Assumes a single table called 'key_cache',
+created by the adjacent script sqlite_cache_initialize.sh
 and populated from the related script sqlite_cache_set.sh
 "
 
