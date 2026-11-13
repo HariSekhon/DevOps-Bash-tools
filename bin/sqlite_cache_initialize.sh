@@ -52,6 +52,12 @@ fi
 #    die "DB file not found: $db"
 #fi
 
+# PRIMARY KEY    - creates primary key index with unique key constraint and an index for fast lookups
+# COLLATE BINARY - exact, case-sensitive matching
+# WITHOUT ROWID  - optimises storage for a table with a primary key
+#                  since we have no use for row IDs in key cache use case
+# IF NOT EXISTS  - safe to run repeatedly idempotently by only creating the table
+#                  if it doesn't already exist, thereby avoiding errors
 sqlite3 -init /dev/null "$db" "
     CREATE TABLE IF NOT EXISTS key_cache (
         key   TEXT NOT NULL PRIMARY KEY COLLATE BINARY,
