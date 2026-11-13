@@ -39,6 +39,8 @@ num_args 2 "$@"
 db="$1"
 key="$2"
 
+check_bin sqlite3
+
 if ! [[ "$db" =~ \.sqlite3 ]]; then
     usage "DB name given does not match the expected format: NAME.sqlite3"
 fi
