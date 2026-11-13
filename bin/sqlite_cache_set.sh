@@ -39,6 +39,8 @@ help_usage "$@"
 
 num_args 3 "$@"
 
+check_bin sqlite3
+
 db="$1"
 key="$2"
 value="$3"
