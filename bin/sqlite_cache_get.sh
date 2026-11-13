@@ -39,6 +39,8 @@ num_args 2 "$@"
 
 check_bin sqlite3
 
+export SQLITE_HISTORY=/dev/null
+
 db="$1"
 key="$2"
 
