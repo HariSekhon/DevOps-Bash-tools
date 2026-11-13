@@ -476,6 +476,10 @@ Prometheus, OpenTSDB, InfluxDB etc.
 
 - [sql/](https://github.com/HariSekhon/SQL-scripts) - 100+ SQL scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [Google BigQuery](https://cloud.google.com/bigquery) and [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration
 - `sqlite.sh` - one-touch [SQLite](https://www.sqlite.org/index.html), starts sqlite3 shell with sample 'chinook' database loaded
+- `sqlite_cache_*` - portable key cache lookup scripts for use in other scripts:
+  - `sqlite_cache_initialize.sh` - creates a sqlite db key cache table in the given db filename
+  - `sqlite_cache_set.sh` - creates a sqlite db key cache table entry for a given key with upsert behaviour
+  - `sqlite_cache_get.sh` - searches a sqlite db key cache table for a given key
 - `mysql*.sh` - [MySQL](https://www.mysql.com/) scripts:
   - `mysql.sh` - shortens `mysql` command to connect to [MySQL](https://www.mysql.com/) by auto-populating switches from both standard environment variables like `$MYSQL_TCP_PORT`, `$DBI_USER`, `$MYSQL_PWD` (see [doc](https://dev.mysql.com/doc/refman/8.0/en/environment-variables.html)) and other common environment variables like `$MYSQL_HOST` / `$HOST`, `$MYSQL_USER` / `$USER`, `$MYSQL_PASSWORD` / `$PASSWORD`, `$MYSQL_DATABASE` / `$DATABASE`
   - `mysql_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
