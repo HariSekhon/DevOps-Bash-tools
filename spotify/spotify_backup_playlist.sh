@@ -163,7 +163,8 @@ get_path_mapping_subdir(){
     local debug_mappings="${DEBUG_MAPPINGS:-}"
 
     # use fast cache if this playlist name was previously found
-    # shaves off approximately 2/3 of the lookup time
+    # shaves off approximately 2/3 of the lookup time, which when multiplied
+    # by my 400+ playlists amounts to minutes of real world clock time
     if playlist_path_cache_get "$playlist_name" 2>/dev/null; then
         return 0
     fi
