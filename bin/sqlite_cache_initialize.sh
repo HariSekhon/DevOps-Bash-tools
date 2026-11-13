@@ -40,9 +40,9 @@ help_usage "$@"
 
 num_args 1 "$@"
 
-export SQLITE_HISTORY=/dev/null
-
 check_bin sqlite3
+
+export SQLITE_HISTORY=/dev/null
 
 db="$1"
 
