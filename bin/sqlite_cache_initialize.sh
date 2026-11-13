@@ -40,6 +40,8 @@ help_usage "$@"
 
 num_args 1 "$@"
 
+check_bin sqlite3
+
 db="$1"
 
 if ! [[ "$db" =~ \.sqlite3 ]]; then
