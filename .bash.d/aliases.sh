@@ -188,6 +188,7 @@ alias screen='screen -T $TERM'
 alias ht='headtail.py'
 
 alias run='run.sh'
+alias sleepuntil='sleepuntil.sh'
 
 # ============================================================================ #
 #           GitHub / GitLab / BitBucket / Azure DevOps repo checkouts
