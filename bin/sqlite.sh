@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -38,7 +39,9 @@ db=chinook.sqlite
 cd "$srcdir"
 
 if ! [ -f "$db" ]; then
-    curl -sSLf -o "$db" --proto "=https" \
+    curl -sSLf \
+         -o "$db" \
+         --proto "=https" \
     'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_Sqlite.sqlite?raw=true'
 fi
 
