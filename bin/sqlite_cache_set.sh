@@ -22,13 +22,15 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Searches a sqlite3 db key cache table entry for a given key
+Creates a sqlite3 db key cache table entry for a given key
 
 If the key doesn't exist it creates it
-
 If the key already exists it updates it
+(Upsert behaviour)
 
-Uses or creates a single table called 'key_cache' which the related script sqlite_cache_get.sh expects to query from
+Uses a single table called 'key_cache' which should be pre-existing and
+initialized by the adjacent script sqlite_cache_initialize.sh and
+the related script sqlite_cache_get.sh expects to query from
 "
 
 # used by usage() in lib/utils.sh
