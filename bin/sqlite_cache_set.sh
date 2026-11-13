@@ -30,7 +30,7 @@ If the key already exists it updates it
 
 Uses a single table called 'key_cache' which should be pre-existing and
 initialized by the adjacent script sqlite_cache_initialize.sh and
-the related script sqlite_cache_get.sh expects to query from
+the queried by the adjacent script sqlite_cache_get.sh
 "
 
 # used by usage() in lib/utils.sh
