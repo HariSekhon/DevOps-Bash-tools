@@ -209,9 +209,10 @@ make
 
 Setting the `DEBUG` environment variable to any non-blank value prints full stack debugging down through all scripts and libraries to every single step being executed.
 
-This is a _lot_ of output but is invaluable for developers.
+This is a _lot_ of output but is invaluable for developers and advanced systems administrators and engineers.
 
-You will almost certainly want to `tee` this to a log or use a scrollback buffer terminal multiplexer like Screen or Tmux (configs provided for both in this project).
+You will almost certainly want to `tee` this to a log file for review in `less` or
+use a scrollback buffer in a terminal multiplexer like Screen or Tmux (configs provided for both under `configs/`).
 
 I use this a lot as this is a large non-trivial project that I use daily extensively for many years.
 
