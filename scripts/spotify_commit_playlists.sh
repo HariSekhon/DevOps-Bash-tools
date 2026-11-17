@@ -138,6 +138,10 @@ find_net_removals(){
             continue
         fi
         track="$("$srcdir/../spotify/spotify_uri_to_name.sh" <<< "$uri")"
+        # TODO: there is a limitation to this check where if you have the same track from a different URI
+        #       and have removed only one of them, this check will fail - revisit to see if there is a more
+        #       intelligent test that can be applied - perhaps switch to git diff or line numbers instead
+        #       which will expose this
         if grep -Fxq "$track" "$playlist"; then
             if [ -n "${VERBOSE:-}" ]; then
                 echo "skipping removed URI for track '$track' which is found in $playlist (must have been replaced with a different URI)" >&2
