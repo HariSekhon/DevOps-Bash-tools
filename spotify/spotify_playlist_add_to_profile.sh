@@ -35,6 +35,10 @@ Written to automate adding all my 'Best of NNNN' year 60+ playlists
 
 Spotify profile dashboard page only seems to display the first 199 publicly displayed playlists
 
+To see all playlists marked to be publicly displayed (included the ones after 199 that are not):
+
+    SPOTIFY_PUBLIC_ONLY=1 spotify_playlists.sh
+
 Playlists must already be set to public in your Spotify Client otherwise this request is silently ignored.
 Newly created playlists are public by default,
 and will only be private if you explicitly mark them as private in your Spotify Client
