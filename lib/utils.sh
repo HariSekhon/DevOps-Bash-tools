@@ -1232,7 +1232,7 @@ EOF
 
 min_args(){
     local min="$1"
-    if ! is_digit "$min"; then
+    if ! is_int "$min"; then
         die "Code Error: first arg to min_args must be an integer"
     fi
     shift || :
@@ -1243,7 +1243,7 @@ min_args(){
 
 max_args(){
     local max="$1"
-    if ! is_digit "$max"; then
+    if ! is_int "$max"; then
         die "Code Error: first arg to min_args must be an integer"
     fi
     shift || :
