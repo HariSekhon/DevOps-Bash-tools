@@ -894,21 +894,29 @@ gitadded(){
     less
 }
 
-# doesn't need pipe | less, git drops you in to less anyway
-gitl(){
+# doesn't need pipe | less, git drops you in to less anyway via GIT_PAGER environment variable set above
+gitlog(){
     git log --all --graph --decorate --name-status "$@"
 }
+alias gitl=gitlog
 
-gitlp(){
-    git log -p "$@"
-}
-alias gitlp1="gitlp -1"
-
-gitl2(){
+gitlog2(){
     git log --all --graph --decorate --stat "$@"
 }
+alias gitl2=gitlog2
 
-gitl3(){
+gitlogp(){
+    git log -p "$@"
+}
+alias gitlp=gitlogp
+alias gitlp1="gitlp -1"
+
+gitlogoneline(){
+    git log --oneline --date=iso --pretty=format:'%h %ad %s'
+}
+alias gitlo=gitlogoneline
+
+gitlogauthors(){
     git log --pretty=format:"%n%an => %ar%n%s" --name-status "$@"
 }
 
