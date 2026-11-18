@@ -97,7 +97,12 @@ commit_playlist(){
         added_num="$(awk '{print $1}' <<< "$stats")"
         removed_num="$(awk '{print $2}' <<< "$stats")"
         if [ "$removed_num" -gt "$added_num" ]; then
-            die "ERROR: tracks have been removed from playlist '$playlist' top level file which were not removed from 'spotify/$playlist' - partial interrupted playlist download or files committed separately?"
+            local duplicate_removals
+            duplicate_removals="$(find_duplicate_removals "$playlist")"
+            removed_num_duplicates="$(wc -l <<< "$duplicate_removals" | sed 's/[[:space:]]//g')"
+            if [ "$((removed_num - removed_num_duplicates))" -gt "$added_num" ]; then
+                die "ERROR: tracks have been removed from playlist '$playlist' top level file which were not removed from 'spotify/$playlist' - partial interrupted playlist download or files committed separately?"
+            fi
         fi
         echo "Auto-committing playlist '$playlist' as no net removals"
         echo
@@ -132,23 +137,43 @@ find_net_removals(){
     sed 's/^-//' |
     while read -r uri; do
         if grep -Fxq "$uri" "spotify/$playlist"; then
-            if [ -n "${VERBOSE:-}" ]; then
+            if is_verbose; then
                 echo "skipping removed duplicate URI '$uri' which is present in spotify/$playlist" >&2
             fi
             continue
         fi
         track="$("$srcdir/../spotify/spotify_uri_to_name.sh" <<< "$uri")"
-        # TODO: there is a limitation to this check where if you have the same track from a different URI
-        #       and have removed only one of them, this check will fail - revisit to see if there is a more
-        #       intelligent test that can be applied - perhaps switch to git diff or line numbers instead
-        #       which will expose this
         if grep -Fxq "$track" "$playlist"; then
-            if [ -n "${VERBOSE:-}" ]; then
+            if is_verbose; then
                 echo "skipping removed URI for track '$track' which is found in $playlist (must have been replaced with a different URI)" >&2
             fi
             continue
         fi
         printf '%s\t%s\n' "$uri" "$track"
+    done
+}
+
+find_duplicate_removals(){
+    local playlist="$1"
+    git diff "spotify/$playlist" |
+    diffnet.pl |
+    { grep ^- || :; } |
+    sed 's/^-//' |
+    while read -r uri; do
+        if grep -Fxq "$uri" "spotify/$playlist"; then
+            if is_verbose; then
+                echo "detected duplicate removed duplicate URI '$uri' which is present in spotify/$playlist" >&2
+            fi
+            printf '%s\n' "$uri"
+        else
+            track="$("$srcdir/../spotify/spotify_uri_to_name.sh" <<< "$uri")"
+            if grep -Fxq "$track" "$playlist"; then
+                if is_verbose; then
+                    echo "detected duplicate removed URI for track '$track' which is found in $playlist (must have been replaced with a different URI)" >&2
+                fi
+                printf '%s\t%s\n' "$uri" "$track"
+            fi
+        fi
     done
 }
 
