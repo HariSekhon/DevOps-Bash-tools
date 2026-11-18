@@ -44,8 +44,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-# without this only finds public playlists that have also already been added to profile
-# so we always need to use a private token
+# always required to have authorization to remove from displayed profile
 export SPOTIFY_PRIVATE=1
 
 spotify_token
