@@ -900,10 +900,10 @@ gitlog(){
 }
 alias gitl=gitlog
 
-gitlog2(){
+gitlogstat(){
     git log --all --graph --decorate --stat "$@"
 }
-alias gitl2=gitlog2
+alias gitl2=gitlogstat
 
 gitlogp(){
     git log -p "$@"
