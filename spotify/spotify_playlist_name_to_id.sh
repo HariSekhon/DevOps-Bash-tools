@@ -36,6 +36,10 @@ Needed by several other adjacent spotify tools
 This is quite a slow O(n) operation as it has to iterate through all playlists until it finds a matching name to
 retrieve its ID and is therefore used as a last resort by my adjacent scripts
 
+If finding one of your own playlists you may need to set:
+
+    export SPOTIFY_PRIVATE=1
+
 
 $usage_playlist_help
 
