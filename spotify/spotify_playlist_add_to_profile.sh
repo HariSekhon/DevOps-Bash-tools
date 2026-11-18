@@ -44,18 +44,15 @@ usage_args="<playlist> [<playlist2> <playlist3> ...]"
 
 help_usage "$@"
 
+min_args 1 "$@"
+
+# without this only finds public playlists that have also already been added to profile
+# so we always need to use a private token
+export SPOTIFY_PRIVATE=1
+
+spotify_token
+
 for playlist_id; do
-
-    if is_blank "$playlist_id"; then
-        usage "playlist not defined"
-    fi
-
-    # without this only finds public playlists that have also already been added to profile
-    # so we always need to use a private token
-    export SPOTIFY_PRIVATE=1
-
-    spotify_token
-
     timestamp "Resolving Playlist Name <=> ID: $playlist_id"
     playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id")"
     playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id")"
