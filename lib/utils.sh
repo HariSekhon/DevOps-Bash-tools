@@ -1232,6 +1232,9 @@ EOF
 
 min_args(){
     local min="$1"
+    if ! is_digit "$min"; then
+        die "Code Error: first arg to min_args must be an integer"
+    fi
     shift || :
     if [ $# -lt "$min" ]; then
         usage "error: missing arguments"
@@ -1240,6 +1243,9 @@ min_args(){
 
 max_args(){
     local max="$1"
+    if ! is_digit "$max"; then
+        die "Code Error: first arg to min_args must be an integer"
+    fi
     shift || :
     if [ $# -gt "$max" ]; then
         usage "error: too many arguments, expected $max, got $#"
