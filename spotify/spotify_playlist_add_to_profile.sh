@@ -33,6 +33,10 @@ Playlist arguments can be any mix of playlist names or playlist ID (get this fro
 
 Written to automate adding all my 'Best of NNNN' year 60+ playlists
 
+Playlists must already be set to public in your Spotify Client otherwise this is ignored.
+Newly created playlists are public by default,
+and will only be private if you explicitly mark them as private in your Spotify Client
+
 $usage_playlist_help
 
 $usage_auth_help
