@@ -1672,6 +1672,8 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 - `spotify_foreach_playlist.sh` - executes a templated command against all playlists, replacing `{playlist}` and `{playlist_id}` in each iteration
 - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
 - `spotify_playlist_snapshot_id.sh` - returns the Snapshot ID of a given Spotify playlist, useful for detecting whether a playlist has changed or not to skip re-downloading it
+- `spotify_playlist_add_to_profile.sh` - adds given Spotify playlist(s) to publicly displayed profile
+- `spotify_playlist_remove_from_profile.sh` - removes given Spotify playlist(s) from publicly displayed profile
 - `spotify_api_token.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
 - `spotify_api.sh` - query any Spotify [API](https://developer.spotify.com/documentation/web-api/reference/) endpoint with authentication, used by adjacent spotify scripts
 
