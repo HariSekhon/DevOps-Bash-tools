@@ -912,7 +912,7 @@ alias gitlp=gitlogp
 alias gitlp1="gitlp -1"
 
 gitlogoneline(){
-    git log --oneline --date=iso --pretty=format:'%h %ad %s'
+    git log --oneline --date=iso --pretty=format:'%h %ad %ae %s'
 }
 alias gitlo=gitlogoneline
 
