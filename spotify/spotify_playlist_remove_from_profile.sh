@@ -56,7 +56,7 @@ for playlist_id; do
     timestamp "Playlist Name: $playlist_name"
     timestamp "Playlist Name: $playlist_id"
 
-    timestamp "Removing playlist to public profile: $playlist_name"
+    timestamp "Removing playlist from public profile: $playlist_name"
     "$srcdir/spotify_api.sh" \
         "https://api.spotify.com/v1/playlists/$playlist_id" \
         -X PUT \
