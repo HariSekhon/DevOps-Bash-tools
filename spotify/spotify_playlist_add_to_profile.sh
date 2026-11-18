@@ -31,7 +31,7 @@ Adds given Spotify playlist(s) to publicly displayed profile
 
 Playlist arguments can be any mix of playlist names or playlist ID (get this from spotify_playlists.sh)
 
-Written to automate adding all my 'Best of NNNN' year 50 playlists
+Written to automate adding all my 'Best of NNNN' year 50+ playlists
 
 $usage_playlist_help
 
